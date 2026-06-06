@@ -1,0 +1,136 @@
+spring:
+  application:
+    name: Utility Billing System
+  profiles:
+    active: dev
+
+  datasource:
+    url: ${DB_URL:jdbc:postgresql://localhost:5432/utility_billing}
+    username: postgres
+    password: 12345
+    driver-class-name: org.postgresql.Driver
+    hikari:
+      connection-timeout: 20000
+      maximum-pool-size: 10
+      minimum-idle: 5
+      idle-timeout: 300000
+      pool-name: UtilityBillingHikariPool
+
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    show-sql: false
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        format_sql: true
+        default_schema: public
+        jdbc:
+          lob:
+            non_contextual_creation: true
+    open-in-view: false
+
+  flyway:
+    enabled: true
+    locations: classpath:db/migration
+    baseline-on-migrate: true
+    validate-on-migrate: true
+    out-of-order: false
+
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: princesseakeza@gmail.com
+    password: twbd dobd flde bzhn
+
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+          connectiontimeout: 5000
+          timeout: 5000
+          writetimeout: 5000
+
+  thymeleaf:
+    prefix: classpath:/templates/
+    suffix: .html
+    cache: false
+    mode: HTML
+    encoding: UTF-8
+
+  servlet:
+    multipart:
+      enabled: true
+      max-file-size: 10MB
+      max-request-size: 15MB
+
+  cache:
+    type: simple
+
+  task:
+    scheduling:
+      pool:
+        size: 5
+
+server:
+  port: ${SERVER_PORT:8080}
+  error:
+    include-message: always
+    include-binding-errors: always
+    include-stacktrace: on_param
+  servlet:
+    context-path: /api/v1
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,metrics,flyway
+  endpoint:
+    health:
+      show-details: when_authorized
+
+app:
+  jwt:
+    secret: ${JWT_SECRET:3cfa76ef14937c1c0ea519f8fc057a80fcd04a7420f8e8bcd0a7567c272e007b}
+    access-token-expiration: ${JWT_ACCESS_EXPIRY:86400000}    # 24h
+    refresh-token-expiration: ${JWT_REFRESH_EXPIRY:604800000} # 7d
+
+  cors:
+    allowed-origins: ${CORS_ORIGINS:http://localhost:3000,http://localhost:4200}
+
+  file:
+    upload-dir: ${FILE_UPLOAD_DIR:./uploads}
+    max-size: 10485760
+
+  billing:
+    cron-monthly: "0 0 1 * * ?"
+    cron-penalty: "0 0 6 * * ?"
+    grace-period-days: 30
+
+  frontend:
+    url: ${FRONTEND_URL:http://localhost:3000}
+
+logging:
+  level:
+    com.exam.utility: DEBUG
+    org.springframework.security: INFO
+    org.hibernate.SQL: DEBUG
+    org.flywaydb: INFO
+  file:
+    name: logs/utility-billing.log
+  pattern:
+    file: "%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n"
+    console: "%d{HH:mm:ss} %-5level %logger{36} - %msg%n"
+
+springdoc:
+  api-docs:
+    path: /api-docs
+  swagger-ui:
+    path: /swagger-ui.html
+    operations-sorter: method
+    tags-sorter: alpha
+    display-request-duration: true
+  show-actuator: true

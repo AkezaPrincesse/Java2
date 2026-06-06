@@ -1,0 +1,39 @@
+spring:
+  datasource:
+    url: jdbc:h2:mem:testdb;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE;MODE=PostgreSQL
+    driver-class-name: org.h2.Driver
+    username: sa
+    password:
+  jpa:
+    hibernate:
+      ddl-auto: create-drop
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.H2Dialect
+  flyway:
+    enabled: false
+  mail:
+    host: localhost
+    port: 3025
+    username: test@test.com
+    password: test
+
+app:
+  jwt:
+    secret: 3cfa76ef14937c1c0ea519f8fc057a80fcd04a7420f8e8bcd0a7567c272e007b
+    access-token-expiration: 86400000
+    refresh-token-expiration: 604800000
+  frontend:
+    url: http://localhost:3000
+  file:
+    upload-dir: ./test-uploads
+    max-size: 10485760
+  billing:
+    cron-monthly: "0 0 1 * * ?"
+    cron-penalty: "0 0 6 * * ?"
+    grace-period-days: 30
+
+logging:
+  level:
+    com.exam.utility: WARN
+    org.springframework: WARN

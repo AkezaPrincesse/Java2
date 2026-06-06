@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head><meta charset="UTF-8"><title>Payment Confirmed</title>
+<style>
+body{font-family:Arial,sans-serif;background:#f4f4f4;margin:0;padding:0}
+.container{max-width:600px;margin:30px auto;background:#fff;border-radius:8px;overflow:hidden;box-shadow:0 2px 8px rgba(0,0,0,.1)}
+.header{background:#1565c0;color:#fff;padding:30px;text-align:center}
+.body{padding:30px}
+.success-box{background:#e3f2fd;border:2px solid #42a5f5;border-radius:8px;text-align:center;padding:20px;margin:20px 0}
+.amount{font-size:32px;font-weight:bold;color:#1565c0}
+.info-row{display:flex;justify-content:space-between;padding:10px 0;border-bottom:1px solid #eee}
+.label{color:#888;font-size:14px}
+.value{font-weight:bold;color:#333}
+.footer{background:#f8f8f8;padding:20px;text-align:center;color:#888;font-size:12px}
+</style>
+</head>
+<body>
+<div class="container">
+  <div class="header">
+    <h1>✅ Payment Confirmed!</h1>
+    <p style="opacity:.9;margin:5px 0 0">WASAC &amp; REG Utility Billing System</p>
+  </div>
+  <div class="body">
+    <p>Dear <strong th:text="${name}">Customer</strong>,</p>
+    <p>Your payment has been received and processed successfully. Thank you!</p>
+    <div class="success-box">
+      <p style="margin:0 0 5px;color:#555">Amount Paid</p>
+      <div class="amount" th:text="${amount} + ' RWF'">0 RWF</div>
+      <p style="margin:5px 0 0;color:#888;font-size:13px">Receipt: <strong th:text="${receiptNumber}">-</strong></p>
+    </div>
+    <div class="info-row">
+      <span class="label">📋 Bill Number</span>
+      <span class="value" th:text="${billNumber}">-</span>
+    </div>
+    <div class="info-row">
+      <span class="label">📅 Payment Date</span>
+      <span class="value" th:text="${paymentDate}">-</span>
+    </div>
+    <p style="margin-top:20px;color:#555">Please keep your receipt number for future reference. You can download your receipt from the billing portal.</p>
+  </div>
+  <div class="footer">
+    <p>&copy; 2026 WASAC &amp; REG – Rwanda Utility Billing System</p>
+    <p>Support: support@wasac-reg.rw</p>
+  </div>
+</div>
+</body>
+</html>

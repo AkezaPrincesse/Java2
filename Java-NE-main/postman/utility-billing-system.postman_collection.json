@@ -1,0 +1,414 @@
+{
+  "info": {
+    "name": "Utility Billing System – WASAC & REG",
+    "description": "Complete API collection for the Enterprise Utility Billing System",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "version": "1.0.0"
+  },
+  "variable": [
+    { "key": "baseUrl", "value": "http://localhost:8080/api/v1", "type": "string" },
+    { "key": "accessToken", "value": "", "type": "string" },
+    { "key": "refreshToken", "value": "", "type": "string" }
+  ],
+  "item": [
+    {
+      "name": "🔐 Authentication",
+      "item": [
+        {
+          "name": "Register",
+          "request": {
+            "method": "POST",
+            "url": "{{baseUrl}}/auth/register",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"fullName\": \"Alice Uwimana\",\n  \"email\": \"alice@example.com\",\n  \"password\": \"Password@1234\",\n  \"phoneNumber\": \"+250788111222\"\n}"
+            }
+          }
+        },
+        {
+          "name": "Login",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "var json = pm.response.json();",
+                  "if (json.data && json.data.accessToken) {",
+                  "  pm.collectionVariables.set('accessToken', json.data.accessToken);",
+                  "  pm.collectionVariables.set('refreshToken', json.data.refreshToken);",
+                  "}"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "url": "{{baseUrl}}/auth/login",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"admin@wasac-reg.rw\",\n  \"password\": \"Admin@1234!\"\n}"
+            }
+          }
+        },
+        {
+          "name": "Refresh Token",
+          "request": {
+            "method": "POST",
+            "url": "{{baseUrl}}/auth/refresh-token",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"refreshToken\": \"{{refreshToken}}\"\n}"
+            }
+          }
+        },
+        {
+          "name": "Forgot Password",
+          "request": {
+            "method": "POST",
+            "url": "{{baseUrl}}/auth/forgot-password",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": { "mode": "raw", "raw": "{\n  \"email\": \"alice@example.com\"\n}" }
+          }
+        },
+        {
+          "name": "Logout",
+          "request": {
+            "method": "POST",
+            "url": "{{baseUrl}}/auth/logout",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{accessToken}}" }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "👤 Customers",
+      "item": [
+        {
+          "name": "Create Customer",
+          "request": {
+            "method": "POST",
+            "url": "{{baseUrl}}/customers",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "Authorization", "value": "Bearer {{accessToken}}" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"fullName\": \"Bob Mugisha\",\n  \"nationalId\": \"1199880098765432\",\n  \"email\": \"bob@example.com\",\n  \"phoneNumber\": \"+250788000001\",\n  \"address\": \"KG 7 Ave, Kigali\",\n  \"district\": \"Gasabo\",\n  \"sector\": \"Remera\"\n}"
+            }
+          }
+        },
+        {
+          "name": "Get All Customers",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/customers?page=0&size=10&sortBy=createdAt&direction=desc",
+              "query": [
+                { "key": "page", "value": "0" },
+                { "key": "size", "value": "10" },
+                { "key": "sortBy", "value": "createdAt" },
+                { "key": "direction", "value": "desc" }
+              ]
+            },
+            "header": [{ "key": "Authorization", "value": "Bearer {{accessToken}}" }]
+          }
+        },
+        {
+          "name": "Search Customers",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/customers/search?keyword=Bob&page=0&size=10",
+              "query": [
+                { "key": "keyword", "value": "Bob" },
+                { "key": "page", "value": "0" },
+                { "key": "size", "value": "10" }
+              ]
+            },
+            "header": [{ "key": "Authorization", "value": "Bearer {{accessToken}}" }]
+          }
+        },
+        {
+          "name": "Update Customer",
+          "request": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/customers/1",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "Authorization", "value": "Bearer {{accessToken}}" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"phoneNumber\": \"+250788999888\",\n  \"address\": \"New Address, Kigali\"\n}"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "⚡💧 Meters",
+      "item": [
+        {
+          "name": "Install Meter",
+          "request": {
+            "method": "POST",
+            "url": "{{baseUrl}}/meters",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "Authorization", "value": "Bearer {{accessToken}}" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"meterNumber\": \"WM-RWA-00001\",\n  \"meterType\": \"WATER\",\n  \"installationDate\": \"2024-01-15\",\n  \"customerId\": 1,\n  \"tariffId\": 1,\n  \"location\": \"Remera, Kigali\",\n  \"initialReading\": 0\n}"
+            }
+          }
+        },
+        {
+          "name": "Get All Meters",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/meters?page=0&size=10",
+            "header": [{ "key": "Authorization", "value": "Bearer {{accessToken}}" }]
+          }
+        }
+      ]
+    },
+    {
+      "name": "📖 Meter Readings",
+      "item": [
+        {
+          "name": "Record Reading",
+          "request": {
+            "method": "POST",
+            "url": "{{baseUrl}}/meter-readings",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "Authorization", "value": "Bearer {{accessToken}}" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"meterId\": 1,\n  \"previousReading\": 0,\n  \"currentReading\": 18.5,\n  \"readingDate\": \"2025-12-31\",\n  \"notes\": \"Regular monthly reading\"\n}"
+            }
+          }
+        },
+        {
+          "name": "Get Readings for Meter",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/meter-readings/meter/1?page=0&size=10",
+            "header": [{ "key": "Authorization", "value": "Bearer {{accessToken}}" }]
+          }
+        }
+      ]
+    },
+    {
+      "name": "💰 Tariffs",
+      "item": [
+        {
+          "name": "Create Flat Tariff",
+          "request": {
+            "method": "POST",
+            "url": "{{baseUrl}}/tariffs",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "Authorization", "value": "Bearer {{accessToken}}" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Standard Water Tariff 2025\",\n  \"description\": \"Flat rate water tariff\",\n  \"utilityType\": \"WATER\",\n  \"tariffType\": \"FLAT\",\n  \"flatRate\": 250.00,\n  \"effectiveDate\": \"2025-01-01\"\n}"
+            }
+          }
+        },
+        {
+          "name": "Create Tiered Tariff",
+          "request": {
+            "method": "POST",
+            "url": "{{baseUrl}}/tariffs",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "Authorization", "value": "Bearer {{accessToken}}" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Electricity Tiered 2025\",\n  \"utilityType\": \"ELECTRICITY\",\n  \"tariffType\": \"TIERED\",\n  \"effectiveDate\": \"2025-01-01\",\n  \"tiers\": [\n    { \"tierOrder\": 1, \"minUnits\": 0, \"maxUnits\": 20, \"ratePerUnit\": 100, \"effectiveDate\": \"2025-01-01\", \"description\": \"First 20 kWh\" },\n    { \"tierOrder\": 2, \"minUnits\": 20, \"maxUnits\": 100, \"ratePerUnit\": 150, \"effectiveDate\": \"2025-01-01\", \"description\": \"21-100 kWh\" },\n    { \"tierOrder\": 3, \"minUnits\": 100, \"ratePerUnit\": 200, \"effectiveDate\": \"2025-01-01\", \"description\": \"Above 100 kWh\" }\n  ]\n}"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "📄 Billing",
+      "item": [
+        {
+          "name": "Generate Bills",
+          "request": {
+            "method": "POST",
+            "url": "{{baseUrl}}/bills/generate",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "Authorization", "value": "Bearer {{accessToken}}" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"billingYear\": 2025,\n  \"billingMonth\": 12\n}"
+            }
+          }
+        },
+        {
+          "name": "Approve Bill",
+          "request": {
+            "method": "POST",
+            "url": "{{baseUrl}}/bills/approve",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "Authorization", "value": "Bearer {{accessToken}}" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"billNumber\": \"WB-202512-AABB12\",\n  \"notes\": \"Approved after verification\"\n}"
+            }
+          }
+        },
+        {
+          "name": "Get All Bills",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/bills?page=0&size=10",
+            "header": [{ "key": "Authorization", "value": "Bearer {{accessToken}}" }]
+          }
+        },
+        {
+          "name": "Get Bills by Status",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/bills/status/PENDING?page=0&size=10",
+            "header": [{ "key": "Authorization", "value": "Bearer {{accessToken}}" }]
+          }
+        },
+        {
+          "name": "Download Bill PDF",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/bills/number/WB-202512-AABB12/pdf",
+            "header": [{ "key": "Authorization", "value": "Bearer {{accessToken}}" }]
+          }
+        }
+      ]
+    },
+    {
+      "name": "💳 Payments",
+      "item": [
+        {
+          "name": "Process Payment (Full)",
+          "request": {
+            "method": "POST",
+            "url": "{{baseUrl}}/payments",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "Authorization", "value": "Bearer {{accessToken}}" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"billNumber\": \"WB-202512-AABB12\",\n  \"amount\": 6490.00,\n  \"paymentMethod\": \"MOMO\",\n  \"transactionReference\": \"TXN20251231001\",\n  \"paidBy\": \"Bob Mugisha\"\n}"
+            }
+          }
+        },
+        {
+          "name": "Process Partial Payment",
+          "request": {
+            "method": "POST",
+            "url": "{{baseUrl}}/payments",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "Authorization", "value": "Bearer {{accessToken}}" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"billNumber\": \"WB-202512-AABB12\",\n  \"amount\": 3000.00,\n  \"paymentMethod\": \"CASH\",\n  \"paidBy\": \"Bob Mugisha\"\n}"
+            }
+          }
+        },
+        {
+          "name": "Get All Payments",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/payments?page=0&size=10",
+            "header": [{ "key": "Authorization", "value": "Bearer {{accessToken}}" }]
+          }
+        },
+        {
+          "name": "Download Receipt PDF",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/payments/receipt/RCP-TESTRCPT/pdf",
+            "header": [{ "key": "Authorization", "value": "Bearer {{accessToken}}" }]
+          }
+        }
+      ]
+    },
+    {
+      "name": "🔔 Notifications",
+      "item": [
+        {
+          "name": "Get My Notifications",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/notifications?page=0&size=20",
+            "header": [{ "key": "Authorization", "value": "Bearer {{accessToken}}" }]
+          }
+        },
+        {
+          "name": "Get Unread Count",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/notifications/unread-count",
+            "header": [{ "key": "Authorization", "value": "Bearer {{accessToken}}" }]
+          }
+        },
+        {
+          "name": "Mark All As Read",
+          "request": {
+            "method": "PATCH",
+            "url": "{{baseUrl}}/notifications/mark-all-read",
+            "header": [{ "key": "Authorization", "value": "Bearer {{accessToken}}" }]
+          }
+        }
+      ]
+    },
+    {
+      "name": "📊 Reports",
+      "item": [
+        {
+          "name": "Dashboard Statistics",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/reports/dashboard",
+            "header": [{ "key": "Authorization", "value": "Bearer {{accessToken}}" }]
+          }
+        },
+        {
+          "name": "Monthly Report PDF",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/reports/monthly?year=2025&month=12",
+            "header": [{ "key": "Authorization", "value": "Bearer {{accessToken}}" }]
+          }
+        },
+        {
+          "name": "Revenue Report PDF",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/reports/revenue?from=2025-12-01&to=2025-12-31",
+            "header": [{ "key": "Authorization", "value": "Bearer {{accessToken}}" }]
+          }
+        }
+      ]
+    }
+  ]
+}

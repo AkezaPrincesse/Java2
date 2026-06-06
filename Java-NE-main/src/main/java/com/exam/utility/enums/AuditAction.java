@@ -1,0 +1,19 @@
+package com.exam.utility.enums;
+
+public enum AuditAction {
+    CREATE,
+    UPDATE,
+    DELETE,
+    LOGIN,
+    LOGOUT,
+    LOGIN_FAILED,
+    PASSWORD_CHANGE,
+    EMAIL_VERIFIED,
+    OTP_VERIFIED,
+    BILL_APPROVED,
+    PAYMENT_PROCESSED,
+    ACCOUNT_LOCKED,
+    ACCOUNT_UNLOCKED,
+    ROLE_ASSIGNED,
+    ROLE_REVOKED
+}

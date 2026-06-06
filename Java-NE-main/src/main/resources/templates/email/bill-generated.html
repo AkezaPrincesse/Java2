@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head><meta charset="UTF-8"><title>New Bill Generated</title>
+<style>
+body{font-family:Arial,sans-serif;background:#f4f4f4;margin:0;padding:0}
+.container{max-width:600px;margin:30px auto;background:#fff;border-radius:8px;overflow:hidden;box-shadow:0 2px 8px rgba(0,0,0,.1)}
+.header{background:#2e7d32;color:#fff;padding:30px;text-align:center}
+.body{padding:30px}
+.amount-box{background:#e8f5e9;border:2px solid #66bb6a;border-radius:8px;text-align:center;padding:20px;margin:20px 0}
+.amount{font-size:32px;font-weight:bold;color:#2e7d32}
+.info-row{display:flex;justify-content:space-between;padding:10px 0;border-bottom:1px solid #eee}
+.label{color:#888;font-size:14px}
+.value{font-weight:bold;color:#333}
+.footer{background:#f8f8f8;padding:20px;text-align:center;color:#888;font-size:12px}
+.urgent{background:#ffebee;border-left:4px solid #ef5350;padding:12px;margin:15px 0;border-radius:4px}
+</style>
+</head>
+<body>
+<div class="container">
+  <div class="header">
+    <h1>📄 New Utility Bill</h1>
+    <p style="opacity:.9;margin:5px 0 0">WASAC &amp; REG Utility Billing System</p>
+  </div>
+  <div class="body">
+    <p>Dear <strong th:text="${name}">Customer</strong>,</p>
+    <p>Your utility bill has been generated and is ready for payment.</p>
+    <div class="amount-box">
+      <p style="margin:0 0 5px;color:#555">Total Amount Due</p>
+      <div class="amount" th:text="${amount} + ' RWF'">0 RWF</div>
+      <p style="margin:5px 0 0;color:#888;font-size:13px">Bill No: <strong th:text="${billNumber}">-</strong></p>
+    </div>
+    <div class="info-row">
+      <span class="label">📅 Due Date</span>
+      <span class="value" th:text="${dueDate}">-</span>
+    </div>
+    <div class="urgent" style="margin-top:20px">
+      <strong>⚠️ Please pay before the due date to avoid late payment penalties.</strong>
+    </div>
+  </div>
+  <div class="footer">
+    <p>&copy; 2026 WASAC &amp; REG – Rwanda Utility Billing System</p>
+    <p>Support: support@wasac-reg.rw</p>
+  </div>
+</div>
+</body>
+</html>

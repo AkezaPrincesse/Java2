@@ -1,0 +1,93 @@
+2026-06-07 00:31:54 [http-nio-8080-exec-2] DEBUG org.hibernate.SQL - 
+    select
+        u1_0.id,
+        u1_0.account_non_expired,
+        u1_0.account_non_locked,
+        u1_0.created_at,
+        u1_0.created_by,
+        u1_0.credentials_non_expired,
+        u1_0.email,
+        u1_0.enabled,
+        u1_0.failed_login_attempts,
+        u1_0.force_password_change,
+        u1_0.full_name,
+        u1_0.last_login,
+        u1_0.lock_time,
+        u1_0.password,
+        u1_0.phone_number,
+        u1_0.updated_at,
+        u1_0.updated_by 
+    from
+        public.users u1_0 
+    where
+        u1_0.email=?
+2026-06-07 00:31:55 [http-nio-8080-exec-2] DEBUG org.hibernate.SQL - 
+    select
+        r1_0.user_id,
+        r1_1.id,
+        r1_1.created_at,
+        r1_1.created_by,
+        r1_1.description,
+        r1_1.name,
+        p1_0.role_id,
+        p1_1.id,
+        p1_1.created_at,
+        p1_1.created_by,
+        p1_1.description,
+        p1_1.name,
+        p1_1.updated_at,
+        p1_1.updated_by,
+        r1_1.updated_at,
+        r1_1.updated_by 
+    from
+        public.user_roles r1_0 
+    join
+        public.roles r1_1 
+            on r1_1.id=r1_0.role_id 
+    left join
+        public.role_permissions p1_0 
+            on r1_1.id=p1_0.role_id 
+    left join
+        public.permissions p1_1 
+            on p1_1.id=p1_0.permission_id 
+    where
+        r1_0.user_id=?
+2026-06-07 00:31:55 [http-nio-8080-exec-2] DEBUG org.hibernate.SQL - 
+    select
+        u1_0.id,
+        u1_0.account_non_expired,
+        u1_0.account_non_locked,
+        u1_0.created_at,
+        u1_0.created_by,
+        u1_0.credentials_non_expired,
+        u1_0.email,
+        u1_0.enabled,
+        u1_0.failed_login_attempts,
+        u1_0.force_password_change,
+        u1_0.full_name,
+        u1_0.last_login,
+        u1_0.lock_time,
+        u1_0.password,
+        u1_0.phone_number,
+        u1_0.updated_at,
+        u1_0.updated_by 
+    from
+        public.users u1_0 
+    where
+        u1_0.email=?
+2026-06-07 00:31:55 [http-nio-8080-exec-2] DEBUG org.hibernate.SQL - 
+    update
+        public.users u1_0 
+    set
+        failed_login_attempts=(u1_0.failed_login_attempts+1) 
+    where
+        u1_0.email=?
+2026-06-07 00:31:55 [http-nio-8080-exec-2] WARN  o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - Resolved [org.springframework.security.authentication.DisabledException: User is disabled]
+2026-06-07 00:31:55 [SimpleAsyncTaskExecutor-26] DEBUG org.hibernate.SQL - 
+    insert 
+    into
+        public.audit_logs
+        (action, description, entity_id, entity_name, ip_address, new_values, old_values, performed_at, performed_by, user_agent) 
+    values
+        (?, ?, ?, ?, ?, ?, ?, ?, ?, ?) 
+    returning id

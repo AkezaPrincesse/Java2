@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head><meta charset="UTF-8"><title>Overdue Bill Notice</title>
+<style>
+body{font-family:Arial,sans-serif;background:#f4f4f4;margin:0;padding:0}
+.container{max-width:600px;margin:30px auto;background:#fff;border-radius:8px;overflow:hidden;box-shadow:0 2px 8px rgba(0,0,0,.1)}
+.header{background:#bf360c;color:#fff;padding:30px;text-align:center}
+.body{padding:30px}
+.warning-box{background:#fbe9e7;border:2px solid #ff8a65;border-radius:8px;text-align:center;padding:20px;margin:20px 0}
+.amount{font-size:28px;font-weight:bold;color:#bf360c}
+.footer{background:#f8f8f8;padding:20px;text-align:center;color:#888;font-size:12px}
+</style>
+</head>
+<body>
+<div class="container">
+  <div class="header">
+    <h1>⚠️ OVERDUE BILL NOTICE</h1>
+    <p style="opacity:.9;margin:5px 0 0">WASAC &amp; REG Utility Billing</p>
+  </div>
+  <div class="body">
+    <p>Dear <strong th:text="${name}">Customer</strong>,</p>
+    <p style="color:#bf360c;font-weight:bold">Your utility bill is <strong>OVERDUE</strong>. Immediate payment is required to avoid service interruption and additional penalties.</p>
+    <div class="warning-box">
+      <p style="margin:0 0 5px;color:#555">Bill No: <strong th:text="${billNumber}">-</strong></p>
+      <p style="margin:0 0 5px;color:#555">Outstanding Balance</p>
+      <div class="amount" th:text="${amount} + ' RWF'">0 RWF</div>
+    </div>
+    <p>Please visit our portal or any WASAC/REG payment center to settle this bill immediately.</p>
+    <p style="color:#888;font-size:13px">If you believe this is an error, please contact support at support@wasac-reg.rw</p>
+  </div>
+  <div class="footer">
+    <p>&copy; 2026 WASAC &amp; REG – Rwanda Utility Billing System</p>
+    <p>Support: support@wasac-reg.rw | Tel: +250 788 000 000</p>
+  </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head><meta charset="UTF-8"><title>Verify Your Email</title>
+<style>
+body{font-family:Arial,sans-serif;background:#f4f4f4;margin:0;padding:0}
+.container{max-width:600px;margin:30px auto;background:#fff;border-radius:8px;overflow:hidden;box-shadow:0 2px 8px rgba(0,0,0,.1)}
+.header{background:#1a73e8;color:#fff;padding:30px;text-align:center}
+.header h1{margin:0;font-size:24px}
+.body{padding:30px}
+.body p{color:#555;line-height:1.6}
+.btn{display:inline-block;background:#1a73e8;color:#fff;padding:14px 28px;border-radius:5px;text-decoration:none;font-weight:bold;margin:20px 0}
+.footer{background:#f8f8f8;padding:20px;text-align:center;color:#888;font-size:12px}
+.note{background:#fff3cd;border-left:4px solid #ffc107;padding:12px;margin:15px 0;border-radius:4px;font-size:13px}
+</style>
+</head>
+<body>
+<div class="container">
+  <div class="header">
+    <h1>🔐 WASAC &amp; REG Utility Billing</h1>
+    <p style="margin:5px 0 0;opacity:.9">Email Verification Required</p>
+  </div>
+  <div class="body">
+    <p>Dear <strong th:text="${name}">Customer</strong>,</p>
+    <p>Thank you for registering with the WASAC &amp; REG Utility Billing System. To activate your account, please verify your email address by clicking the button below.</p>
+    <div style="text-align:center">
+      <a th:href="${verificationLink}" class="btn">✅ Verify My Email</a>
+    </div>
+    <div class="note">
+      <strong>⏰ Important:</strong> This verification link will expire in <strong th:text="${expiryHours}">24</strong> hours.
+    </div>
+    <p>If you did not create an account, please ignore this email.</p>
+    <p>If the button does not work, copy and paste this link into your browser:</p>
+    <p style="word-break:break-all;color:#1a73e8;font-size:12px" th:text="${verificationLink}"></p>
+  </div>
+  <div class="footer">
+    <p>&copy; 2026 WASAC &amp; REG – Rwanda Utility Billing System</p>
+    <p>This is an automated message. Please do not reply.</p>
+  </div>
+</div>
+</body>
+</html>
