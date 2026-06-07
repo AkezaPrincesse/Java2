@@ -9511,3 +9511,1051 @@ Caused by: java.net.SocketTimeoutException: Read timed out
             on b1_0.id=i1_0.bill_id 
     where
         b1_0.bill_number=?
+2026-06-07 14:16:50 [http-nio-8080-exec-8] DEBUG org.hibernate.SQL - 
+    select
+        u1_0.id,
+        u1_0.account_non_expired,
+        u1_0.account_non_locked,
+        u1_0.created_at,
+        u1_0.created_by,
+        u1_0.credentials_non_expired,
+        u1_0.email,
+        u1_0.enabled,
+        u1_0.failed_login_attempts,
+        u1_0.force_password_change,
+        u1_0.full_name,
+        u1_0.last_login,
+        u1_0.lock_time,
+        u1_0.password,
+        u1_0.phone_number,
+        u1_0.updated_at,
+        u1_0.updated_by 
+    from
+        public.users u1_0 
+    where
+        u1_0.email=?
+2026-06-07 14:16:50 [http-nio-8080-exec-8] DEBUG org.hibernate.SQL - 
+    select
+        r1_0.user_id,
+        r1_1.id,
+        r1_1.created_at,
+        r1_1.created_by,
+        r1_1.description,
+        r1_1.name,
+        p1_0.role_id,
+        p1_1.id,
+        p1_1.created_at,
+        p1_1.created_by,
+        p1_1.description,
+        p1_1.name,
+        p1_1.updated_at,
+        p1_1.updated_by,
+        r1_1.updated_at,
+        r1_1.updated_by 
+    from
+        public.user_roles r1_0 
+    join
+        public.roles r1_1 
+            on r1_1.id=r1_0.role_id 
+    left join
+        public.role_permissions p1_0 
+            on r1_1.id=p1_0.role_id 
+    left join
+        public.permissions p1_1 
+            on p1_1.id=p1_0.permission_id 
+    where
+        r1_0.user_id=?
+2026-06-07 14:16:50 [http-nio-8080-exec-8] DEBUG c.e.u.s.JwtAuthenticationFilter - Authenticated user: admin@wasac-reg.rw
+2026-06-07 14:16:52 [http-nio-8080-exec-8] DEBUG org.hibernate.SQL - 
+    select
+        c1_0.id 
+    from
+        public.customers c1_0 
+    where
+        c1_0.national_id=? 
+    fetch
+        first ? rows only
+2026-06-07 14:16:52 [http-nio-8080-exec-8] DEBUG org.hibernate.SQL - 
+    select
+        c1_0.id 
+    from
+        public.customers c1_0 
+    where
+        c1_0.email=? 
+    fetch
+        first ? rows only
+2026-06-07 14:16:52 [http-nio-8080-exec-8] DEBUG org.hibernate.SQL - 
+    insert 
+    into
+        public.customers
+        (address, created_at, created_by, district, email, full_name, national_id, phone_number, sector, status, updated_at, updated_by, user_id) 
+    values
+        (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) 
+    returning id
+2026-06-07 14:16:52 [http-nio-8080-exec-8] DEBUG org.hibernate.SQL - 
+    select
+        u1_0.id,
+        u1_0.account_non_expired,
+        u1_0.account_non_locked,
+        u1_0.created_at,
+        u1_0.created_by,
+        u1_0.credentials_non_expired,
+        u1_0.email,
+        u1_0.enabled,
+        u1_0.failed_login_attempts,
+        u1_0.force_password_change,
+        u1_0.full_name,
+        u1_0.last_login,
+        u1_0.lock_time,
+        u1_0.password,
+        u1_0.phone_number,
+        u1_0.updated_at,
+        u1_0.updated_by 
+    from
+        public.users u1_0 
+    where
+        u1_0.email=?
+2026-06-07 14:16:52 [http-nio-8080-exec-8] DEBUG org.hibernate.SQL - 
+    select
+        r1_0.user_id,
+        r1_1.id,
+        r1_1.created_at,
+        r1_1.created_by,
+        r1_1.description,
+        r1_1.name,
+        p1_0.role_id,
+        p1_1.id,
+        p1_1.created_at,
+        p1_1.created_by,
+        p1_1.description,
+        p1_1.name,
+        p1_1.updated_at,
+        p1_1.updated_by,
+        r1_1.updated_at,
+        r1_1.updated_by 
+    from
+        public.user_roles r1_0 
+    join
+        public.roles r1_1 
+            on r1_1.id=r1_0.role_id 
+    left join
+        public.role_permissions p1_0 
+            on r1_1.id=p1_0.role_id 
+    left join
+        public.permissions p1_1 
+            on p1_1.id=p1_0.permission_id 
+    where
+        r1_0.user_id=?
+2026-06-07 14:16:52 [http-nio-8080-exec-8] INFO  c.e.u.s.impl.CustomerServiceImpl - Linked customer 4 to existing user account sengagloire2007@gmail.com
+2026-06-07 14:16:52 [http-nio-8080-exec-8] INFO  c.e.u.s.impl.CustomerServiceImpl - Customer created: Jean Pierre Habimana (ID: 4)
+2026-06-07 14:16:52 [http-nio-8080-exec-8] DEBUG org.hibernate.SQL - 
+    update
+        public.customers 
+    set
+        address=?,
+        district=?,
+        email=?,
+        full_name=?,
+        national_id=?,
+        phone_number=?,
+        sector=?,
+        status=?,
+        updated_at=?,
+        updated_by=?,
+        user_id=? 
+    where
+        id=?
+2026-06-07 14:16:52 [SimpleAsyncTaskExecutor-5] DEBUG org.hibernate.SQL - 
+    insert 
+    into
+        public.audit_logs
+        (action, description, entity_id, entity_name, ip_address, new_values, old_values, performed_at, performed_by, user_agent) 
+    values
+        (?, ?, ?, ?, ?, ?, ?, ?, ?, ?) 
+    returning id
+2026-06-07 14:18:01 [http-nio-8080-exec-5] DEBUG org.hibernate.SQL - 
+    select
+        u1_0.id,
+        u1_0.account_non_expired,
+        u1_0.account_non_locked,
+        u1_0.created_at,
+        u1_0.created_by,
+        u1_0.credentials_non_expired,
+        u1_0.email,
+        u1_0.enabled,
+        u1_0.failed_login_attempts,
+        u1_0.force_password_change,
+        u1_0.full_name,
+        u1_0.last_login,
+        u1_0.lock_time,
+        u1_0.password,
+        u1_0.phone_number,
+        u1_0.updated_at,
+        u1_0.updated_by 
+    from
+        public.users u1_0 
+    where
+        u1_0.email=?
+2026-06-07 14:18:01 [http-nio-8080-exec-5] DEBUG org.hibernate.SQL - 
+    select
+        r1_0.user_id,
+        r1_1.id,
+        r1_1.created_at,
+        r1_1.created_by,
+        r1_1.description,
+        r1_1.name,
+        p1_0.role_id,
+        p1_1.id,
+        p1_1.created_at,
+        p1_1.created_by,
+        p1_1.description,
+        p1_1.name,
+        p1_1.updated_at,
+        p1_1.updated_by,
+        r1_1.updated_at,
+        r1_1.updated_by 
+    from
+        public.user_roles r1_0 
+    join
+        public.roles r1_1 
+            on r1_1.id=r1_0.role_id 
+    left join
+        public.role_permissions p1_0 
+            on r1_1.id=p1_0.role_id 
+    left join
+        public.permissions p1_1 
+            on p1_1.id=p1_0.permission_id 
+    where
+        r1_0.user_id=?
+2026-06-07 14:18:01 [http-nio-8080-exec-5] DEBUG c.e.u.s.JwtAuthenticationFilter - Authenticated user: admin@wasac-reg.rw
+2026-06-07 14:18:01 [http-nio-8080-exec-5] DEBUG org.hibernate.SQL - 
+    select
+        m1_0.id 
+    from
+        public.meters m1_0 
+    where
+        m1_0.meter_number=? 
+    fetch
+        first ? rows only
+2026-06-07 14:18:01 [http-nio-8080-exec-5] DEBUG org.hibernate.SQL - 
+    select
+        c1_0.id,
+        c1_0.address,
+        c1_0.created_at,
+        c1_0.created_by,
+        c1_0.district,
+        c1_0.email,
+        c1_0.full_name,
+        c1_0.national_id,
+        c1_0.phone_number,
+        c1_0.sector,
+        c1_0.status,
+        c1_0.updated_at,
+        c1_0.updated_by,
+        c1_0.user_id 
+    from
+        public.customers c1_0 
+    where
+        c1_0.id=?
+2026-06-07 14:18:01 [http-nio-8080-exec-5] DEBUG org.hibernate.SQL - 
+    select
+        t1_0.id,
+        t1_0.active,
+        t1_0.created_at,
+        t1_0.created_by,
+        t1_0.description,
+        t1_0.effective_date,
+        t1_0.expiry_date,
+        t1_0.flat_rate,
+        t1_0.name,
+        t1_0.tariff_type,
+        t1_0.updated_at,
+        t1_0.updated_by,
+        t1_0.utility_type 
+    from
+        public.tariffs t1_0 
+    where
+        t1_0.id=?
+2026-06-07 14:18:01 [http-nio-8080-exec-5] DEBUG org.hibernate.SQL - 
+    insert 
+    into
+        public.meters
+        (created_at, created_by, customer_id, initial_reading, installation_date, location, meter_number, meter_type, status, tariff_id, updated_at, updated_by) 
+    values
+        (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) 
+    returning id
+2026-06-07 14:18:01 [SimpleAsyncTaskExecutor-6] DEBUG org.hibernate.SQL - 
+    insert 
+    into
+        public.audit_logs
+        (action, description, entity_id, entity_name, ip_address, new_values, old_values, performed_at, performed_by, user_agent) 
+    values
+        (?, ?, ?, ?, ?, ?, ?, ?, ?, ?) 
+    returning id
+2026-06-07 14:19:04 [http-nio-8080-exec-3] DEBUG org.hibernate.SQL - 
+    select
+        u1_0.id,
+        u1_0.account_non_expired,
+        u1_0.account_non_locked,
+        u1_0.created_at,
+        u1_0.created_by,
+        u1_0.credentials_non_expired,
+        u1_0.email,
+        u1_0.enabled,
+        u1_0.failed_login_attempts,
+        u1_0.force_password_change,
+        u1_0.full_name,
+        u1_0.last_login,
+        u1_0.lock_time,
+        u1_0.password,
+        u1_0.phone_number,
+        u1_0.updated_at,
+        u1_0.updated_by 
+    from
+        public.users u1_0 
+    where
+        u1_0.email=?
+2026-06-07 14:19:04 [http-nio-8080-exec-3] DEBUG org.hibernate.SQL - 
+    select
+        r1_0.user_id,
+        r1_1.id,
+        r1_1.created_at,
+        r1_1.created_by,
+        r1_1.description,
+        r1_1.name,
+        p1_0.role_id,
+        p1_1.id,
+        p1_1.created_at,
+        p1_1.created_by,
+        p1_1.description,
+        p1_1.name,
+        p1_1.updated_at,
+        p1_1.updated_by,
+        r1_1.updated_at,
+        r1_1.updated_by 
+    from
+        public.user_roles r1_0 
+    join
+        public.roles r1_1 
+            on r1_1.id=r1_0.role_id 
+    left join
+        public.role_permissions p1_0 
+            on r1_1.id=p1_0.role_id 
+    left join
+        public.permissions p1_1 
+            on p1_1.id=p1_0.permission_id 
+    where
+        r1_0.user_id=?
+2026-06-07 14:19:04 [http-nio-8080-exec-3] DEBUG c.e.u.s.JwtAuthenticationFilter - Authenticated user: admin@wasac-reg.rw
+2026-06-07 14:19:04 [http-nio-8080-exec-3] DEBUG org.hibernate.SQL - 
+    select
+        m1_0.id,
+        m1_0.created_at,
+        m1_0.created_by,
+        m1_0.customer_id,
+        m1_0.initial_reading,
+        m1_0.installation_date,
+        m1_0.location,
+        m1_0.meter_number,
+        m1_0.meter_type,
+        m1_0.status,
+        m1_0.tariff_id,
+        m1_0.updated_at,
+        m1_0.updated_by 
+    from
+        public.meters m1_0 
+    where
+        m1_0.id=?
+2026-06-07 14:19:04 [http-nio-8080-exec-3] DEBUG org.hibernate.SQL - 
+    select
+        mr1_0.id 
+    from
+        public.meter_readings mr1_0 
+    where
+        mr1_0.meter_id=? 
+        and mr1_0.reading_year=? 
+        and mr1_0.reading_month=? 
+    fetch
+        first ? rows only
+2026-06-07 14:19:04 [http-nio-8080-exec-3] DEBUG org.hibernate.SQL - 
+    insert 
+    into
+        public.meter_readings
+        (consumption, created_at, created_by, current_reading, meter_id, notes, previous_reading, reading_date, reading_image_path, reading_month, reading_year, updated_at, updated_by) 
+    values
+        (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) 
+    returning id
+2026-06-07 14:19:04 [http-nio-8080-exec-3] DEBUG org.hibernate.SQL - 
+    select
+        c1_0.id,
+        c1_0.address,
+        c1_0.created_at,
+        c1_0.created_by,
+        c1_0.district,
+        c1_0.email,
+        c1_0.full_name,
+        c1_0.national_id,
+        c1_0.phone_number,
+        c1_0.sector,
+        c1_0.status,
+        c1_0.updated_at,
+        c1_0.updated_by,
+        c1_0.user_id 
+    from
+        public.customers c1_0 
+    where
+        c1_0.id=?
+2026-06-07 14:19:04 [SimpleAsyncTaskExecutor-7] DEBUG org.hibernate.SQL - 
+    insert 
+    into
+        public.audit_logs
+        (action, description, entity_id, entity_name, ip_address, new_values, old_values, performed_at, performed_by, user_agent) 
+    values
+        (?, ?, ?, ?, ?, ?, ?, ?, ?, ?) 
+    returning id
+2026-06-07 14:19:21 [http-nio-8080-exec-4] DEBUG org.hibernate.SQL - 
+    select
+        u1_0.id,
+        u1_0.account_non_expired,
+        u1_0.account_non_locked,
+        u1_0.created_at,
+        u1_0.created_by,
+        u1_0.credentials_non_expired,
+        u1_0.email,
+        u1_0.enabled,
+        u1_0.failed_login_attempts,
+        u1_0.force_password_change,
+        u1_0.full_name,
+        u1_0.last_login,
+        u1_0.lock_time,
+        u1_0.password,
+        u1_0.phone_number,
+        u1_0.updated_at,
+        u1_0.updated_by 
+    from
+        public.users u1_0 
+    where
+        u1_0.email=?
+2026-06-07 14:19:21 [http-nio-8080-exec-4] DEBUG org.hibernate.SQL - 
+    select
+        r1_0.user_id,
+        r1_1.id,
+        r1_1.created_at,
+        r1_1.created_by,
+        r1_1.description,
+        r1_1.name,
+        p1_0.role_id,
+        p1_1.id,
+        p1_1.created_at,
+        p1_1.created_by,
+        p1_1.description,
+        p1_1.name,
+        p1_1.updated_at,
+        p1_1.updated_by,
+        r1_1.updated_at,
+        r1_1.updated_by 
+    from
+        public.user_roles r1_0 
+    join
+        public.roles r1_1 
+            on r1_1.id=r1_0.role_id 
+    left join
+        public.role_permissions p1_0 
+            on r1_1.id=p1_0.role_id 
+    left join
+        public.permissions p1_1 
+            on p1_1.id=p1_0.permission_id 
+    where
+        r1_0.user_id=?
+2026-06-07 14:19:21 [http-nio-8080-exec-4] DEBUG c.e.u.s.JwtAuthenticationFilter - Authenticated user: admin@wasac-reg.rw
+2026-06-07 14:19:21 [http-nio-8080-exec-4] DEBUG org.hibernate.SQL - 
+    select
+        m1_0.id,
+        m1_0.created_at,
+        m1_0.created_by,
+        m1_0.customer_id,
+        m1_0.initial_reading,
+        m1_0.installation_date,
+        m1_0.location,
+        m1_0.meter_number,
+        m1_0.meter_type,
+        m1_0.status,
+        m1_0.tariff_id,
+        m1_0.updated_at,
+        m1_0.updated_by 
+    from
+        public.meters m1_0 
+    where
+        m1_0.id=?
+2026-06-07 14:19:21 [http-nio-8080-exec-4] DEBUG org.hibernate.SQL - 
+    select
+        mr1_0.id 
+    from
+        public.meter_readings mr1_0 
+    where
+        mr1_0.meter_id=? 
+        and mr1_0.reading_year=? 
+        and mr1_0.reading_month=? 
+    fetch
+        first ? rows only
+2026-06-07 14:19:21 [http-nio-8080-exec-4] WARN  c.e.u.e.GlobalExceptionHandler - Duplicate resource: A reading already exists for meter WATER-JP-001 for 2026/6
+2026-06-07 14:19:21 [http-nio-8080-exec-4] WARN  o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - Resolved [com.exam.utility.exception.DuplicateResourceException: A reading already exists for meter WATER-JP-001 for 2026/6]
+2026-06-07 14:19:46 [http-nio-8080-exec-10] DEBUG org.hibernate.SQL - 
+    select
+        u1_0.id,
+        u1_0.account_non_expired,
+        u1_0.account_non_locked,
+        u1_0.created_at,
+        u1_0.created_by,
+        u1_0.credentials_non_expired,
+        u1_0.email,
+        u1_0.enabled,
+        u1_0.failed_login_attempts,
+        u1_0.force_password_change,
+        u1_0.full_name,
+        u1_0.last_login,
+        u1_0.lock_time,
+        u1_0.password,
+        u1_0.phone_number,
+        u1_0.updated_at,
+        u1_0.updated_by 
+    from
+        public.users u1_0 
+    where
+        u1_0.email=?
+2026-06-07 14:19:46 [http-nio-8080-exec-10] DEBUG org.hibernate.SQL - 
+    select
+        r1_0.user_id,
+        r1_1.id,
+        r1_1.created_at,
+        r1_1.created_by,
+        r1_1.description,
+        r1_1.name,
+        p1_0.role_id,
+        p1_1.id,
+        p1_1.created_at,
+        p1_1.created_by,
+        p1_1.description,
+        p1_1.name,
+        p1_1.updated_at,
+        p1_1.updated_by,
+        r1_1.updated_at,
+        r1_1.updated_by 
+    from
+        public.user_roles r1_0 
+    join
+        public.roles r1_1 
+            on r1_1.id=r1_0.role_id 
+    left join
+        public.role_permissions p1_0 
+            on r1_1.id=p1_0.role_id 
+    left join
+        public.permissions p1_1 
+            on p1_1.id=p1_0.permission_id 
+    where
+        r1_0.user_id=?
+2026-06-07 14:19:46 [http-nio-8080-exec-10] DEBUG c.e.u.s.JwtAuthenticationFilter - Authenticated user: admin@wasac-reg.rw
+2026-06-07 14:19:46 [http-nio-8080-exec-10] INFO  c.exam.utility.billing.BillingEngine - Starting bill generation for 2026/6
+2026-06-07 14:19:46 [http-nio-8080-exec-10] DEBUG org.hibernate.SQL - 
+    select
+        bc1_0.id,
+        bc1_0.billing_month,
+        bc1_0.billing_year,
+        bc1_0.closed,
+        bc1_0.created_at,
+        bc1_0.created_by,
+        bc1_0.due_date,
+        bc1_0.end_date,
+        bc1_0.start_date,
+        bc1_0.updated_at,
+        bc1_0.updated_by 
+    from
+        public.billing_cycles bc1_0 
+    where
+        bc1_0.billing_year=? 
+        and bc1_0.billing_month=?
+2026-06-07 14:19:46 [http-nio-8080-exec-10] DEBUG org.hibernate.SQL - 
+    select
+        m1_0.id,
+        m1_0.created_at,
+        m1_0.created_by,
+        m1_0.customer_id,
+        m1_0.initial_reading,
+        m1_0.installation_date,
+        m1_0.location,
+        m1_0.meter_number,
+        m1_0.meter_type,
+        m1_0.status,
+        m1_0.tariff_id,
+        m1_0.updated_at,
+        m1_0.updated_by 
+    from
+        public.meters m1_0 
+    where
+        m1_0.status=? 
+        and m1_0.meter_type=?
+2026-06-07 14:19:46 [http-nio-8080-exec-10] DEBUG org.hibernate.SQL - 
+    select
+        m1_0.id,
+        m1_0.created_at,
+        m1_0.created_by,
+        m1_0.customer_id,
+        m1_0.initial_reading,
+        m1_0.installation_date,
+        m1_0.location,
+        m1_0.meter_number,
+        m1_0.meter_type,
+        m1_0.status,
+        m1_0.tariff_id,
+        m1_0.updated_at,
+        m1_0.updated_by 
+    from
+        public.meters m1_0 
+    where
+        m1_0.status=? 
+        and m1_0.meter_type=?
+2026-06-07 14:19:46 [http-nio-8080-exec-10] DEBUG org.hibernate.SQL - 
+    select
+        c1_0.id,
+        c1_0.address,
+        c1_0.created_at,
+        c1_0.created_by,
+        c1_0.district,
+        c1_0.email,
+        c1_0.full_name,
+        c1_0.national_id,
+        c1_0.phone_number,
+        c1_0.sector,
+        c1_0.status,
+        c1_0.updated_at,
+        c1_0.updated_by,
+        c1_0.user_id 
+    from
+        public.customers c1_0 
+    where
+        c1_0.id=?
+2026-06-07 14:19:46 [http-nio-8080-exec-10] DEBUG org.hibernate.SQL - 
+    select
+        b1_0.id 
+    from
+        public.bills b1_0 
+    where
+        b1_0.meter_id=? 
+        and b1_0.billing_cycle_id=? 
+    fetch
+        first ? rows only
+2026-06-07 14:19:46 [http-nio-8080-exec-10] DEBUG org.hibernate.SQL - 
+    select
+        mr1_0.id,
+        mr1_0.consumption,
+        mr1_0.created_at,
+        mr1_0.created_by,
+        mr1_0.current_reading,
+        mr1_0.meter_id,
+        mr1_0.notes,
+        mr1_0.previous_reading,
+        mr1_0.reading_date,
+        mr1_0.reading_image_path,
+        mr1_0.reading_month,
+        mr1_0.reading_year,
+        mr1_0.updated_at,
+        mr1_0.updated_by 
+    from
+        public.meter_readings mr1_0 
+    where
+        mr1_0.meter_id=? 
+        and mr1_0.reading_year=? 
+        and mr1_0.reading_month=?
+2026-06-07 14:19:46 [http-nio-8080-exec-10] ERROR c.exam.utility.billing.BillingEngine - Failed to generate bill for meter MTR-TEST-001: No meter reading found for meter MTR-TEST-001 in 2026/6. A reading is required before generating a bill.
+2026-06-07 14:19:46 [http-nio-8080-exec-10] DEBUG org.hibernate.SQL - 
+    select
+        c1_0.id,
+        c1_0.address,
+        c1_0.created_at,
+        c1_0.created_by,
+        c1_0.district,
+        c1_0.email,
+        c1_0.full_name,
+        c1_0.national_id,
+        c1_0.phone_number,
+        c1_0.sector,
+        c1_0.status,
+        c1_0.updated_at,
+        c1_0.updated_by,
+        c1_0.user_id 
+    from
+        public.customers c1_0 
+    where
+        c1_0.id=?
+2026-06-07 14:19:46 [http-nio-8080-exec-10] DEBUG org.hibernate.SQL - 
+    select
+        b1_0.id 
+    from
+        public.bills b1_0 
+    where
+        b1_0.meter_id=? 
+        and b1_0.billing_cycle_id=? 
+    fetch
+        first ? rows only
+2026-06-07 14:19:46 [http-nio-8080-exec-10] DEBUG org.hibernate.SQL - 
+    select
+        mr1_0.id,
+        mr1_0.consumption,
+        mr1_0.created_at,
+        mr1_0.created_by,
+        mr1_0.current_reading,
+        mr1_0.meter_id,
+        mr1_0.notes,
+        mr1_0.previous_reading,
+        mr1_0.reading_date,
+        mr1_0.reading_image_path,
+        mr1_0.reading_month,
+        mr1_0.reading_year,
+        mr1_0.updated_at,
+        mr1_0.updated_by 
+    from
+        public.meter_readings mr1_0 
+    where
+        mr1_0.meter_id=? 
+        and mr1_0.reading_year=? 
+        and mr1_0.reading_month=?
+2026-06-07 14:19:46 [http-nio-8080-exec-10] DEBUG org.hibernate.SQL - 
+    select
+        t1_0.id,
+        t1_0.active,
+        t1_0.created_at,
+        t1_0.created_by,
+        t1_0.description,
+        t1_0.effective_date,
+        t1_0.expiry_date,
+        t1_0.flat_rate,
+        t1_0.name,
+        t1_0.tariff_type,
+        t1_0.updated_at,
+        t1_0.updated_by,
+        t1_0.utility_type 
+    from
+        public.tariffs t1_0 
+    where
+        t1_0.id=?
+2026-06-07 14:19:46 [http-nio-8080-exec-10] DEBUG org.hibernate.SQL - 
+    select
+        sc1_0.id,
+        sc1_0.active,
+        sc1_0.amount,
+        sc1_0.charge_type,
+        sc1_0.created_at,
+        sc1_0.created_by,
+        sc1_0.description,
+        sc1_0.name,
+        sc1_0.updated_at,
+        sc1_0.updated_by,
+        sc1_0.utility_type 
+    from
+        public.service_charges sc1_0 
+    where
+        sc1_0.utility_type=? 
+        and sc1_0.active
+2026-06-07 14:19:47 [http-nio-8080-exec-10] DEBUG org.hibernate.SQL - 
+    select
+        t1_0.id,
+        t1_0.active,
+        t1_0.applied_to_consumption,
+        t1_0.created_at,
+        t1_0.created_by,
+        t1_0.description,
+        t1_0.name,
+        t1_0.rate,
+        t1_0.tax_type,
+        t1_0.updated_at,
+        t1_0.updated_by,
+        t1_0.utility_type 
+    from
+        public.taxes t1_0 
+    where
+        t1_0.utility_type=? 
+        and t1_0.active
+2026-06-07 14:19:47 [http-nio-8080-exec-10] DEBUG org.hibernate.SQL - 
+    insert 
+    into
+        public.bills
+        (approved_at, approved_by, balance_amount, bill_date, bill_number, billing_cycle_id, consumption_amount, created_at, created_by, customer_id, due_date, meter_id, meter_reading_id, notes, paid_amount, paid_at, penalty_amount, service_charge_amount, status, tax_amount, total_amount, updated_at, updated_by, utility_type) 
+    values
+        (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) 
+    returning id
+2026-06-07 14:19:47 [http-nio-8080-exec-10] DEBUG org.hibernate.SQL - 
+    insert 
+    into
+        public.bill_items
+        (amount, bill_id, created_at, created_by, description, item_type, quantity, unit_price, updated_at, updated_by) 
+    values
+        (?, ?, ?, ?, ?, ?, ?, ?, ?, ?) 
+    returning id
+2026-06-07 14:19:47 [http-nio-8080-exec-10] DEBUG org.hibernate.SQL - 
+    insert 
+    into
+        public.bill_items
+        (amount, bill_id, created_at, created_by, description, item_type, quantity, unit_price, updated_at, updated_by) 
+    values
+        (?, ?, ?, ?, ?, ?, ?, ?, ?, ?) 
+    returning id
+2026-06-07 14:19:47 [http-nio-8080-exec-10] DEBUG org.hibernate.SQL - 
+    insert 
+    into
+        public.bill_items
+        (amount, bill_id, created_at, created_by, description, item_type, quantity, unit_price, updated_at, updated_by) 
+    values
+        (?, ?, ?, ?, ?, ?, ?, ?, ?, ?) 
+    returning id
+2026-06-07 14:19:47 [http-nio-8080-exec-10] INFO  c.exam.utility.billing.BillingEngine - Generated bill WB-202606-2EC56E for meter MTR-WATER-2024-001 (consumption: 5.0, total: 2065.0000)
+2026-06-07 14:19:47 [http-nio-8080-exec-10] DEBUG org.hibernate.SQL - 
+    select
+        c1_0.id,
+        c1_0.address,
+        c1_0.created_at,
+        c1_0.created_by,
+        c1_0.district,
+        c1_0.email,
+        c1_0.full_name,
+        c1_0.national_id,
+        c1_0.phone_number,
+        c1_0.sector,
+        c1_0.status,
+        c1_0.updated_at,
+        c1_0.updated_by,
+        c1_0.user_id 
+    from
+        public.customers c1_0 
+    where
+        c1_0.id=?
+2026-06-07 14:19:47 [http-nio-8080-exec-10] DEBUG org.hibernate.SQL - 
+    select
+        b1_0.id 
+    from
+        public.bills b1_0 
+    where
+        b1_0.meter_id=? 
+        and b1_0.billing_cycle_id=? 
+    fetch
+        first ? rows only
+2026-06-07 14:19:47 [http-nio-8080-exec-10] DEBUG org.hibernate.SQL - 
+    select
+        b1_0.id,
+        b1_0.approved_at,
+        b1_0.approved_by,
+        b1_0.balance_amount,
+        b1_0.bill_date,
+        b1_0.bill_number,
+        b1_0.billing_cycle_id,
+        b1_0.consumption_amount,
+        b1_0.created_at,
+        b1_0.created_by,
+        b1_0.customer_id,
+        b1_0.due_date,
+        b1_0.meter_id,
+        b1_0.meter_reading_id,
+        b1_0.notes,
+        b1_0.paid_amount,
+        b1_0.paid_at,
+        b1_0.penalty_amount,
+        b1_0.service_charge_amount,
+        b1_0.status,
+        b1_0.tax_amount,
+        b1_0.total_amount,
+        b1_0.updated_at,
+        b1_0.updated_by,
+        b1_0.utility_type 
+    from
+        public.bills b1_0 
+    where
+        b1_0.meter_id=? 
+        and b1_0.billing_cycle_id=?
+2026-06-07 14:19:47 [http-nio-8080-exec-10] DEBUG c.exam.utility.billing.BillingEngine - Bill already exists for meter WATER-MTR-001 in cycle 2026/6
+2026-06-07 14:19:47 [http-nio-8080-exec-10] DEBUG org.hibernate.SQL - 
+    select
+        c1_0.id,
+        c1_0.address,
+        c1_0.created_at,
+        c1_0.created_by,
+        c1_0.district,
+        c1_0.email,
+        c1_0.full_name,
+        c1_0.national_id,
+        c1_0.phone_number,
+        c1_0.sector,
+        c1_0.status,
+        c1_0.updated_at,
+        c1_0.updated_by,
+        c1_0.user_id 
+    from
+        public.customers c1_0 
+    where
+        c1_0.id=?
+2026-06-07 14:19:47 [http-nio-8080-exec-10] DEBUG org.hibernate.SQL - 
+    select
+        b1_0.id 
+    from
+        public.bills b1_0 
+    where
+        b1_0.meter_id=? 
+        and b1_0.billing_cycle_id=? 
+    fetch
+        first ? rows only
+2026-06-07 14:19:47 [http-nio-8080-exec-10] DEBUG org.hibernate.SQL - 
+    select
+        mr1_0.id,
+        mr1_0.consumption,
+        mr1_0.created_at,
+        mr1_0.created_by,
+        mr1_0.current_reading,
+        mr1_0.meter_id,
+        mr1_0.notes,
+        mr1_0.previous_reading,
+        mr1_0.reading_date,
+        mr1_0.reading_image_path,
+        mr1_0.reading_month,
+        mr1_0.reading_year,
+        mr1_0.updated_at,
+        mr1_0.updated_by 
+    from
+        public.meter_readings mr1_0 
+    where
+        mr1_0.meter_id=? 
+        and mr1_0.reading_year=? 
+        and mr1_0.reading_month=?
+2026-06-07 14:19:47 [http-nio-8080-exec-10] DEBUG org.hibernate.SQL - 
+    select
+        sc1_0.id,
+        sc1_0.active,
+        sc1_0.amount,
+        sc1_0.charge_type,
+        sc1_0.created_at,
+        sc1_0.created_by,
+        sc1_0.description,
+        sc1_0.name,
+        sc1_0.updated_at,
+        sc1_0.updated_by,
+        sc1_0.utility_type 
+    from
+        public.service_charges sc1_0 
+    where
+        sc1_0.utility_type=? 
+        and sc1_0.active
+2026-06-07 14:19:47 [http-nio-8080-exec-10] DEBUG org.hibernate.SQL - 
+    select
+        t1_0.id,
+        t1_0.active,
+        t1_0.applied_to_consumption,
+        t1_0.created_at,
+        t1_0.created_by,
+        t1_0.description,
+        t1_0.name,
+        t1_0.rate,
+        t1_0.tax_type,
+        t1_0.updated_at,
+        t1_0.updated_by,
+        t1_0.utility_type 
+    from
+        public.taxes t1_0 
+    where
+        t1_0.utility_type=? 
+        and t1_0.active
+2026-06-07 14:19:47 [http-nio-8080-exec-10] DEBUG org.hibernate.SQL - 
+    insert 
+    into
+        public.bills
+        (approved_at, approved_by, balance_amount, bill_date, bill_number, billing_cycle_id, consumption_amount, created_at, created_by, customer_id, due_date, meter_id, meter_reading_id, notes, paid_amount, paid_at, penalty_amount, service_charge_amount, status, tax_amount, total_amount, updated_at, updated_by, utility_type) 
+    values
+        (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) 
+    returning id
+2026-06-07 14:19:47 [http-nio-8080-exec-10] DEBUG org.hibernate.SQL - 
+    insert 
+    into
+        public.bill_items
+        (amount, bill_id, created_at, created_by, description, item_type, quantity, unit_price, updated_at, updated_by) 
+    values
+        (?, ?, ?, ?, ?, ?, ?, ?, ?, ?) 
+    returning id
+2026-06-07 14:19:47 [http-nio-8080-exec-10] DEBUG org.hibernate.SQL - 
+    insert 
+    into
+        public.bill_items
+        (amount, bill_id, created_at, created_by, description, item_type, quantity, unit_price, updated_at, updated_by) 
+    values
+        (?, ?, ?, ?, ?, ?, ?, ?, ?, ?) 
+    returning id
+2026-06-07 14:19:47 [http-nio-8080-exec-10] DEBUG org.hibernate.SQL - 
+    insert 
+    into
+        public.bill_items
+        (amount, bill_id, created_at, created_by, description, item_type, quantity, unit_price, updated_at, updated_by) 
+    values
+        (?, ?, ?, ?, ?, ?, ?, ?, ?, ?) 
+    returning id
+2026-06-07 14:19:47 [http-nio-8080-exec-10] INFO  c.exam.utility.billing.BillingEngine - Generated bill WB-202606-1A62A5 for meter WATER-JP-001 (consumption: 120.0, total: 35990.0000)
+2026-06-07 14:19:47 [http-nio-8080-exec-10] INFO  c.exam.utility.billing.BillingEngine - Generated 2 bills for 2026/6
+2026-06-07 14:19:47 [SimpleAsyncTaskExecutor-8] DEBUG org.hibernate.SQL - 
+    insert 
+    into
+        public.audit_logs
+        (action, description, entity_id, entity_name, ip_address, new_values, old_values, performed_at, performed_by, user_agent) 
+    values
+        (?, ?, ?, ?, ?, ?, ?, ?, ?, ?) 
+    returning id
+2026-06-07 14:19:47 [notif-2] DEBUG org.hibernate.SQL - 
+    insert 
+    into
+        public.notifications
+        (created_at, created_by, customer_id, email_sent, message, reference_link, status, title, type, updated_at, updated_by, user_id) 
+    values
+        (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) 
+    returning id
+2026-06-07 14:19:47 [notif-1] DEBUG org.hibernate.SQL - 
+    insert 
+    into
+        public.notifications
+        (created_at, created_by, customer_id, email_sent, message, reference_link, status, title, type, updated_at, updated_by, user_id) 
+    values
+        (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) 
+    returning id
+2026-06-07 14:19:47 [notif-1] ERROR o.s.a.i.SimpleAsyncUncaughtExceptionHandler - Unexpected exception occurred invoking async method: public void com.exam.utility.service.impl.NotificationServiceImpl.notifyBillGenerated(com.exam.utility.entity.Bill)
+org.hibernate.LazyInitializationException: could not initialize proxy [com.exam.utility.entity.User#5] - no Session
+	at org.hibernate.proxy.AbstractLazyInitializer.initialize(AbstractLazyInitializer.java:165)
+	at org.hibernate.proxy.AbstractLazyInitializer.getImplementation(AbstractLazyInitializer.java:314)
+	at org.hibernate.proxy.pojo.bytebuddy.ByteBuddyInterceptor.intercept(ByteBuddyInterceptor.java:44)
+	at org.hibernate.proxy.ProxyConfiguration$InterceptorDispatcher.intercept(ProxyConfiguration.java:102)
+	at com.exam.utility.entity.User$HibernateProxy$RhoI7R8C.getEmail(Unknown Source)
+	at com.exam.utility.service.impl.NotificationServiceImpl.sendNotification(NotificationServiceImpl.java:46)
+	at com.exam.utility.service.impl.NotificationServiceImpl.notifyBillGenerated(NotificationServiceImpl.java:60)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at org.springframework.aop.support.AopUtils.invokeJoinpointUsingReflection(AopUtils.java:355)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.invokeJoinpoint(ReflectiveMethodInvocation.java:196)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:163)
+	at org.springframework.aop.framework.CglibAopProxy$CglibMethodInvocation.proceed(CglibAopProxy.java:768)
+	at org.springframework.aop.interceptor.AsyncExecutionInterceptor.lambda$invoke$0(AsyncExecutionInterceptor.java:113)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:317)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1144)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+2026-06-07 14:19:47 [notif-2] ERROR o.s.a.i.SimpleAsyncUncaughtExceptionHandler - Unexpected exception occurred invoking async method: public void com.exam.utility.service.impl.NotificationServiceImpl.notifyBillGenerated(com.exam.utility.entity.Bill)
+org.hibernate.LazyInitializationException: could not initialize proxy [com.exam.utility.entity.User#4] - no Session
+	at org.hibernate.proxy.AbstractLazyInitializer.initialize(AbstractLazyInitializer.java:165)
+	at org.hibernate.proxy.AbstractLazyInitializer.getImplementation(AbstractLazyInitializer.java:314)
+	at org.hibernate.proxy.pojo.bytebuddy.ByteBuddyInterceptor.intercept(ByteBuddyInterceptor.java:44)
+	at org.hibernate.proxy.ProxyConfiguration$InterceptorDispatcher.intercept(ProxyConfiguration.java:102)
+	at com.exam.utility.entity.User$HibernateProxy$RhoI7R8C.getEmail(Unknown Source)
+	at com.exam.utility.service.impl.NotificationServiceImpl.sendNotification(NotificationServiceImpl.java:46)
+	at com.exam.utility.service.impl.NotificationServiceImpl.notifyBillGenerated(NotificationServiceImpl.java:60)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at org.springframework.aop.support.AopUtils.invokeJoinpointUsingReflection(AopUtils.java:355)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.invokeJoinpoint(ReflectiveMethodInvocation.java:196)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:163)
+	at org.springframework.aop.framework.CglibAopProxy$CglibMethodInvocation.proceed(CglibAopProxy.java:768)
+	at org.springframework.aop.interceptor.AsyncExecutionInterceptor.lambda$invoke$0(AsyncExecutionInterceptor.java:113)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:317)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1144)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+2026-06-07 14:21:16 [UtilityBillingHikariPool housekeeper] WARN  com.zaxxer.hikari.pool.HikariPool - UtilityBillingHikariPool - Thread starvation or clock leap detected (housekeeper delta=56s908ms909µs800ns).
