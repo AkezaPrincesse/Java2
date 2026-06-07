@@ -10,7 +10,7 @@ public interface EmailService {
     void sendWelcomeEmail(String to, String name);
     void sendBillGeneratedEmail(String to, String name, String billNumber, BigDecimal amount, String dueDate);
     void sendBillApprovedEmail(String to, String name, String billNumber, BigDecimal amount);
-    void sendPaymentConfirmationEmail(String to, String name, String receiptNumber, BigDecimal amount, String billNumber);
+    void sendPaymentConfirmationEmail(String to, String name, String receiptNumber, BigDecimal amount, String billNumber, BigDecimal remainingBalance);
     void sendOverdueBillEmail(String to, String name, String billNumber, BigDecimal amount);
     /** Sends login credentials to a newly created staff account. */
     void sendUserCreatedEmail(String to, String fullName, String temporaryPassword, String role, String loginUrl);

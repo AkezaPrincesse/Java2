@@ -113,14 +113,15 @@ public class EmailServiceImpl implements EmailService {
     @Override
     @Async("emailExecutor")
     public void sendPaymentConfirmationEmail(String to, String name, String receiptNumber,
-                                              BigDecimal amount, String billNumber) {
-        Map<String, Object> vars = Map.of(
-            "name", name,
-            "receiptNumber", receiptNumber,
-            "amount", amount,
-            "billNumber", billNumber,
-            "paymentDate", LocalDateTime.now().toString()
-        );
+                                              BigDecimal amount, String billNumber, BigDecimal remainingBalance) {
+        Map<String, Object> vars = new java.util.HashMap<>();
+        vars.put("name", name);
+        vars.put("receiptNumber", receiptNumber);
+        vars.put("amount", amount);
+        vars.put("billNumber", billNumber);
+        vars.put("paymentDate", LocalDateTime.now().toString());
+        vars.put("remainingBalance", remainingBalance);
+        vars.put("isFullyPaid", remainingBalance.compareTo(BigDecimal.ZERO) <= 0);
         sendEmail(to, "Payment Confirmed – Receipt " + receiptNumber, "email/payment-confirmation", vars);
     }
 

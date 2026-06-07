@@ -96,7 +96,8 @@ public class NotificationServiceImpl implements NotificationService {
         sendNotification(customer.getUser(), customer, NotificationType.PAYMENT_RECEIVED, title, message);
         emailService.sendPaymentConfirmationEmail(
             customer.getEmail(), customer.getFullName(),
-            payment.getReceiptNumber(), payment.getAmount(), bill.getBillNumber()
+            payment.getReceiptNumber(), payment.getAmount(), bill.getBillNumber(),
+            bill.getBalanceAmount()
         );
     }
 

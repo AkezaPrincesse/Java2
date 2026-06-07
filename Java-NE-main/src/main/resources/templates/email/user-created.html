@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head><meta charset="UTF-8"><title>Account Created</title>
+<style>
+body{font-family:Arial,sans-serif;background:#f4f4f4;margin:0;padding:0}
+.container{max-width:600px;margin:30px auto;background:#fff;border-radius:8px;overflow:hidden;box-shadow:0 2px 8px rgba(0,0,0,.1)}
+.header{background:#1565c0;color:#fff;padding:30px;text-align:center}
+.header h1{margin:0;font-size:24px}
+.body{padding:30px}
+.body p{color:#555;line-height:1.6}
+.credentials{background:#e3f2fd;border:2px solid #1565c0;border-radius:8px;padding:20px;margin:20px 0}
+.credentials table{width:100%;border-collapse:collapse}
+.credentials td{padding:8px 0;color:#333;font-size:14px}
+.credentials td:first-child{font-weight:bold;width:45%;color:#1565c0}
+.warning{background:#fff3e0;border-left:4px solid #ff9800;padding:12px;margin:15px 0;border-radius:4px;font-size:13px;color:#555}
+.btn{display:inline-block;background:#1565c0;color:#fff;padding:12px 28px;border-radius:5px;text-decoration:none;font-weight:bold;margin:10px 0}
+.footer{background:#f8f8f8;padding:20px;text-align:center;color:#888;font-size:12px}
+</style>
+</head>
+<body>
+<div class="container">
+  <div class="header">
+    <h1>🏢 Staff Account Created</h1>
+    <p style="opacity:.9;margin:5px 0 0">WASAC &amp; REG Utility Billing System</p>
+  </div>
+  <div class="body">
+    <p>Dear <strong th:text="${name}">Staff Member</strong>,</p>
+    <p>An administrator has created a staff account for you on the WASAC &amp; REG Utility Billing System. Your login credentials are below.</p>
+    <div class="credentials">
+      <table>
+        <tr>
+          <td>Email Address:</td>
+          <td th:text="${email}">staff@example.com</td>
+        </tr>
+        <tr>
+          <td>Temporary Password:</td>
+          <td><strong th:text="${temporaryPassword}">TempPass123!</strong></td>
+        </tr>
+        <tr>
+          <td>Assigned Role:</td>
+          <td th:text="${role}">ROLE_OPERATOR</td>
+        </tr>
+      </table>
+    </div>
+    <div class="warning">
+      <strong>&#9888; Important:</strong> You must change your password immediately upon first login. This temporary password will be invalidated after your first login.
+    </div>
+    <div style="text-align:center;margin:20px 0">
+      <a th:href="${loginUrl}" class="btn">Login to Your Account</a>
+    </div>
+    <p style="font-size:13px;color:#888">If you did not expect this email or believe this was sent in error, please contact your system administrator immediately.</p>
+  </div>
+  <div class="footer">
+    <p>&copy; 2026 WASAC &amp; REG – Rwanda Utility Billing System</p>
+    <p>This is an automated message. Do not reply to this email.</p>
+  </div>
+</div>
+</body>
+</html>

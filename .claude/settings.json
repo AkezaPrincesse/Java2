@@ -5,7 +5,10 @@
       "Bash(PGPASSWORD=12345 psql -U postgres -h localhost -d utility_billing -c \"SELECT id, full_name, email, enabled FROM users WHERE email = 'sengagloire2007@gmail.com';\")",
       "Bash(PGPASSWORD=12345 psql -U postgres -h localhost -d utility_billing -c \"SELECT id, full_name, email, user_id FROM customers WHERE email = 'sengagloire2007@gmail.com';\")",
       "Bash(PGPASSWORD=12345 psql -U postgres -h localhost -d utility_billing -c \"SELECT id, full_name, email FROM customers ORDER BY id;\")",
-      "Bash(PGPASSWORD=12345 psql -U postgres -h localhost -d utility_billing -c \"SELECT id, meter_number, meter_type, customer_id, status FROM meters ORDER BY id;\")"
+      "Bash(PGPASSWORD=12345 psql -U postgres -h localhost -d utility_billing -c \"SELECT id, meter_number, meter_type, customer_id, status FROM meters ORDER BY id;\")",
+      "Bash(PGPASSWORD=12345 psql -U postgres -h localhost -d utility_billing -c \"SELECT to_email, template_name, sent, error_message, sent_at FROM email_logs ORDER BY sent_at DESC LIMIT 20;\")",
+      "Bash(Get-ChildItem -Recurse -Filter \"*.sql\" \"C:\\\\Users\\\\user\\\\Downloads\\\\Java-NE-main\\\\Java-NE-main\\\\src\")",
+      "Bash(Select-Object FullName)"
     ]
   }
 }
