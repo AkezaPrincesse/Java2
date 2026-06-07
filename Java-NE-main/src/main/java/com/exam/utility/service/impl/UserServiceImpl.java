@@ -176,7 +176,7 @@ public class UserServiceImpl implements UserService {
 
         user.setEnabled(false);
         userRepository.save(user);
-        auditService.log(AuditAction.UPDATE, "User", userId.toString(),
+        auditService.log(AuditAction.DEACTIVATE, "User", userId.toString(),
             "User account deactivated: " + user.getEmail());
         log.info("User deactivated: {}", user.getEmail());
     }

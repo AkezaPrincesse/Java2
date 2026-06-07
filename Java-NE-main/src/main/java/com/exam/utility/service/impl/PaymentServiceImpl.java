@@ -11,6 +11,7 @@ import com.exam.utility.enums.PaymentStatus;
 import com.exam.utility.exception.BusinessException;
 import com.exam.utility.exception.ResourceNotFoundException;
 import com.exam.utility.repository.BillRepository;
+import com.exam.utility.repository.CustomerRepository;
 import com.exam.utility.repository.PaymentRepository;
 import com.exam.utility.service.AuditService;
 import com.exam.utility.service.NotificationService;
@@ -18,6 +19,7 @@ import com.exam.utility.service.PaymentService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Pageable;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -32,6 +34,7 @@ public class PaymentServiceImpl implements PaymentService {
 
     private final PaymentRepository paymentRepository;
     private final BillRepository billRepository;
+    private final CustomerRepository customerRepository;
     private final NotificationService notificationService;
     private final AuditService auditService;
 
@@ -90,8 +93,8 @@ public class PaymentServiceImpl implements PaymentService {
         billRepository.save(bill);
 
         notificationService.notifyPaymentReceived(payment);
-        auditService.log(AuditAction.PAYMENT_PROCESSED, "Payment", payment.getId().toString(),
-            "Payment processed: " + receiptNumber + " amount: " + request.getAmount());
+        auditService.log(AuditAction.PAYMENT_RECEIVED, "Payment", payment.getId().toString(),
+            "Payment received: " + receiptNumber + " amount: " + request.getAmount());
 
         log.info("Payment processed: {} for bill: {} amount: {}", receiptNumber, request.getBillNumber(), request.getAmount());
         return toResponse(payment);
@@ -127,6 +130,21 @@ public class PaymentServiceImpl implements PaymentService {
     @Transactional(readOnly = true)
     public PagedResponse<PaymentResponse> getPaymentsByBill(Long billId, Pageable pageable) {
         return PagedResponse.of(paymentRepository.findByBillId(billId, pageable).map(this::toResponse));
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public PagedResponse<PaymentResponse> searchPayments(String keyword, Pageable pageable) {
+        return PagedResponse.of(paymentRepository.searchPayments(keyword, pageable).map(this::toResponse));
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public PagedResponse<PaymentResponse> getMyPayments(Pageable pageable) {
+        String email = SecurityContextHolder.getContext().getAuthentication().getName();
+        com.exam.utility.entity.Customer customer = customerRepository.findByEmail(email)
+            .orElseThrow(() -> new ResourceNotFoundException("Customer not found for logged-in user"));
+        return PagedResponse.of(paymentRepository.findByCustomerId(customer.getId(), pageable).map(this::toResponse));
     }
 
     @Override

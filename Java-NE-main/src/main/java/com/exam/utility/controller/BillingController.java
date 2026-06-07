@@ -2,6 +2,7 @@ package com.exam.utility.controller;
 
 import com.exam.utility.dto.request.billing.ApproveBillRequest;
 import com.exam.utility.dto.request.billing.GenerateBillsRequest;
+import com.exam.utility.dto.request.billing.RejectBillRequest;
 import com.exam.utility.dto.response.ApiResponse;
 import com.exam.utility.dto.response.PagedResponse;
 import com.exam.utility.dto.response.billing.BillResponse;
@@ -61,6 +62,25 @@ public class BillingController {
     @Operation(summary = "Approve a pending bill")
     public ResponseEntity<ApiResponse<BillResponse>> approveBill(@Valid @RequestBody ApproveBillRequest request) {
         return ResponseEntity.ok(ApiResponse.success("Bill approved", billingService.approveBill(request)));
+    }
+
+    @PostMapping("/reject")
+    @PreAuthorize("hasAnyRole('ADMIN', 'FINANCE')")
+    @Operation(summary = "Reject a pending bill")
+    public ResponseEntity<ApiResponse<BillResponse>> rejectBill(@Valid @RequestBody RejectBillRequest request) {
+        return ResponseEntity.ok(ApiResponse.success("Bill rejected", billingService.rejectBill(request)));
+    }
+
+    @GetMapping("/search")
+    @PreAuthorize("hasAnyRole('ADMIN', 'FINANCE', 'MANAGER')")
+    @Operation(summary = "Search bills by number, customer, or meter")
+    public ResponseEntity<ApiResponse<PagedResponse<BillResponse>>> searchBills(
+        @RequestParam String keyword,
+        @RequestParam(defaultValue = "0") int page,
+        @RequestParam(defaultValue = "10") int size
+    ) {
+        return ResponseEntity.ok(ApiResponse.success("Search results",
+            billingService.searchBills(keyword, PageRequest.of(page, size))));
     }
 
     @GetMapping("/{id}")

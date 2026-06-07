@@ -7,6 +7,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.math.BigDecimal;
@@ -42,6 +43,13 @@ public interface BillRepository extends JpaRepository<Bill, Long> {
 
     @Query("SELECT b FROM Bill b WHERE b.billingCycle.id = :cycleId")
     List<Bill> findByBillingCycleId(Long cycleId);
+
+    @Query("SELECT b FROM Bill b WHERE " +
+           "LOWER(b.billNumber) LIKE LOWER(CONCAT('%',:keyword,'%')) OR " +
+           "LOWER(b.customer.fullName) LIKE LOWER(CONCAT('%',:keyword,'%')) OR " +
+           "LOWER(b.customer.email) LIKE LOWER(CONCAT('%',:keyword,'%')) OR " +
+           "LOWER(b.meter.meterNumber) LIKE LOWER(CONCAT('%',:keyword,'%'))")
+    Page<Bill> searchBills(@Param("keyword") String keyword, Pageable pageable);
 
     @Query("SELECT b FROM Bill b WHERE b.status NOT IN ('PAID','CANCELLED') " +
            "AND b.customer.id = :customerId ORDER BY b.dueDate ASC")

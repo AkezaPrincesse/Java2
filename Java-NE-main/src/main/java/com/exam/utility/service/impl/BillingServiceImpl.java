@@ -3,6 +3,7 @@ package com.exam.utility.service.impl;
 import com.exam.utility.billing.BillingEngine;
 import com.exam.utility.dto.request.billing.ApproveBillRequest;
 import com.exam.utility.dto.request.billing.GenerateBillsRequest;
+import com.exam.utility.dto.request.billing.RejectBillRequest;
 import com.exam.utility.dto.response.PagedResponse;
 import com.exam.utility.dto.response.billing.BillItemResponse;
 import com.exam.utility.dto.response.billing.BillResponse;
@@ -59,7 +60,7 @@ public class BillingServiceImpl implements BillingService {
     public List<BillResponse> generateBills(GenerateBillsRequest request) {
         List<Bill> bills = billingEngine.generateMonthlyBills(request.getBillingYear(), request.getBillingMonth());
         bills.forEach(notificationService::notifyBillGenerated);
-        auditService.log(AuditAction.CREATE, "Bill", null,
+        auditService.log(AuditAction.BILL_GENERATED, "Bill", null,
             "Generated " + bills.size() + " bills for " + request.getBillingYear() + "/" + request.getBillingMonth());
         return bills.stream().map(this::toResponse).collect(Collectors.toList());
     }
@@ -86,6 +87,32 @@ public class BillingServiceImpl implements BillingService {
             "Bill approved: " + bill.getBillNumber());
 
         return toResponse(bill);
+    }
+
+    @Override
+    @Transactional
+    public BillResponse rejectBill(RejectBillRequest request) {
+        Bill bill = billRepository.findByBillNumber(request.getBillNumber())
+            .orElseThrow(() -> new ResourceNotFoundException("Bill", "billNumber", request.getBillNumber()));
+
+        if (bill.getStatus() != BillStatus.PENDING) {
+            throw new BusinessException("Only PENDING bills can be rejected. Current status: " + bill.getStatus());
+        }
+
+        bill.setStatus(BillStatus.CANCELLED);
+        bill.setNotes("REJECTED: " + request.getReason());
+        bill = billRepository.save(bill);
+
+        auditService.log(AuditAction.UPDATE, "Bill", bill.getId().toString(),
+            "Bill rejected: " + bill.getBillNumber() + " — " + request.getReason());
+
+        return toResponse(bill);
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public PagedResponse<BillResponse> searchBills(String keyword, Pageable pageable) {
+        return PagedResponse.of(billRepository.searchBills(keyword, pageable).map(this::toResponse));
     }
 
     @Override

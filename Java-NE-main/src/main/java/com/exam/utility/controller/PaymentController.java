@@ -86,6 +86,29 @@ public class PaymentController {
             paymentService.getPaymentsByBill(billId, PageRequest.of(page, size))));
     }
 
+    @GetMapping("/search")
+    @PreAuthorize("hasAnyRole('ADMIN', 'FINANCE')")
+    @Operation(summary = "Search payments by receipt, customer, or bill number")
+    public ResponseEntity<ApiResponse<PagedResponse<PaymentResponse>>> search(
+        @RequestParam String keyword,
+        @RequestParam(defaultValue = "0") int page,
+        @RequestParam(defaultValue = "10") int size
+    ) {
+        return ResponseEntity.ok(ApiResponse.success("Search results",
+            paymentService.searchPayments(keyword, PageRequest.of(page, size))));
+    }
+
+    @GetMapping("/my-payments")
+    @PreAuthorize("hasRole('CUSTOMER')")
+    @Operation(summary = "Get payments for the currently logged-in customer")
+    public ResponseEntity<ApiResponse<PagedResponse<PaymentResponse>>> getMyPayments(
+        @RequestParam(defaultValue = "0") int page,
+        @RequestParam(defaultValue = "10") int size
+    ) {
+        return ResponseEntity.ok(ApiResponse.success("Your payments",
+            paymentService.getMyPayments(PageRequest.of(page, size, Sort.by("paymentDate").descending()))));
+    }
+
     @GetMapping("/receipt/{receiptNumber}/pdf")
     @Operation(summary = "Download payment receipt as PDF")
     public ResponseEntity<byte[]> downloadReceipt(@PathVariable String receiptNumber) {

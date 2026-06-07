@@ -12,5 +12,7 @@ public interface PaymentService {
     PagedResponse<PaymentResponse> getAllPayments(Pageable pageable);
     PagedResponse<PaymentResponse> getPaymentsByCustomer(Long customerId, Pageable pageable);
     PagedResponse<PaymentResponse> getPaymentsByBill(Long billId, Pageable pageable);
+    PagedResponse<PaymentResponse> searchPayments(String keyword, Pageable pageable);
+    PagedResponse<PaymentResponse> getMyPayments(Pageable pageable);
     byte[] generateReceiptPdf(String receiptNumber);
 }
