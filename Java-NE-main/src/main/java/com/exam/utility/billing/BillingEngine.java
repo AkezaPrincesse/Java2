@@ -115,15 +115,19 @@ public class BillingEngine {
 
         double consumption = reading.getConsumption().doubleValue();
 
+        // Use the last day of the billing period so retroactive bills always pick the
+        // tariff that was actually in effect then, not the latest tariff as of today.
+        LocalDate billingPeriodDate = YearMonth.of(year, month).atEndOfMonth();
+
         Tariff tariff = meter.getTariff();
         if (tariff == null) {
             List<Tariff> matchingTariffs = tariffRepository
                 .findByUtilityTypeAndActiveTrueAndEffectiveDateLessThanEqualOrderByEffectiveDateDesc(
-                    meter.getMeterType(), LocalDate.now());
+                    meter.getMeterType(), billingPeriodDate);
             tariff = matchingTariffs.isEmpty() ? null : matchingTariffs.get(0);
         }
 
-        BigDecimal consumptionAmount = calculateConsumptionCharge(tariff, consumption, meter.getMeterType(), LocalDate.now());
+        BigDecimal consumptionAmount = calculateConsumptionCharge(tariff, consumption, meter.getMeterType(), billingPeriodDate);
         List<ServiceCharge> serviceCharges = serviceChargeRepository.findByUtilityTypeAndActiveTrue(meter.getMeterType());
         List<Tax> taxes = taxRepository.findByUtilityTypeAndActiveTrue(meter.getMeterType());
 

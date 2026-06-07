@@ -29,4 +29,7 @@ public interface UserService {
 
     /** Deactivates a user account (soft delete — account is disabled, not removed). */
     void deactivateUser(Long userId);
+
+    /** Searches users by name, email, or phone number. */
+    PagedResponse<UserResponse> searchUsers(String keyword, Pageable pageable);
 }

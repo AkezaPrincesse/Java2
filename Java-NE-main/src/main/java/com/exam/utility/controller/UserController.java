@@ -18,6 +18,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
+import org.springframework.web.bind.annotation.RequestParam;
+
 /**
  * Administrator-only endpoints for managing internal staff user accounts.
  *
@@ -38,7 +40,7 @@ public class UserController {
      * The account is ACTIVE immediately with forcePasswordChange = true.
      */
     @PostMapping
-    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    @PreAuthorize("hasRole('ADMIN')")
     @Operation(summary = "Create a new staff user account (Admin only)")
     public ResponseEntity<ApiResponse<UserResponse>> createUser(@Valid @RequestBody CreateUserRequest request) {
         UserResponse response = userService.createUser(request);
@@ -47,7 +49,7 @@ public class UserController {
     }
 
     @GetMapping
-    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    @PreAuthorize("hasRole('ADMIN')")
     @Operation(summary = "List all system users (paginated)")
     public ResponseEntity<ApiResponse<PagedResponse<UserResponse>>> getAllUsers(
         @RequestParam(defaultValue = "0") int page,
@@ -61,7 +63,7 @@ public class UserController {
     }
 
     @GetMapping("/{id}")
-    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    @PreAuthorize("hasRole('ADMIN')")
     @Operation(summary = "Get a user by ID")
     public ResponseEntity<ApiResponse<UserResponse>> getUserById(@PathVariable Long id) {
         return ResponseEntity.ok(ApiResponse.success("User retrieved", userService.getUserById(id)));
@@ -72,7 +74,7 @@ public class UserController {
      * describing the new role and its permissions. Change is audit-logged.
      */
     @PatchMapping("/{id}/role")
-    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    @PreAuthorize("hasRole('ADMIN')")
     @Operation(summary = "Change a user's role (triggers email notification)")
     public ResponseEntity<ApiResponse<UserResponse>> changeUserRole(
         @PathVariable Long id,
@@ -81,8 +83,20 @@ public class UserController {
         return ResponseEntity.ok(ApiResponse.success("Role updated successfully", userService.changeUserRole(id, request)));
     }
 
+    @GetMapping("/search")
+    @PreAuthorize("hasRole('ADMIN')")
+    @Operation(summary = "Search users by name or email")
+    public ResponseEntity<ApiResponse<PagedResponse<UserResponse>>> search(
+        @RequestParam String keyword,
+        @RequestParam(defaultValue = "0") int page,
+        @RequestParam(defaultValue = "10") int size
+    ) {
+        return ResponseEntity.ok(ApiResponse.success("Search results",
+            userService.searchUsers(keyword, PageRequest.of(page, size))));
+    }
+
     @PatchMapping("/{id}/activate")
-    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    @PreAuthorize("hasRole('ADMIN')")
     @Operation(summary = "Activate a user account")
     public ResponseEntity<ApiResponse<Void>> activateUser(@PathVariable Long id) {
         userService.activateUser(id);
@@ -90,7 +104,7 @@ public class UserController {
     }
 
     @PatchMapping("/{id}/deactivate")
-    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    @PreAuthorize("hasRole('ADMIN')")
     @Operation(summary = "Deactivate a user account (soft disable)")
     public ResponseEntity<ApiResponse<Void>> deactivateUser(@PathVariable Long id) {
         userService.deactivateUser(id);

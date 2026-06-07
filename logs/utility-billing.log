@@ -91,3 +91,2388 @@
     values
         (?, ?, ?, ?, ?, ?, ?, ?, ?, ?) 
     returning id
+2026-06-07 00:54:46 [http-nio-8080-exec-3] DEBUG org.hibernate.SQL - 
+    select
+        u1_0.id,
+        u1_0.account_non_expired,
+        u1_0.account_non_locked,
+        u1_0.created_at,
+        u1_0.created_by,
+        u1_0.credentials_non_expired,
+        u1_0.email,
+        u1_0.enabled,
+        u1_0.failed_login_attempts,
+        u1_0.force_password_change,
+        u1_0.full_name,
+        u1_0.last_login,
+        u1_0.lock_time,
+        u1_0.password,
+        u1_0.phone_number,
+        u1_0.updated_at,
+        u1_0.updated_by 
+    from
+        public.users u1_0 
+    where
+        u1_0.email=?
+2026-06-07 00:54:46 [http-nio-8080-exec-3] DEBUG org.hibernate.SQL - 
+    select
+        r1_0.user_id,
+        r1_1.id,
+        r1_1.created_at,
+        r1_1.created_by,
+        r1_1.description,
+        r1_1.name,
+        p1_0.role_id,
+        p1_1.id,
+        p1_1.created_at,
+        p1_1.created_by,
+        p1_1.description,
+        p1_1.name,
+        p1_1.updated_at,
+        p1_1.updated_by,
+        r1_1.updated_at,
+        r1_1.updated_by 
+    from
+        public.user_roles r1_0 
+    join
+        public.roles r1_1 
+            on r1_1.id=r1_0.role_id 
+    left join
+        public.role_permissions p1_0 
+            on r1_1.id=p1_0.role_id 
+    left join
+        public.permissions p1_1 
+            on p1_1.id=p1_0.permission_id 
+    where
+        r1_0.user_id=?
+2026-06-07 00:54:46 [http-nio-8080-exec-3] DEBUG org.hibernate.SQL - 
+    select
+        u1_0.id,
+        u1_0.account_non_expired,
+        u1_0.account_non_locked,
+        u1_0.created_at,
+        u1_0.created_by,
+        u1_0.credentials_non_expired,
+        u1_0.email,
+        u1_0.enabled,
+        u1_0.failed_login_attempts,
+        u1_0.force_password_change,
+        u1_0.full_name,
+        u1_0.last_login,
+        u1_0.lock_time,
+        u1_0.password,
+        u1_0.phone_number,
+        u1_0.updated_at,
+        u1_0.updated_by 
+    from
+        public.users u1_0 
+    where
+        u1_0.email=?
+2026-06-07 00:54:47 [http-nio-8080-exec-3] DEBUG org.hibernate.SQL - 
+    update
+        public.users u1_0 
+    set
+        failed_login_attempts=0,
+        account_non_locked=true,
+        lock_time=null 
+    where
+        u1_0.email=?
+2026-06-07 00:54:47 [http-nio-8080-exec-3] DEBUG org.hibernate.SQL - 
+    update
+        public.refresh_tokens rt1_0 
+    set
+        revoked=true 
+    where
+        rt1_0.user_id=?
+2026-06-07 00:54:47 [http-nio-8080-exec-3] DEBUG org.hibernate.SQL - 
+    insert 
+    into
+        public.refresh_tokens
+        (expiry_date, ip_address, revoked, token, user_id, user_agent) 
+    values
+        (?, ?, ?, ?, ?, ?) 
+    returning id
+2026-06-07 00:54:47 [http-nio-8080-exec-3] INFO  c.e.u.service.impl.AuthServiceImpl - User logged in: admin@wasac-reg.rw
+2026-06-07 00:54:47 [SimpleAsyncTaskExecutor-27] DEBUG org.hibernate.SQL - 
+    insert 
+    into
+        public.audit_logs
+        (action, description, entity_id, entity_name, ip_address, new_values, old_values, performed_at, performed_by, user_agent) 
+    values
+        (?, ?, ?, ?, ?, ?, ?, ?, ?, ?) 
+    returning id
+2026-06-07 00:54:47 [http-nio-8080-exec-3] DEBUG org.hibernate.SQL - 
+    update
+        public.users 
+    set
+        account_non_expired=?,
+        account_non_locked=?,
+        credentials_non_expired=?,
+        email=?,
+        enabled=?,
+        failed_login_attempts=?,
+        force_password_change=?,
+        full_name=?,
+        last_login=?,
+        lock_time=?,
+        password=?,
+        phone_number=?,
+        updated_at=?,
+        updated_by=? 
+    where
+        id=?
+2026-06-07 00:54:58 [http-nio-8080-exec-5] DEBUG org.hibernate.SQL - 
+    select
+        u1_0.id,
+        u1_0.account_non_expired,
+        u1_0.account_non_locked,
+        u1_0.created_at,
+        u1_0.created_by,
+        u1_0.credentials_non_expired,
+        u1_0.email,
+        u1_0.enabled,
+        u1_0.failed_login_attempts,
+        u1_0.force_password_change,
+        u1_0.full_name,
+        u1_0.last_login,
+        u1_0.lock_time,
+        u1_0.password,
+        u1_0.phone_number,
+        u1_0.updated_at,
+        u1_0.updated_by 
+    from
+        public.users u1_0 
+    where
+        u1_0.email=?
+2026-06-07 00:54:58 [http-nio-8080-exec-5] DEBUG org.hibernate.SQL - 
+    select
+        r1_0.user_id,
+        r1_1.id,
+        r1_1.created_at,
+        r1_1.created_by,
+        r1_1.description,
+        r1_1.name,
+        p1_0.role_id,
+        p1_1.id,
+        p1_1.created_at,
+        p1_1.created_by,
+        p1_1.description,
+        p1_1.name,
+        p1_1.updated_at,
+        p1_1.updated_by,
+        r1_1.updated_at,
+        r1_1.updated_by 
+    from
+        public.user_roles r1_0 
+    join
+        public.roles r1_1 
+            on r1_1.id=r1_0.role_id 
+    left join
+        public.role_permissions p1_0 
+            on r1_1.id=p1_0.role_id 
+    left join
+        public.permissions p1_1 
+            on p1_1.id=p1_0.permission_id 
+    where
+        r1_0.user_id=?
+2026-06-07 00:54:58 [http-nio-8080-exec-5] DEBUG org.hibernate.SQL - 
+    select
+        u1_0.id,
+        u1_0.account_non_expired,
+        u1_0.account_non_locked,
+        u1_0.created_at,
+        u1_0.created_by,
+        u1_0.credentials_non_expired,
+        u1_0.email,
+        u1_0.enabled,
+        u1_0.failed_login_attempts,
+        u1_0.force_password_change,
+        u1_0.full_name,
+        u1_0.last_login,
+        u1_0.lock_time,
+        u1_0.password,
+        u1_0.phone_number,
+        u1_0.updated_at,
+        u1_0.updated_by 
+    from
+        public.users u1_0 
+    where
+        u1_0.email=?
+2026-06-07 00:54:59 [http-nio-8080-exec-5] DEBUG org.hibernate.SQL - 
+    update
+        public.users u1_0 
+    set
+        failed_login_attempts=0,
+        account_non_locked=true,
+        lock_time=null 
+    where
+        u1_0.email=?
+2026-06-07 00:54:59 [http-nio-8080-exec-5] DEBUG org.hibernate.SQL - 
+    update
+        public.refresh_tokens rt1_0 
+    set
+        revoked=true 
+    where
+        rt1_0.user_id=?
+2026-06-07 00:54:59 [http-nio-8080-exec-5] DEBUG org.hibernate.SQL - 
+    insert 
+    into
+        public.refresh_tokens
+        (expiry_date, ip_address, revoked, token, user_id, user_agent) 
+    values
+        (?, ?, ?, ?, ?, ?) 
+    returning id
+2026-06-07 00:54:59 [http-nio-8080-exec-5] INFO  c.e.u.service.impl.AuthServiceImpl - User logged in: admin@wasac-reg.rw
+2026-06-07 00:54:59 [http-nio-8080-exec-5] DEBUG org.hibernate.SQL - 
+    update
+        public.users 
+    set
+        account_non_expired=?,
+        account_non_locked=?,
+        credentials_non_expired=?,
+        email=?,
+        enabled=?,
+        failed_login_attempts=?,
+        force_password_change=?,
+        full_name=?,
+        last_login=?,
+        lock_time=?,
+        password=?,
+        phone_number=?,
+        updated_at=?,
+        updated_by=? 
+    where
+        id=?
+2026-06-07 00:54:59 [SimpleAsyncTaskExecutor-28] DEBUG org.hibernate.SQL - 
+    insert 
+    into
+        public.audit_logs
+        (action, description, entity_id, entity_name, ip_address, new_values, old_values, performed_at, performed_by, user_agent) 
+    values
+        (?, ?, ?, ?, ?, ?, ?, ?, ?, ?) 
+    returning id
+2026-06-07 00:54:59 [http-nio-8080-exec-4] DEBUG org.hibernate.SQL - 
+    select
+        u1_0.id,
+        u1_0.account_non_expired,
+        u1_0.account_non_locked,
+        u1_0.created_at,
+        u1_0.created_by,
+        u1_0.credentials_non_expired,
+        u1_0.email,
+        u1_0.enabled,
+        u1_0.failed_login_attempts,
+        u1_0.force_password_change,
+        u1_0.full_name,
+        u1_0.last_login,
+        u1_0.lock_time,
+        u1_0.password,
+        u1_0.phone_number,
+        u1_0.updated_at,
+        u1_0.updated_by 
+    from
+        public.users u1_0 
+    where
+        u1_0.email=?
+2026-06-07 00:54:59 [http-nio-8080-exec-4] DEBUG org.hibernate.SQL - 
+    select
+        r1_0.user_id,
+        r1_1.id,
+        r1_1.created_at,
+        r1_1.created_by,
+        r1_1.description,
+        r1_1.name,
+        p1_0.role_id,
+        p1_1.id,
+        p1_1.created_at,
+        p1_1.created_by,
+        p1_1.description,
+        p1_1.name,
+        p1_1.updated_at,
+        p1_1.updated_by,
+        r1_1.updated_at,
+        r1_1.updated_by 
+    from
+        public.user_roles r1_0 
+    join
+        public.roles r1_1 
+            on r1_1.id=r1_0.role_id 
+    left join
+        public.role_permissions p1_0 
+            on r1_1.id=p1_0.role_id 
+    left join
+        public.permissions p1_1 
+            on p1_1.id=p1_0.permission_id 
+    where
+        r1_0.user_id=?
+2026-06-07 00:54:59 [http-nio-8080-exec-4] DEBUG c.e.u.s.JwtAuthenticationFilter - Authenticated user: admin@wasac-reg.rw
+2026-06-07 00:54:59 [http-nio-8080-exec-4] DEBUG org.hibernate.SQL - 
+    select
+        b1_0.id,
+        b1_0.approved_at,
+        b1_0.approved_by,
+        b1_0.balance_amount,
+        b1_0.bill_date,
+        b1_0.bill_number,
+        b1_0.billing_cycle_id,
+        b1_0.consumption_amount,
+        b1_0.created_at,
+        b1_0.created_by,
+        b1_0.customer_id,
+        b1_0.due_date,
+        b1_0.meter_id,
+        b1_0.meter_reading_id,
+        b1_0.notes,
+        b1_0.paid_amount,
+        b1_0.paid_at,
+        b1_0.penalty_amount,
+        b1_0.service_charge_amount,
+        b1_0.status,
+        b1_0.tax_amount,
+        b1_0.total_amount,
+        b1_0.updated_at,
+        b1_0.updated_by,
+        b1_0.utility_type 
+    from
+        public.bills b1_0 
+    order by
+        b1_0.created_at desc 
+    offset
+        ? rows 
+    fetch
+        first ? rows only
+2026-06-07 00:54:59 [http-nio-8080-exec-4] DEBUG org.hibernate.SQL - 
+    select
+        i1_0.bill_id,
+        i1_0.id,
+        i1_0.amount,
+        i1_0.created_at,
+        i1_0.created_by,
+        i1_0.description,
+        i1_0.item_type,
+        i1_0.quantity,
+        i1_0.unit_price,
+        i1_0.updated_at,
+        i1_0.updated_by 
+    from
+        public.bill_items i1_0 
+    where
+        i1_0.bill_id=?
+2026-06-07 00:54:59 [http-nio-8080-exec-4] DEBUG org.hibernate.SQL - 
+    select
+        c1_0.id,
+        c1_0.address,
+        c1_0.created_at,
+        c1_0.created_by,
+        c1_0.district,
+        c1_0.email,
+        c1_0.full_name,
+        c1_0.national_id,
+        c1_0.phone_number,
+        c1_0.sector,
+        c1_0.status,
+        c1_0.updated_at,
+        c1_0.updated_by,
+        c1_0.user_id 
+    from
+        public.customers c1_0 
+    where
+        c1_0.id=?
+2026-06-07 00:54:59 [http-nio-8080-exec-4] DEBUG org.hibernate.SQL - 
+    select
+        m1_0.id,
+        m1_0.created_at,
+        m1_0.created_by,
+        m1_0.customer_id,
+        m1_0.initial_reading,
+        m1_0.installation_date,
+        m1_0.location,
+        m1_0.meter_number,
+        m1_0.meter_type,
+        m1_0.status,
+        m1_0.tariff_id,
+        m1_0.updated_at,
+        m1_0.updated_by 
+    from
+        public.meters m1_0 
+    where
+        m1_0.id=?
+2026-06-07 00:55:00 [http-nio-8080-exec-4] DEBUG org.hibernate.SQL - 
+    select
+        bc1_0.id,
+        bc1_0.billing_month,
+        bc1_0.billing_year,
+        bc1_0.closed,
+        bc1_0.created_at,
+        bc1_0.created_by,
+        bc1_0.due_date,
+        bc1_0.end_date,
+        bc1_0.start_date,
+        bc1_0.updated_at,
+        bc1_0.updated_by 
+    from
+        public.billing_cycles bc1_0 
+    where
+        bc1_0.id=?
+2026-06-07 00:55:00 [http-nio-8080-exec-4] DEBUG org.hibernate.SQL - 
+    select
+        mr1_0.id,
+        mr1_0.consumption,
+        mr1_0.created_at,
+        mr1_0.created_by,
+        mr1_0.current_reading,
+        mr1_0.meter_id,
+        mr1_0.notes,
+        mr1_0.previous_reading,
+        mr1_0.reading_date,
+        mr1_0.reading_image_path,
+        mr1_0.reading_month,
+        mr1_0.reading_year,
+        mr1_0.updated_at,
+        mr1_0.updated_by 
+    from
+        public.meter_readings mr1_0 
+    where
+        mr1_0.id=?
+2026-06-07 00:55:00 [http-nio-8080-exec-4] DEBUG org.hibernate.SQL - 
+    select
+        i1_0.bill_id,
+        i1_0.id,
+        i1_0.amount,
+        i1_0.created_at,
+        i1_0.created_by,
+        i1_0.description,
+        i1_0.item_type,
+        i1_0.quantity,
+        i1_0.unit_price,
+        i1_0.updated_at,
+        i1_0.updated_by 
+    from
+        public.bill_items i1_0 
+    where
+        i1_0.bill_id=?
+2026-06-07 00:55:00 [http-nio-8080-exec-4] DEBUG org.hibernate.SQL - 
+    select
+        c1_0.id,
+        c1_0.address,
+        c1_0.created_at,
+        c1_0.created_by,
+        c1_0.district,
+        c1_0.email,
+        c1_0.full_name,
+        c1_0.national_id,
+        c1_0.phone_number,
+        c1_0.sector,
+        c1_0.status,
+        c1_0.updated_at,
+        c1_0.updated_by,
+        c1_0.user_id 
+    from
+        public.customers c1_0 
+    where
+        c1_0.id=?
+2026-06-07 00:55:00 [http-nio-8080-exec-4] DEBUG org.hibernate.SQL - 
+    select
+        m1_0.id,
+        m1_0.created_at,
+        m1_0.created_by,
+        m1_0.customer_id,
+        m1_0.initial_reading,
+        m1_0.installation_date,
+        m1_0.location,
+        m1_0.meter_number,
+        m1_0.meter_type,
+        m1_0.status,
+        m1_0.tariff_id,
+        m1_0.updated_at,
+        m1_0.updated_by 
+    from
+        public.meters m1_0 
+    where
+        m1_0.id=?
+2026-06-07 00:55:00 [http-nio-8080-exec-4] DEBUG org.hibernate.SQL - 
+    select
+        mr1_0.id,
+        mr1_0.consumption,
+        mr1_0.created_at,
+        mr1_0.created_by,
+        mr1_0.current_reading,
+        mr1_0.meter_id,
+        mr1_0.notes,
+        mr1_0.previous_reading,
+        mr1_0.reading_date,
+        mr1_0.reading_image_path,
+        mr1_0.reading_month,
+        mr1_0.reading_year,
+        mr1_0.updated_at,
+        mr1_0.updated_by 
+    from
+        public.meter_readings mr1_0 
+    where
+        mr1_0.id=?
+2026-06-07 00:55:14 [http-nio-8080-exec-6] DEBUG org.hibernate.SQL - 
+    select
+        u1_0.id,
+        u1_0.account_non_expired,
+        u1_0.account_non_locked,
+        u1_0.created_at,
+        u1_0.created_by,
+        u1_0.credentials_non_expired,
+        u1_0.email,
+        u1_0.enabled,
+        u1_0.failed_login_attempts,
+        u1_0.force_password_change,
+        u1_0.full_name,
+        u1_0.last_login,
+        u1_0.lock_time,
+        u1_0.password,
+        u1_0.phone_number,
+        u1_0.updated_at,
+        u1_0.updated_by 
+    from
+        public.users u1_0 
+    where
+        u1_0.email=?
+2026-06-07 00:55:14 [http-nio-8080-exec-6] DEBUG org.hibernate.SQL - 
+    select
+        r1_0.user_id,
+        r1_1.id,
+        r1_1.created_at,
+        r1_1.created_by,
+        r1_1.description,
+        r1_1.name,
+        p1_0.role_id,
+        p1_1.id,
+        p1_1.created_at,
+        p1_1.created_by,
+        p1_1.description,
+        p1_1.name,
+        p1_1.updated_at,
+        p1_1.updated_by,
+        r1_1.updated_at,
+        r1_1.updated_by 
+    from
+        public.user_roles r1_0 
+    join
+        public.roles r1_1 
+            on r1_1.id=r1_0.role_id 
+    left join
+        public.role_permissions p1_0 
+            on r1_1.id=p1_0.role_id 
+    left join
+        public.permissions p1_1 
+            on p1_1.id=p1_0.permission_id 
+    where
+        r1_0.user_id=?
+2026-06-07 00:55:14 [http-nio-8080-exec-6] DEBUG org.hibernate.SQL - 
+    select
+        u1_0.id,
+        u1_0.account_non_expired,
+        u1_0.account_non_locked,
+        u1_0.created_at,
+        u1_0.created_by,
+        u1_0.credentials_non_expired,
+        u1_0.email,
+        u1_0.enabled,
+        u1_0.failed_login_attempts,
+        u1_0.force_password_change,
+        u1_0.full_name,
+        u1_0.last_login,
+        u1_0.lock_time,
+        u1_0.password,
+        u1_0.phone_number,
+        u1_0.updated_at,
+        u1_0.updated_by 
+    from
+        public.users u1_0 
+    where
+        u1_0.email=?
+2026-06-07 00:55:15 [http-nio-8080-exec-6] DEBUG org.hibernate.SQL - 
+    update
+        public.users u1_0 
+    set
+        failed_login_attempts=0,
+        account_non_locked=true,
+        lock_time=null 
+    where
+        u1_0.email=?
+2026-06-07 00:55:15 [http-nio-8080-exec-6] DEBUG org.hibernate.SQL - 
+    update
+        public.refresh_tokens rt1_0 
+    set
+        revoked=true 
+    where
+        rt1_0.user_id=?
+2026-06-07 00:55:15 [http-nio-8080-exec-6] DEBUG org.hibernate.SQL - 
+    insert 
+    into
+        public.refresh_tokens
+        (expiry_date, ip_address, revoked, token, user_id, user_agent) 
+    values
+        (?, ?, ?, ?, ?, ?) 
+    returning id
+2026-06-07 00:55:15 [http-nio-8080-exec-6] INFO  c.e.u.service.impl.AuthServiceImpl - User logged in: admin@wasac-reg.rw
+2026-06-07 00:55:15 [http-nio-8080-exec-6] DEBUG org.hibernate.SQL - 
+    update
+        public.users 
+    set
+        account_non_expired=?,
+        account_non_locked=?,
+        credentials_non_expired=?,
+        email=?,
+        enabled=?,
+        failed_login_attempts=?,
+        force_password_change=?,
+        full_name=?,
+        last_login=?,
+        lock_time=?,
+        password=?,
+        phone_number=?,
+        updated_at=?,
+        updated_by=? 
+    where
+        id=?
+2026-06-07 00:55:15 [SimpleAsyncTaskExecutor-29] DEBUG org.hibernate.SQL - 
+    insert 
+    into
+        public.audit_logs
+        (action, description, entity_id, entity_name, ip_address, new_values, old_values, performed_at, performed_by, user_agent) 
+    values
+        (?, ?, ?, ?, ?, ?, ?, ?, ?, ?) 
+    returning id
+2026-06-07 00:55:15 [http-nio-8080-exec-8] DEBUG org.hibernate.SQL - 
+    select
+        u1_0.id,
+        u1_0.account_non_expired,
+        u1_0.account_non_locked,
+        u1_0.created_at,
+        u1_0.created_by,
+        u1_0.credentials_non_expired,
+        u1_0.email,
+        u1_0.enabled,
+        u1_0.failed_login_attempts,
+        u1_0.force_password_change,
+        u1_0.full_name,
+        u1_0.last_login,
+        u1_0.lock_time,
+        u1_0.password,
+        u1_0.phone_number,
+        u1_0.updated_at,
+        u1_0.updated_by 
+    from
+        public.users u1_0 
+    where
+        u1_0.email=?
+2026-06-07 00:55:15 [http-nio-8080-exec-8] DEBUG org.hibernate.SQL - 
+    select
+        r1_0.user_id,
+        r1_1.id,
+        r1_1.created_at,
+        r1_1.created_by,
+        r1_1.description,
+        r1_1.name,
+        p1_0.role_id,
+        p1_1.id,
+        p1_1.created_at,
+        p1_1.created_by,
+        p1_1.description,
+        p1_1.name,
+        p1_1.updated_at,
+        p1_1.updated_by,
+        r1_1.updated_at,
+        r1_1.updated_by 
+    from
+        public.user_roles r1_0 
+    join
+        public.roles r1_1 
+            on r1_1.id=r1_0.role_id 
+    left join
+        public.role_permissions p1_0 
+            on r1_1.id=p1_0.role_id 
+    left join
+        public.permissions p1_1 
+            on p1_1.id=p1_0.permission_id 
+    where
+        r1_0.user_id=?
+2026-06-07 00:55:15 [http-nio-8080-exec-8] DEBUG c.e.u.s.JwtAuthenticationFilter - Authenticated user: admin@wasac-reg.rw
+2026-06-07 00:55:15 [http-nio-8080-exec-8] DEBUG org.hibernate.SQL - 
+    select
+        b1_0.id,
+        b1_0.approved_at,
+        b1_0.approved_by,
+        b1_0.balance_amount,
+        b1_0.bill_date,
+        b1_0.bill_number,
+        b1_0.billing_cycle_id,
+        b1_0.consumption_amount,
+        b1_0.created_at,
+        b1_0.created_by,
+        b1_0.customer_id,
+        b1_0.due_date,
+        b1_0.meter_id,
+        b1_0.meter_reading_id,
+        b1_0.notes,
+        b1_0.paid_amount,
+        b1_0.paid_at,
+        b1_0.penalty_amount,
+        b1_0.service_charge_amount,
+        b1_0.status,
+        b1_0.tax_amount,
+        b1_0.total_amount,
+        b1_0.updated_at,
+        b1_0.updated_by,
+        b1_0.utility_type 
+    from
+        public.bills b1_0 
+    where
+        b1_0.bill_number=?
+2026-06-07 00:55:15 [http-nio-8080-exec-8] DEBUG org.hibernate.SQL - 
+    insert 
+    into
+        public.payments
+        (amount, bill_id, created_at, created_by, customer_id, notes, paid_by, payment_date, payment_method, payment_status, receipt_number, transaction_reference, updated_at, updated_by) 
+    values
+        (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) 
+    returning id
+2026-06-07 00:55:15 [http-nio-8080-exec-8] INFO  c.e.u.s.impl.PaymentServiceImpl - Payment processed: RCP-B16E892C for bill: WB-202401-B3790A amount: 59590
+2026-06-07 00:55:15 [http-nio-8080-exec-8] DEBUG org.hibernate.SQL - 
+    select
+        c1_0.id,
+        c1_0.address,
+        c1_0.created_at,
+        c1_0.created_by,
+        c1_0.district,
+        c1_0.email,
+        c1_0.full_name,
+        c1_0.national_id,
+        c1_0.phone_number,
+        c1_0.sector,
+        c1_0.status,
+        c1_0.updated_at,
+        c1_0.updated_by,
+        c1_0.user_id 
+    from
+        public.customers c1_0 
+    where
+        c1_0.id=?
+2026-06-07 00:55:15 [notif-1] DEBUG org.hibernate.SQL - 
+    select
+        c1_0.id,
+        c1_0.address,
+        c1_0.created_at,
+        c1_0.created_by,
+        c1_0.district,
+        c1_0.email,
+        c1_0.full_name,
+        c1_0.national_id,
+        c1_0.phone_number,
+        c1_0.sector,
+        c1_0.status,
+        c1_0.updated_at,
+        c1_0.updated_by,
+        c1_0.user_id 
+    from
+        public.customers c1_0 
+    where
+        c1_0.id=?
+2026-06-07 00:55:15 [SimpleAsyncTaskExecutor-30] DEBUG org.hibernate.SQL - 
+    insert 
+    into
+        public.audit_logs
+        (action, description, entity_id, entity_name, ip_address, new_values, old_values, performed_at, performed_by, user_agent) 
+    values
+        (?, ?, ?, ?, ?, ?, ?, ?, ?, ?) 
+    returning id
+2026-06-07 00:55:15 [notif-1] DEBUG org.hibernate.SQL - 
+    insert 
+    into
+        public.notifications
+        (created_at, created_by, customer_id, email_sent, message, reference_link, status, title, type, updated_at, updated_by, user_id) 
+    values
+        (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) 
+    returning id
+2026-06-07 00:55:15 [http-nio-8080-exec-8] DEBUG org.hibernate.SQL - 
+    update
+        public.bills 
+    set
+        approved_at=?,
+        approved_by=?,
+        balance_amount=?,
+        bill_date=?,
+        bill_number=?,
+        billing_cycle_id=?,
+        consumption_amount=?,
+        customer_id=?,
+        due_date=?,
+        meter_id=?,
+        meter_reading_id=?,
+        notes=?,
+        paid_amount=?,
+        paid_at=?,
+        penalty_amount=?,
+        service_charge_amount=?,
+        status=?,
+        tax_amount=?,
+        total_amount=?,
+        updated_at=?,
+        updated_by=?,
+        utility_type=? 
+    where
+        id=?
+2026-06-07 00:55:15 [notif-1] DEBUG c.e.u.s.impl.NotificationServiceImpl - Notification saved: PAYMENT_RECEIVED for user: N/A
+2026-06-07 00:55:21 [email-1] INFO  c.e.u.service.impl.EmailServiceImpl - Email sent to akezaprincesse@gmail.com subject: Payment Confirmed – Receipt RCP-B16E892C
+2026-06-07 00:55:21 [email-1] DEBUG org.hibernate.SQL - 
+    insert 
+    into
+        public.email_logs
+        (error_message, reference_id, sent, sent_at, subject, template_name, to_email) 
+    values
+        (?, ?, ?, ?, ?, ?, ?) 
+    returning id
+2026-06-07 00:56:41 [http-nio-8080-exec-9] DEBUG org.hibernate.SQL - 
+    select
+        u1_0.id,
+        u1_0.account_non_expired,
+        u1_0.account_non_locked,
+        u1_0.created_at,
+        u1_0.created_by,
+        u1_0.credentials_non_expired,
+        u1_0.email,
+        u1_0.enabled,
+        u1_0.failed_login_attempts,
+        u1_0.force_password_change,
+        u1_0.full_name,
+        u1_0.last_login,
+        u1_0.lock_time,
+        u1_0.password,
+        u1_0.phone_number,
+        u1_0.updated_at,
+        u1_0.updated_by 
+    from
+        public.users u1_0 
+    where
+        u1_0.email=?
+2026-06-07 00:56:41 [http-nio-8080-exec-9] DEBUG org.hibernate.SQL - 
+    select
+        r1_0.user_id,
+        r1_1.id,
+        r1_1.created_at,
+        r1_1.created_by,
+        r1_1.description,
+        r1_1.name,
+        p1_0.role_id,
+        p1_1.id,
+        p1_1.created_at,
+        p1_1.created_by,
+        p1_1.description,
+        p1_1.name,
+        p1_1.updated_at,
+        p1_1.updated_by,
+        r1_1.updated_at,
+        r1_1.updated_by 
+    from
+        public.user_roles r1_0 
+    join
+        public.roles r1_1 
+            on r1_1.id=r1_0.role_id 
+    left join
+        public.role_permissions p1_0 
+            on r1_1.id=p1_0.role_id 
+    left join
+        public.permissions p1_1 
+            on p1_1.id=p1_0.permission_id 
+    where
+        r1_0.user_id=?
+2026-06-07 00:56:41 [http-nio-8080-exec-9] DEBUG c.e.u.s.JwtAuthenticationFilter - Authenticated user: admin@wasac-reg.rw
+2026-06-07 00:56:41 [http-nio-8080-exec-9] DEBUG org.hibernate.SQL - 
+    select
+        b1_0.id,
+        b1_0.approved_at,
+        b1_0.approved_by,
+        b1_0.balance_amount,
+        b1_0.bill_date,
+        b1_0.bill_number,
+        b1_0.billing_cycle_id,
+        b1_0.consumption_amount,
+        b1_0.created_at,
+        b1_0.created_by,
+        b1_0.customer_id,
+        b1_0.due_date,
+        b1_0.meter_id,
+        b1_0.meter_reading_id,
+        b1_0.notes,
+        b1_0.paid_amount,
+        b1_0.paid_at,
+        b1_0.penalty_amount,
+        b1_0.service_charge_amount,
+        b1_0.status,
+        b1_0.tax_amount,
+        b1_0.total_amount,
+        b1_0.updated_at,
+        b1_0.updated_by,
+        b1_0.utility_type 
+    from
+        public.bills b1_0 
+    where
+        b1_0.bill_number=?
+2026-06-07 00:56:41 [http-nio-8080-exec-9] WARN  c.e.u.e.GlobalExceptionHandler - Business exception: Bill is already fully paid
+2026-06-07 00:56:41 [http-nio-8080-exec-9] WARN  o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - Resolved [com.exam.utility.exception.BusinessException: Bill is already fully paid]
+2026-06-07 01:50:49 [scheduling-1] INFO  c.e.u.scheduler.BillingScheduler - Scheduled job: generating bills for 2026/5
+2026-06-07 01:50:49 [scheduling-1] INFO  c.exam.utility.billing.BillingEngine - Starting bill generation for 2026/5
+2026-06-07 01:50:49 [scheduling-1] DEBUG org.hibernate.SQL - 
+    select
+        bc1_0.id,
+        bc1_0.billing_month,
+        bc1_0.billing_year,
+        bc1_0.closed,
+        bc1_0.created_at,
+        bc1_0.created_by,
+        bc1_0.due_date,
+        bc1_0.end_date,
+        bc1_0.start_date,
+        bc1_0.updated_at,
+        bc1_0.updated_by 
+    from
+        public.billing_cycles bc1_0 
+    where
+        bc1_0.billing_year=? 
+        and bc1_0.billing_month=?
+2026-06-07 01:50:49 [scheduling-1] DEBUG org.hibernate.SQL - 
+    insert 
+    into
+        public.billing_cycles
+        (billing_month, billing_year, closed, created_at, created_by, due_date, end_date, start_date, updated_at, updated_by) 
+    values
+        (?, ?, ?, ?, ?, ?, ?, ?, ?, ?) 
+    returning id
+2026-06-07 01:50:49 [scheduling-1] DEBUG org.hibernate.SQL - 
+    select
+        m1_0.id,
+        m1_0.created_at,
+        m1_0.created_by,
+        m1_0.customer_id,
+        m1_0.initial_reading,
+        m1_0.installation_date,
+        m1_0.location,
+        m1_0.meter_number,
+        m1_0.meter_type,
+        m1_0.status,
+        m1_0.tariff_id,
+        m1_0.updated_at,
+        m1_0.updated_by 
+    from
+        public.meters m1_0 
+    where
+        m1_0.status=? 
+        and m1_0.meter_type=?
+2026-06-07 01:50:50 [scheduling-1] DEBUG org.hibernate.SQL - 
+    select
+        m1_0.id,
+        m1_0.created_at,
+        m1_0.created_by,
+        m1_0.customer_id,
+        m1_0.initial_reading,
+        m1_0.installation_date,
+        m1_0.location,
+        m1_0.meter_number,
+        m1_0.meter_type,
+        m1_0.status,
+        m1_0.tariff_id,
+        m1_0.updated_at,
+        m1_0.updated_by 
+    from
+        public.meters m1_0 
+    where
+        m1_0.status=? 
+        and m1_0.meter_type=?
+2026-06-07 01:50:50 [scheduling-1] DEBUG org.hibernate.SQL - 
+    select
+        c1_0.id,
+        c1_0.address,
+        c1_0.created_at,
+        c1_0.created_by,
+        c1_0.district,
+        c1_0.email,
+        c1_0.full_name,
+        c1_0.national_id,
+        c1_0.phone_number,
+        c1_0.sector,
+        c1_0.status,
+        c1_0.updated_at,
+        c1_0.updated_by,
+        c1_0.user_id 
+    from
+        public.customers c1_0 
+    where
+        c1_0.id=?
+2026-06-07 01:50:50 [scheduling-1] DEBUG org.hibernate.SQL - 
+    select
+        b1_0.id 
+    from
+        public.bills b1_0 
+    where
+        b1_0.meter_id=? 
+        and b1_0.billing_cycle_id=? 
+    fetch
+        first ? rows only
+2026-06-07 01:50:50 [scheduling-1] DEBUG org.hibernate.SQL - 
+    select
+        mr1_0.id,
+        mr1_0.consumption,
+        mr1_0.created_at,
+        mr1_0.created_by,
+        mr1_0.current_reading,
+        mr1_0.meter_id,
+        mr1_0.notes,
+        mr1_0.previous_reading,
+        mr1_0.reading_date,
+        mr1_0.reading_image_path,
+        mr1_0.reading_month,
+        mr1_0.reading_year,
+        mr1_0.updated_at,
+        mr1_0.updated_by 
+    from
+        public.meter_readings mr1_0 
+    where
+        mr1_0.meter_id=? 
+        and mr1_0.reading_year=? 
+        and mr1_0.reading_month=?
+2026-06-07 01:50:50 [scheduling-1] ERROR c.exam.utility.billing.BillingEngine - Failed to generate bill for meter MTR-TEST-001: No meter reading found for meter MTR-TEST-001 in 2026/5. A reading is required before generating a bill.
+2026-06-07 01:50:50 [scheduling-1] DEBUG org.hibernate.SQL - 
+    select
+        c1_0.id,
+        c1_0.address,
+        c1_0.created_at,
+        c1_0.created_by,
+        c1_0.district,
+        c1_0.email,
+        c1_0.full_name,
+        c1_0.national_id,
+        c1_0.phone_number,
+        c1_0.sector,
+        c1_0.status,
+        c1_0.updated_at,
+        c1_0.updated_by,
+        c1_0.user_id 
+    from
+        public.customers c1_0 
+    where
+        c1_0.id=?
+2026-06-07 01:50:50 [scheduling-1] DEBUG org.hibernate.SQL - 
+    select
+        b1_0.id 
+    from
+        public.bills b1_0 
+    where
+        b1_0.meter_id=? 
+        and b1_0.billing_cycle_id=? 
+    fetch
+        first ? rows only
+2026-06-07 01:50:50 [scheduling-1] DEBUG org.hibernate.SQL - 
+    select
+        mr1_0.id,
+        mr1_0.consumption,
+        mr1_0.created_at,
+        mr1_0.created_by,
+        mr1_0.current_reading,
+        mr1_0.meter_id,
+        mr1_0.notes,
+        mr1_0.previous_reading,
+        mr1_0.reading_date,
+        mr1_0.reading_image_path,
+        mr1_0.reading_month,
+        mr1_0.reading_year,
+        mr1_0.updated_at,
+        mr1_0.updated_by 
+    from
+        public.meter_readings mr1_0 
+    where
+        mr1_0.meter_id=? 
+        and mr1_0.reading_year=? 
+        and mr1_0.reading_month=?
+2026-06-07 01:50:50 [scheduling-1] ERROR c.exam.utility.billing.BillingEngine - Failed to generate bill for meter MTR-WATER-2024-001: No meter reading found for meter MTR-WATER-2024-001 in 2026/5. A reading is required before generating a bill.
+2026-06-07 01:50:50 [scheduling-1] INFO  c.exam.utility.billing.BillingEngine - Generated 0 bills for 2026/5
+2026-06-07 01:50:50 [SpringApplicationShutdownHook] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+2026-06-07 01:50:50 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - UtilityBillingHikariPool - Shutdown initiated...
+2026-06-07 01:50:50 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - UtilityBillingHikariPool - Shutdown completed.
+2026-06-07 09:10:29 [restartedMain] INFO  com.exam.utility.UtilityApplication - Starting UtilityApplication using Java 21.0.4 with PID 25168 (C:\Users\user\Downloads\Java-NE-main\Java-NE-main\target\classes started by user in C:\Users\user\Downloads\Java-NE-main)
+2026-06-07 09:10:29 [restartedMain] DEBUG com.exam.utility.UtilityApplication - Running with Spring Boot v3.3.5, Spring v6.1.14
+2026-06-07 09:10:29 [restartedMain] INFO  com.exam.utility.UtilityApplication - The following 1 profile is active: "dev"
+2026-06-07 09:10:29 [restartedMain] INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor - Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2026-06-07 09:10:29 [restartedMain] INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor - For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2026-06-07 09:10:40 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-06-07 09:10:42 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 1243 ms. Found 24 JPA repository interfaces.
+2026-06-07 09:10:44 [restartedMain] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port 8080 (http)
+2026-06-07 09:10:44 [restartedMain] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+2026-06-07 09:10:44 [restartedMain] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.31]
+2026-06-07 09:10:44 [restartedMain] INFO  o.a.c.c.C.[.[localhost].[/api/v1] - Initializing Spring embedded WebApplicationContext
+2026-06-07 09:10:44 [restartedMain] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 14787 ms
+2026-06-07 09:10:45 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - UtilityBillingHikariPool - Starting...
+2026-06-07 09:10:46 [restartedMain] INFO  com.zaxxer.hikari.pool.HikariPool - UtilityBillingHikariPool - Added connection org.postgresql.jdbc.PgConnection@4f3d696b
+2026-06-07 09:10:46 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - UtilityBillingHikariPool - Start completed.
+2026-06-07 09:10:46 [restartedMain] INFO  org.flywaydb.core.FlywayExecutor - Database: jdbc:postgresql://localhost:5432/utility_billing (PostgreSQL 17.1)
+2026-06-07 09:10:46 [restartedMain] WARN  o.f.c.i.database.base.Database - Flyway upgrade recommended: PostgreSQL 17.1 is newer than this version of Flyway and support has not been tested. The latest supported version of PostgreSQL is 16.
+2026-06-07 09:10:46 [restartedMain] INFO  o.f.core.internal.command.DbValidate - Successfully validated 9 migrations (execution time 00:00.312s)
+2026-06-07 09:10:46 [restartedMain] INFO  o.f.core.internal.command.DbMigrate - Current version of schema "public": 9
+2026-06-07 09:10:46 [restartedMain] INFO  o.f.core.internal.command.DbMigrate - Schema "public" is up to date. No migration necessary.
+2026-06-07 09:10:46 [restartedMain] INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+2026-06-07 09:10:47 [restartedMain] INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 6.5.3.Final
+2026-06-07 09:10:47 [restartedMain] INFO  o.h.c.i.RegionFactoryInitiator - HHH000026: Second-level cache disabled
+2026-06-07 09:10:48 [restartedMain] INFO  o.s.o.j.p.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-06-07 09:10:49 [restartedMain] WARN  org.hibernate.orm.deprecation - HHH90000025: PostgreSQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2026-06-07 09:10:55 [restartedMain] INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-06-07 09:10:56 [restartedMain] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-06-07 09:10:57 [restartedMain] INFO  o.s.d.j.r.query.QueryEnhancerFactory - Hibernate is in classpath; If applicable, HQL parser will be used.
+2026-06-07 09:10:59 [restartedMain] DEBUG c.e.u.s.JwtAuthenticationFilter - Filter 'jwtAuthenticationFilter' configured for use
+2026-06-07 09:10:59 [restartedMain] DEBUG c.e.u.s.ForcePasswordChangeFilter - Filter 'forcePasswordChangeFilter' configured for use
+2026-06-07 09:11:03 [restartedMain] INFO  o.s.s.c.a.a.c.InitializeAuthenticationProviderBeanManagerConfigurer$InitializeAuthenticationProviderManagerConfigurer - Global AuthenticationManager configured with AuthenticationProvider bean with name authenticationProvider
+2026-06-07 09:11:03 [restartedMain] WARN  o.s.s.c.a.a.c.InitializeUserDetailsBeanManagerConfigurer$InitializeUserDetailsManagerConfigurer - Global AuthenticationManager configured with an AuthenticationProvider bean. UserDetailsService beans will not be used for username/password login. Consider removing the AuthenticationProvider bean. Alternatively, consider using the UserDetailsService in a manually instantiated DaoAuthenticationProvider.
+2026-06-07 09:11:07 [restartedMain] INFO  o.s.b.a.e.web.EndpointLinksResolver - Exposing 4 endpoints beneath base path '/actuator'
+2026-06-07 09:11:12 [restartedMain] INFO  o.s.b.d.a.OptionalLiveReloadServer - LiveReload server is running on port 35729
+2026-06-07 09:11:12 [restartedMain] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port 8080 (http) with context path '/api/v1'
+2026-06-07 09:11:12 [restartedMain] INFO  com.exam.utility.UtilityApplication - Started UtilityApplication in 45.688 seconds (process running for 48.612)
+2026-06-07 09:11:13 [restartedMain] DEBUG org.hibernate.SQL - 
+    select
+        u1_0.id,
+        u1_0.account_non_expired,
+        u1_0.account_non_locked,
+        u1_0.created_at,
+        u1_0.created_by,
+        u1_0.credentials_non_expired,
+        u1_0.email,
+        u1_0.enabled,
+        u1_0.failed_login_attempts,
+        u1_0.force_password_change,
+        u1_0.full_name,
+        u1_0.last_login,
+        u1_0.lock_time,
+        u1_0.password,
+        u1_0.phone_number,
+        u1_0.updated_at,
+        u1_0.updated_by 
+    from
+        public.users u1_0 
+    where
+        u1_0.email=?
+2026-06-07 09:11:13 [restartedMain] DEBUG org.hibernate.SQL - 
+    select
+        r1_0.user_id,
+        r1_1.id,
+        r1_1.created_at,
+        r1_1.created_by,
+        r1_1.description,
+        r1_1.name,
+        p1_0.role_id,
+        p1_1.id,
+        p1_1.created_at,
+        p1_1.created_by,
+        p1_1.description,
+        p1_1.name,
+        p1_1.updated_at,
+        p1_1.updated_by,
+        r1_1.updated_at,
+        r1_1.updated_by 
+    from
+        public.user_roles r1_0 
+    join
+        public.roles r1_1 
+            on r1_1.id=r1_0.role_id 
+    left join
+        public.role_permissions p1_0 
+            on r1_1.id=p1_0.role_id 
+    left join
+        public.permissions p1_1 
+            on p1_1.id=p1_0.permission_id 
+    where
+        r1_0.user_id=?
+2026-06-07 09:11:15 [RMI TCP Connection(3)-10.12.72.176] INFO  o.a.c.c.C.[.[localhost].[/api/v1] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2026-06-07 09:11:15 [RMI TCP Connection(3)-10.12.72.176] INFO  o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+2026-06-07 09:11:15 [RMI TCP Connection(3)-10.12.72.176] INFO  o.s.web.servlet.DispatcherServlet - Completed initialization in 5 ms
+2026-06-07 09:13:38 [http-nio-8080-exec-7] INFO  o.s.api.AbstractOpenApiResource - Init duration for springdoc-openapi is: 2550 ms
+2026-06-07 09:17:07 [http-nio-8080-exec-2] DEBUG org.hibernate.SQL - 
+    select
+        u1_0.id,
+        u1_0.account_non_expired,
+        u1_0.account_non_locked,
+        u1_0.created_at,
+        u1_0.created_by,
+        u1_0.credentials_non_expired,
+        u1_0.email,
+        u1_0.enabled,
+        u1_0.failed_login_attempts,
+        u1_0.force_password_change,
+        u1_0.full_name,
+        u1_0.last_login,
+        u1_0.lock_time,
+        u1_0.password,
+        u1_0.phone_number,
+        u1_0.updated_at,
+        u1_0.updated_by 
+    from
+        public.users u1_0 
+    where
+        u1_0.email=?
+2026-06-07 09:17:07 [http-nio-8080-exec-2] DEBUG org.hibernate.SQL - 
+    select
+        r1_0.user_id,
+        r1_1.id,
+        r1_1.created_at,
+        r1_1.created_by,
+        r1_1.description,
+        r1_1.name,
+        p1_0.role_id,
+        p1_1.id,
+        p1_1.created_at,
+        p1_1.created_by,
+        p1_1.description,
+        p1_1.name,
+        p1_1.updated_at,
+        p1_1.updated_by,
+        r1_1.updated_at,
+        r1_1.updated_by 
+    from
+        public.user_roles r1_0 
+    join
+        public.roles r1_1 
+            on r1_1.id=r1_0.role_id 
+    left join
+        public.role_permissions p1_0 
+            on r1_1.id=p1_0.role_id 
+    left join
+        public.permissions p1_1 
+            on p1_1.id=p1_0.permission_id 
+    where
+        r1_0.user_id=?
+2026-06-07 09:17:09 [http-nio-8080-exec-2] DEBUG org.hibernate.SQL - 
+    select
+        u1_0.id,
+        u1_0.account_non_expired,
+        u1_0.account_non_locked,
+        u1_0.created_at,
+        u1_0.created_by,
+        u1_0.credentials_non_expired,
+        u1_0.email,
+        u1_0.enabled,
+        u1_0.failed_login_attempts,
+        u1_0.force_password_change,
+        u1_0.full_name,
+        u1_0.last_login,
+        u1_0.lock_time,
+        u1_0.password,
+        u1_0.phone_number,
+        u1_0.updated_at,
+        u1_0.updated_by 
+    from
+        public.users u1_0 
+    where
+        u1_0.email=?
+2026-06-07 09:17:11 [http-nio-8080-exec-2] DEBUG org.hibernate.SQL - 
+    update
+        public.users u1_0 
+    set
+        failed_login_attempts=0,
+        account_non_locked=true,
+        lock_time=null 
+    where
+        u1_0.email=?
+2026-06-07 09:17:14 [http-nio-8080-exec-2] DEBUG org.hibernate.SQL - 
+    update
+        public.refresh_tokens rt1_0 
+    set
+        revoked=true 
+    where
+        rt1_0.user_id=?
+2026-06-07 09:17:18 [http-nio-8080-exec-2] DEBUG org.hibernate.SQL - 
+    insert 
+    into
+        public.refresh_tokens
+        (expiry_date, ip_address, revoked, token, user_id, user_agent) 
+    values
+        (?, ?, ?, ?, ?, ?) 
+    returning id
+2026-06-07 09:17:19 [http-nio-8080-exec-2] INFO  o.s.s.a.AnnotationAsyncExecutionInterceptor - More than one TaskExecutor bean found within the context, and none is named 'taskExecutor'. Mark one of them as primary or name it 'taskExecutor' (possibly as an alias) in order to use it for async processing: [emailExecutor, notificationExecutor, taskScheduler]
+2026-06-07 09:17:19 [http-nio-8080-exec-2] INFO  c.e.u.service.impl.AuthServiceImpl - User logged in: admin@wasac-reg.rw
+2026-06-07 09:17:19 [SimpleAsyncTaskExecutor-1] DEBUG org.hibernate.SQL - 
+    insert 
+    into
+        public.audit_logs
+        (action, description, entity_id, entity_name, ip_address, new_values, old_values, performed_at, performed_by, user_agent) 
+    values
+        (?, ?, ?, ?, ?, ?, ?, ?, ?, ?) 
+    returning id
+2026-06-07 09:17:19 [http-nio-8080-exec-2] DEBUG org.hibernate.SQL - 
+    update
+        public.users 
+    set
+        account_non_expired=?,
+        account_non_locked=?,
+        credentials_non_expired=?,
+        email=?,
+        enabled=?,
+        failed_login_attempts=?,
+        force_password_change=?,
+        full_name=?,
+        last_login=?,
+        lock_time=?,
+        password=?,
+        phone_number=?,
+        updated_at=?,
+        updated_by=? 
+    where
+        id=?
+2026-06-07 09:17:55 [http-nio-8080-exec-5] DEBUG org.hibernate.SQL - 
+    select
+        u1_0.id,
+        u1_0.account_non_expired,
+        u1_0.account_non_locked,
+        u1_0.created_at,
+        u1_0.created_by,
+        u1_0.credentials_non_expired,
+        u1_0.email,
+        u1_0.enabled,
+        u1_0.failed_login_attempts,
+        u1_0.force_password_change,
+        u1_0.full_name,
+        u1_0.last_login,
+        u1_0.lock_time,
+        u1_0.password,
+        u1_0.phone_number,
+        u1_0.updated_at,
+        u1_0.updated_by 
+    from
+        public.users u1_0 
+    where
+        u1_0.email=?
+2026-06-07 09:17:55 [http-nio-8080-exec-5] DEBUG org.hibernate.SQL - 
+    select
+        r1_0.user_id,
+        r1_1.id,
+        r1_1.created_at,
+        r1_1.created_by,
+        r1_1.description,
+        r1_1.name,
+        p1_0.role_id,
+        p1_1.id,
+        p1_1.created_at,
+        p1_1.created_by,
+        p1_1.description,
+        p1_1.name,
+        p1_1.updated_at,
+        p1_1.updated_by,
+        r1_1.updated_at,
+        r1_1.updated_by 
+    from
+        public.user_roles r1_0 
+    join
+        public.roles r1_1 
+            on r1_1.id=r1_0.role_id 
+    left join
+        public.role_permissions p1_0 
+            on r1_1.id=p1_0.role_id 
+    left join
+        public.permissions p1_1 
+            on p1_1.id=p1_0.permission_id 
+    where
+        r1_0.user_id=?
+2026-06-07 09:17:55 [http-nio-8080-exec-5] DEBUG c.e.u.s.JwtAuthenticationFilter - Authenticated user: admin@wasac-reg.rw
+2026-06-07 09:17:55 [http-nio-8080-exec-5] DEBUG org.hibernate.SQL - 
+    select
+        u1_0.id 
+    from
+        public.users u1_0 
+    where
+        u1_0.email=? 
+    fetch
+        first ? rows only
+2026-06-07 09:17:55 [http-nio-8080-exec-5] DEBUG org.hibernate.SQL - 
+    select
+        r1_0.id,
+        r1_0.created_at,
+        r1_0.created_by,
+        r1_0.description,
+        r1_0.name,
+        r1_0.updated_at,
+        r1_0.updated_by 
+    from
+        public.roles r1_0 
+    where
+        r1_0.name=?
+2026-06-07 09:17:55 [http-nio-8080-exec-5] DEBUG org.hibernate.SQL - 
+    select
+        p1_0.role_id,
+        p1_1.id,
+        p1_1.created_at,
+        p1_1.created_by,
+        p1_1.description,
+        p1_1.name,
+        p1_1.updated_at,
+        p1_1.updated_by 
+    from
+        public.role_permissions p1_0 
+    join
+        public.permissions p1_1 
+            on p1_1.id=p1_0.permission_id 
+    where
+        p1_0.role_id=?
+2026-06-07 09:17:57 [http-nio-8080-exec-5] DEBUG org.hibernate.SQL - 
+    insert 
+    into
+        public.users
+        (account_non_expired, account_non_locked, created_at, created_by, credentials_non_expired, email, enabled, failed_login_attempts, force_password_change, full_name, last_login, lock_time, password, phone_number, updated_at, updated_by) 
+    values
+        (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) 
+    returning id
+2026-06-07 09:17:57 [http-nio-8080-exec-5] INFO  c.e.u.service.impl.UserServiceImpl - Admin created user: akezaprincesse@gmail.com with role: ROLE_FINANCE
+2026-06-07 09:17:57 [SimpleAsyncTaskExecutor-2] DEBUG org.hibernate.SQL - 
+    insert 
+    into
+        public.audit_logs
+        (action, description, entity_id, entity_name, ip_address, new_values, old_values, performed_at, performed_by, user_agent) 
+    values
+        (?, ?, ?, ?, ?, ?, ?, ?, ?, ?) 
+    returning id
+2026-06-07 09:17:57 [http-nio-8080-exec-5] DEBUG org.hibernate.SQL - 
+    insert 
+    into
+        public.user_roles
+        (user_id, role_id) 
+    values
+        (?, ?)
+2026-06-07 09:17:57 [email-1] ERROR org.thymeleaf.TemplateEngine - [THYMELEAF][email-1] Exception processing template "email/user-created": Error resolving template [email/user-created], template might not exist or might not be accessible by any of the configured Template Resolvers
+org.thymeleaf.exceptions.TemplateInputException: Error resolving template [email/user-created], template might not exist or might not be accessible by any of the configured Template Resolvers
+	at org.thymeleaf.engine.TemplateManager.resolveTemplate(TemplateManager.java:869)
+	at org.thymeleaf.engine.TemplateManager.parseAndProcess(TemplateManager.java:607)
+	at org.thymeleaf.TemplateEngine.process(TemplateEngine.java:1103)
+	at org.thymeleaf.TemplateEngine.process(TemplateEngine.java:1064)
+	at org.thymeleaf.TemplateEngine.process(TemplateEngine.java:1053)
+	at com.exam.utility.service.impl.EmailServiceImpl.sendEmail(EmailServiceImpl.java:167)
+	at com.exam.utility.service.impl.EmailServiceImpl.sendUserCreatedEmail(EmailServiceImpl.java:144)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at org.springframework.aop.support.AopUtils.invokeJoinpointUsingReflection(AopUtils.java:355)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.invokeJoinpoint(ReflectiveMethodInvocation.java:196)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:163)
+	at org.springframework.aop.interceptor.AsyncExecutionInterceptor.lambda$invoke$0(AsyncExecutionInterceptor.java:113)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:317)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1144)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+2026-06-07 09:17:57 [email-1] ERROR c.e.u.service.impl.EmailServiceImpl - Failed to send email to akezaprincesse@gmail.com: Error resolving template [email/user-created], template might not exist or might not be accessible by any of the configured Template Resolvers
+2026-06-07 09:17:58 [email-1] DEBUG org.hibernate.SQL - 
+    insert 
+    into
+        public.email_logs
+        (error_message, reference_id, sent, sent_at, subject, template_name, to_email) 
+    values
+        (?, ?, ?, ?, ?, ?, ?) 
+    returning id
+2026-06-07 09:18:48 [File Watcher] INFO  o.s.b.d.a.LocalDevToolsAutoConfiguration$RestartingClassPathChangeChangedEventListener - Restarting due to 211 class path changes (0 additions, 211 deletions, 0 modifications)
+2026-06-07 09:18:48 [Thread-5] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+2026-06-07 09:18:48 [Thread-5] INFO  com.zaxxer.hikari.HikariDataSource - UtilityBillingHikariPool - Shutdown initiated...
+2026-06-07 09:18:48 [Thread-5] INFO  com.zaxxer.hikari.HikariDataSource - UtilityBillingHikariPool - Shutdown completed.
+2026-06-07 09:19:20 [restartedMain] INFO  com.exam.utility.UtilityApplication - Starting UtilityApplication using Java 21.0.4 with PID 25168 (C:\Users\user\Downloads\Java-NE-main\Java-NE-main\target\classes started by user in C:\Users\user\Downloads\Java-NE-main)
+2026-06-07 09:19:20 [restartedMain] DEBUG com.exam.utility.UtilityApplication - Running with Spring Boot v3.3.5, Spring v6.1.14
+2026-06-07 09:19:20 [restartedMain] INFO  com.exam.utility.UtilityApplication - The following 1 profile is active: "dev"
+2026-06-07 09:19:22 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-06-07 09:19:22 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 343 ms. Found 24 JPA repository interfaces.
+2026-06-07 09:19:23 [restartedMain] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port 8080 (http)
+2026-06-07 09:19:23 [restartedMain] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+2026-06-07 09:19:23 [restartedMain] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.31]
+2026-06-07 09:19:23 [restartedMain] INFO  o.a.c.c.C.[.[localhost].[/api/v1] - Initializing Spring embedded WebApplicationContext
+2026-06-07 09:19:23 [restartedMain] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 3667 ms
+2026-06-07 09:19:25 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - UtilityBillingHikariPool - Starting...
+2026-06-07 09:19:25 [restartedMain] INFO  com.zaxxer.hikari.pool.HikariPool - UtilityBillingHikariPool - Added connection org.postgresql.jdbc.PgConnection@71c26b8d
+2026-06-07 09:19:25 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - UtilityBillingHikariPool - Start completed.
+2026-06-07 09:19:25 [restartedMain] INFO  org.flywaydb.core.FlywayExecutor - Database: jdbc:postgresql://localhost:5432/utility_billing (PostgreSQL 17.1)
+2026-06-07 09:19:25 [restartedMain] WARN  o.f.c.i.database.base.Database - Flyway upgrade recommended: PostgreSQL 17.1 is newer than this version of Flyway and support has not been tested. The latest supported version of PostgreSQL is 16.
+2026-06-07 09:19:25 [restartedMain] INFO  o.f.core.internal.command.DbValidate - Successfully validated 9 migrations (execution time 00:00.098s)
+2026-06-07 09:19:25 [restartedMain] INFO  o.f.core.internal.command.DbMigrate - Current version of schema "public": 9
+2026-06-07 09:19:25 [restartedMain] INFO  o.f.core.internal.command.DbMigrate - Schema "public" is up to date. No migration necessary.
+2026-06-07 09:19:25 [restartedMain] INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+2026-06-07 09:19:25 [restartedMain] INFO  o.h.c.i.RegionFactoryInitiator - HHH000026: Second-level cache disabled
+2026-06-07 09:19:25 [restartedMain] INFO  o.s.o.j.p.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-06-07 09:19:25 [restartedMain] WARN  org.hibernate.orm.deprecation - HHH90000025: PostgreSQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2026-06-07 09:19:28 [restartedMain] INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-06-07 09:19:28 [restartedMain] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-06-07 09:19:29 [restartedMain] DEBUG c.e.u.s.JwtAuthenticationFilter - Filter 'jwtAuthenticationFilter' configured for use
+2026-06-07 09:19:29 [restartedMain] DEBUG c.e.u.s.ForcePasswordChangeFilter - Filter 'forcePasswordChangeFilter' configured for use
+2026-06-07 09:19:31 [restartedMain] INFO  o.s.s.c.a.a.c.InitializeAuthenticationProviderBeanManagerConfigurer$InitializeAuthenticationProviderManagerConfigurer - Global AuthenticationManager configured with AuthenticationProvider bean with name authenticationProvider
+2026-06-07 09:19:31 [restartedMain] WARN  o.s.s.c.a.a.c.InitializeUserDetailsBeanManagerConfigurer$InitializeUserDetailsManagerConfigurer - Global AuthenticationManager configured with an AuthenticationProvider bean. UserDetailsService beans will not be used for username/password login. Consider removing the AuthenticationProvider bean. Alternatively, consider using the UserDetailsService in a manually instantiated DaoAuthenticationProvider.
+2026-06-07 09:19:33 [restartedMain] INFO  o.s.b.a.e.web.EndpointLinksResolver - Exposing 4 endpoints beneath base path '/actuator'
+2026-06-07 09:19:35 [restartedMain] INFO  o.s.b.d.a.OptionalLiveReloadServer - LiveReload server is running on port 35729
+2026-06-07 09:19:35 [restartedMain] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port 8080 (http) with context path '/api/v1'
+2026-06-07 09:19:35 [restartedMain] INFO  com.exam.utility.UtilityApplication - Started UtilityApplication in 15.846 seconds (process running for 551.628)
+2026-06-07 09:19:35 [restartedMain] DEBUG org.hibernate.SQL - 
+    select
+        u1_0.id,
+        u1_0.account_non_expired,
+        u1_0.account_non_locked,
+        u1_0.created_at,
+        u1_0.created_by,
+        u1_0.credentials_non_expired,
+        u1_0.email,
+        u1_0.enabled,
+        u1_0.failed_login_attempts,
+        u1_0.force_password_change,
+        u1_0.full_name,
+        u1_0.last_login,
+        u1_0.lock_time,
+        u1_0.password,
+        u1_0.phone_number,
+        u1_0.updated_at,
+        u1_0.updated_by 
+    from
+        public.users u1_0 
+    where
+        u1_0.email=?
+2026-06-07 09:19:35 [restartedMain] DEBUG org.hibernate.SQL - 
+    select
+        r1_0.user_id,
+        r1_1.id,
+        r1_1.created_at,
+        r1_1.created_by,
+        r1_1.description,
+        r1_1.name,
+        p1_0.role_id,
+        p1_1.id,
+        p1_1.created_at,
+        p1_1.created_by,
+        p1_1.description,
+        p1_1.name,
+        p1_1.updated_at,
+        p1_1.updated_by,
+        r1_1.updated_at,
+        r1_1.updated_by 
+    from
+        public.user_roles r1_0 
+    join
+        public.roles r1_1 
+            on r1_1.id=r1_0.role_id 
+    left join
+        public.role_permissions p1_0 
+            on r1_1.id=p1_0.role_id 
+    left join
+        public.permissions p1_1 
+            on p1_1.id=p1_0.permission_id 
+    where
+        r1_0.user_id=?
+2026-06-07 09:19:36 [restartedMain] INFO  o.s.b.d.a.ConditionEvaluationDeltaLoggingListener - Condition evaluation unchanged
+2026-06-07 09:20:20 [http-nio-8080-exec-1] INFO  o.a.c.c.C.[.[localhost].[/api/v1] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2026-06-07 09:20:20 [http-nio-8080-exec-1] INFO  o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+2026-06-07 09:20:20 [http-nio-8080-exec-1] INFO  o.s.web.servlet.DispatcherServlet - Completed initialization in 59 ms
+2026-06-07 09:20:20 [http-nio-8080-exec-1] DEBUG org.hibernate.SQL - 
+    select
+        u1_0.id,
+        u1_0.account_non_expired,
+        u1_0.account_non_locked,
+        u1_0.created_at,
+        u1_0.created_by,
+        u1_0.credentials_non_expired,
+        u1_0.email,
+        u1_0.enabled,
+        u1_0.failed_login_attempts,
+        u1_0.force_password_change,
+        u1_0.full_name,
+        u1_0.last_login,
+        u1_0.lock_time,
+        u1_0.password,
+        u1_0.phone_number,
+        u1_0.updated_at,
+        u1_0.updated_by 
+    from
+        public.users u1_0 
+    where
+        u1_0.email=?
+2026-06-07 09:20:21 [http-nio-8080-exec-1] DEBUG org.hibernate.SQL - 
+    select
+        r1_0.user_id,
+        r1_1.id,
+        r1_1.created_at,
+        r1_1.created_by,
+        r1_1.description,
+        r1_1.name,
+        p1_0.role_id,
+        p1_1.id,
+        p1_1.created_at,
+        p1_1.created_by,
+        p1_1.description,
+        p1_1.name,
+        p1_1.updated_at,
+        p1_1.updated_by,
+        r1_1.updated_at,
+        r1_1.updated_by 
+    from
+        public.user_roles r1_0 
+    join
+        public.roles r1_1 
+            on r1_1.id=r1_0.role_id 
+    left join
+        public.role_permissions p1_0 
+            on r1_1.id=p1_0.role_id 
+    left join
+        public.permissions p1_1 
+            on p1_1.id=p1_0.permission_id 
+    where
+        r1_0.user_id=?
+2026-06-07 09:20:21 [http-nio-8080-exec-1] DEBUG c.e.u.s.JwtAuthenticationFilter - Authenticated user: admin@wasac-reg.rw
+2026-06-07 09:20:21 [http-nio-8080-exec-1] DEBUG org.hibernate.SQL - 
+    select
+        u1_0.id 
+    from
+        public.users u1_0 
+    where
+        u1_0.email=? 
+    fetch
+        first ? rows only
+2026-06-07 09:20:21 [http-nio-8080-exec-1] WARN  c.e.u.e.GlobalExceptionHandler - Duplicate resource: User already exists with email: 'akezaprincesse@gmail.com'
+2026-06-07 09:20:21 [http-nio-8080-exec-1] WARN  o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - Resolved [com.exam.utility.exception.DuplicateResourceException: User already exists with email: 'akezaprincesse@gmail.com']
+2026-06-07 09:21:05 [http-nio-8080-exec-2] DEBUG org.hibernate.SQL - 
+    select
+        u1_0.id,
+        u1_0.account_non_expired,
+        u1_0.account_non_locked,
+        u1_0.created_at,
+        u1_0.created_by,
+        u1_0.credentials_non_expired,
+        u1_0.email,
+        u1_0.enabled,
+        u1_0.failed_login_attempts,
+        u1_0.force_password_change,
+        u1_0.full_name,
+        u1_0.last_login,
+        u1_0.lock_time,
+        u1_0.password,
+        u1_0.phone_number,
+        u1_0.updated_at,
+        u1_0.updated_by 
+    from
+        public.users u1_0 
+    where
+        u1_0.email=?
+2026-06-07 09:21:05 [http-nio-8080-exec-2] WARN  c.e.u.e.GlobalExceptionHandler - Resource not found: User not found with email: 'akezaprincessegmail.com'
+2026-06-07 09:21:05 [http-nio-8080-exec-2] WARN  o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - Resolved [com.exam.utility.exception.ResourceNotFoundException: User not found with email: 'akezaprincessegmail.com']
+2026-06-07 09:21:19 [http-nio-8080-exec-3] DEBUG org.hibernate.SQL - 
+    select
+        u1_0.id,
+        u1_0.account_non_expired,
+        u1_0.account_non_locked,
+        u1_0.created_at,
+        u1_0.created_by,
+        u1_0.credentials_non_expired,
+        u1_0.email,
+        u1_0.enabled,
+        u1_0.failed_login_attempts,
+        u1_0.force_password_change,
+        u1_0.full_name,
+        u1_0.last_login,
+        u1_0.lock_time,
+        u1_0.password,
+        u1_0.phone_number,
+        u1_0.updated_at,
+        u1_0.updated_by 
+    from
+        public.users u1_0 
+    where
+        u1_0.email=?
+2026-06-07 09:21:19 [http-nio-8080-exec-3] DEBUG org.hibernate.SQL - 
+    select
+        r1_0.user_id,
+        r1_1.id,
+        r1_1.created_at,
+        r1_1.created_by,
+        r1_1.description,
+        r1_1.name,
+        p1_0.role_id,
+        p1_1.id,
+        p1_1.created_at,
+        p1_1.created_by,
+        p1_1.description,
+        p1_1.name,
+        p1_1.updated_at,
+        p1_1.updated_by,
+        r1_1.updated_at,
+        r1_1.updated_by 
+    from
+        public.user_roles r1_0 
+    join
+        public.roles r1_1 
+            on r1_1.id=r1_0.role_id 
+    left join
+        public.role_permissions p1_0 
+            on r1_1.id=p1_0.role_id 
+    left join
+        public.permissions p1_1 
+            on p1_1.id=p1_0.permission_id 
+    where
+        r1_0.user_id=?
+2026-06-07 09:21:19 [http-nio-8080-exec-3] WARN  c.e.u.e.GlobalExceptionHandler - Business exception: Account is already verified
+2026-06-07 09:21:19 [http-nio-8080-exec-3] WARN  o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - Resolved [com.exam.utility.exception.BusinessException: Account is already verified]
+2026-06-07 09:21:38 [http-nio-8080-exec-6] DEBUG org.hibernate.SQL - 
+    select
+        u1_0.id,
+        u1_0.account_non_expired,
+        u1_0.account_non_locked,
+        u1_0.created_at,
+        u1_0.created_by,
+        u1_0.credentials_non_expired,
+        u1_0.email,
+        u1_0.enabled,
+        u1_0.failed_login_attempts,
+        u1_0.force_password_change,
+        u1_0.full_name,
+        u1_0.last_login,
+        u1_0.lock_time,
+        u1_0.password,
+        u1_0.phone_number,
+        u1_0.updated_at,
+        u1_0.updated_by 
+    from
+        public.users u1_0 
+    where
+        u1_0.email=?
+2026-06-07 09:21:38 [http-nio-8080-exec-6] DEBUG org.hibernate.SQL - 
+    select
+        r1_0.user_id,
+        r1_1.id,
+        r1_1.created_at,
+        r1_1.created_by,
+        r1_1.description,
+        r1_1.name,
+        p1_0.role_id,
+        p1_1.id,
+        p1_1.created_at,
+        p1_1.created_by,
+        p1_1.description,
+        p1_1.name,
+        p1_1.updated_at,
+        p1_1.updated_by,
+        r1_1.updated_at,
+        r1_1.updated_by 
+    from
+        public.user_roles r1_0 
+    join
+        public.roles r1_1 
+            on r1_1.id=r1_0.role_id 
+    left join
+        public.role_permissions p1_0 
+            on r1_1.id=p1_0.role_id 
+    left join
+        public.permissions p1_1 
+            on p1_1.id=p1_0.permission_id 
+    where
+        r1_0.user_id=?
+2026-06-07 09:21:38 [http-nio-8080-exec-6] DEBUG c.e.u.s.JwtAuthenticationFilter - Authenticated user: admin@wasac-reg.rw
+2026-06-07 09:21:38 [http-nio-8080-exec-6] WARN  c.e.u.e.GlobalExceptionHandler - Validation failed: [Email must be valid]
+2026-06-07 09:21:38 [http-nio-8080-exec-6] WARN  o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - Resolved [org.springframework.web.bind.MethodArgumentNotValidException: Validation failed for argument [0] in public org.springframework.http.ResponseEntity<com.exam.utility.dto.response.ApiResponse<com.exam.utility.dto.response.auth.UserResponse>> com.exam.utility.controller.UserController.createUser(com.exam.utility.dto.request.user.CreateUserRequest): [Field error in object 'createUserRequest' on field 'email': rejected value [akezaprincessegmail.com]; codes [Email.createUserRequest.email,Email.email,Email.java.lang.String,Email]; arguments [org.springframework.context.support.DefaultMessageSourceResolvable: codes [createUserRequest.email,email]; arguments []; default message [email],[Ljakarta.validation.constraints.Pattern$Flag;@1cab0a0f,.*]; default message [Email must be valid]] ]
+2026-06-07 09:21:51 [http-nio-8080-exec-5] DEBUG org.hibernate.SQL - 
+    select
+        u1_0.id,
+        u1_0.account_non_expired,
+        u1_0.account_non_locked,
+        u1_0.created_at,
+        u1_0.created_by,
+        u1_0.credentials_non_expired,
+        u1_0.email,
+        u1_0.enabled,
+        u1_0.failed_login_attempts,
+        u1_0.force_password_change,
+        u1_0.full_name,
+        u1_0.last_login,
+        u1_0.lock_time,
+        u1_0.password,
+        u1_0.phone_number,
+        u1_0.updated_at,
+        u1_0.updated_by 
+    from
+        public.users u1_0 
+    where
+        u1_0.email=?
+2026-06-07 09:21:51 [http-nio-8080-exec-5] DEBUG org.hibernate.SQL - 
+    select
+        r1_0.user_id,
+        r1_1.id,
+        r1_1.created_at,
+        r1_1.created_by,
+        r1_1.description,
+        r1_1.name,
+        p1_0.role_id,
+        p1_1.id,
+        p1_1.created_at,
+        p1_1.created_by,
+        p1_1.description,
+        p1_1.name,
+        p1_1.updated_at,
+        p1_1.updated_by,
+        r1_1.updated_at,
+        r1_1.updated_by 
+    from
+        public.user_roles r1_0 
+    join
+        public.roles r1_1 
+            on r1_1.id=r1_0.role_id 
+    left join
+        public.role_permissions p1_0 
+            on r1_1.id=p1_0.role_id 
+    left join
+        public.permissions p1_1 
+            on p1_1.id=p1_0.permission_id 
+    where
+        r1_0.user_id=?
+2026-06-07 09:21:51 [http-nio-8080-exec-5] DEBUG c.e.u.s.JwtAuthenticationFilter - Authenticated user: admin@wasac-reg.rw
+2026-06-07 09:21:51 [http-nio-8080-exec-5] DEBUG org.hibernate.SQL - 
+    select
+        u1_0.id 
+    from
+        public.users u1_0 
+    where
+        u1_0.email=? 
+    fetch
+        first ? rows only
+2026-06-07 09:21:51 [http-nio-8080-exec-5] WARN  c.e.u.e.GlobalExceptionHandler - Duplicate resource: User already exists with email: 'akezaprincesse@gmail.com'
+2026-06-07 09:21:51 [http-nio-8080-exec-5] WARN  o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - Resolved [com.exam.utility.exception.DuplicateResourceException: User already exists with email: 'akezaprincesse@gmail.com']
+2026-06-07 09:22:00 [http-nio-8080-exec-4] DEBUG org.hibernate.SQL - 
+    select
+        u1_0.id,
+        u1_0.account_non_expired,
+        u1_0.account_non_locked,
+        u1_0.created_at,
+        u1_0.created_by,
+        u1_0.credentials_non_expired,
+        u1_0.email,
+        u1_0.enabled,
+        u1_0.failed_login_attempts,
+        u1_0.force_password_change,
+        u1_0.full_name,
+        u1_0.last_login,
+        u1_0.lock_time,
+        u1_0.password,
+        u1_0.phone_number,
+        u1_0.updated_at,
+        u1_0.updated_by 
+    from
+        public.users u1_0 
+    where
+        u1_0.email=?
+2026-06-07 09:22:00 [http-nio-8080-exec-4] DEBUG org.hibernate.SQL - 
+    select
+        r1_0.user_id,
+        r1_1.id,
+        r1_1.created_at,
+        r1_1.created_by,
+        r1_1.description,
+        r1_1.name,
+        p1_0.role_id,
+        p1_1.id,
+        p1_1.created_at,
+        p1_1.created_by,
+        p1_1.description,
+        p1_1.name,
+        p1_1.updated_at,
+        p1_1.updated_by,
+        r1_1.updated_at,
+        r1_1.updated_by 
+    from
+        public.user_roles r1_0 
+    join
+        public.roles r1_1 
+            on r1_1.id=r1_0.role_id 
+    left join
+        public.role_permissions p1_0 
+            on r1_1.id=p1_0.role_id 
+    left join
+        public.permissions p1_1 
+            on p1_1.id=p1_0.permission_id 
+    where
+        r1_0.user_id=?
+2026-06-07 09:22:00 [http-nio-8080-exec-4] DEBUG c.e.u.s.JwtAuthenticationFilter - Authenticated user: admin@wasac-reg.rw
+2026-06-07 09:22:00 [http-nio-8080-exec-4] WARN  c.e.u.e.GlobalExceptionHandler - Validation failed: [Phone number must start with 078, 079, 072, or 073 and be exactly 10 digits]
+2026-06-07 09:22:00 [http-nio-8080-exec-4] WARN  o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - Resolved [org.springframework.web.bind.MethodArgumentNotValidException: Validation failed for argument [0] in public org.springframework.http.ResponseEntity<com.exam.utility.dto.response.ApiResponse<com.exam.utility.dto.response.auth.UserResponse>> com.exam.utility.controller.UserController.createUser(com.exam.utility.dto.request.user.CreateUserRequest): [Field error in object 'createUserRequest' on field 'phoneNumber': rejected value [072639004]; codes [Pattern.createUserRequest.phoneNumber,Pattern.phoneNumber,Pattern.java.lang.String,Pattern]; arguments [org.springframework.context.support.DefaultMessageSourceResolvable: codes [createUserRequest.phoneNumber,phoneNumber]; arguments []; default message [phoneNumber],[Ljakarta.validation.constraints.Pattern$Flag;@1ce1c3a,^(078|079|072|073)\d{7}$]; default message [Phone number must start with 078, 079, 072, or 073 and be exactly 10 digits]] ]
+2026-06-07 09:23:54 [http-nio-8080-exec-7] DEBUG org.hibernate.SQL - 
+    select
+        u1_0.id,
+        u1_0.account_non_expired,
+        u1_0.account_non_locked,
+        u1_0.created_at,
+        u1_0.created_by,
+        u1_0.credentials_non_expired,
+        u1_0.email,
+        u1_0.enabled,
+        u1_0.failed_login_attempts,
+        u1_0.force_password_change,
+        u1_0.full_name,
+        u1_0.last_login,
+        u1_0.lock_time,
+        u1_0.password,
+        u1_0.phone_number,
+        u1_0.updated_at,
+        u1_0.updated_by 
+    from
+        public.users u1_0 
+    where
+        u1_0.email=?
+2026-06-07 09:23:54 [http-nio-8080-exec-7] DEBUG org.hibernate.SQL - 
+    select
+        r1_0.user_id,
+        r1_1.id,
+        r1_1.created_at,
+        r1_1.created_by,
+        r1_1.description,
+        r1_1.name,
+        p1_0.role_id,
+        p1_1.id,
+        p1_1.created_at,
+        p1_1.created_by,
+        p1_1.description,
+        p1_1.name,
+        p1_1.updated_at,
+        p1_1.updated_by,
+        r1_1.updated_at,
+        r1_1.updated_by 
+    from
+        public.user_roles r1_0 
+    join
+        public.roles r1_1 
+            on r1_1.id=r1_0.role_id 
+    left join
+        public.role_permissions p1_0 
+            on r1_1.id=p1_0.role_id 
+    left join
+        public.permissions p1_1 
+            on p1_1.id=p1_0.permission_id 
+    where
+        r1_0.user_id=?
+2026-06-07 09:23:54 [http-nio-8080-exec-7] DEBUG c.e.u.s.JwtAuthenticationFilter - Authenticated user: admin@wasac-reg.rw
+2026-06-07 09:23:54 [http-nio-8080-exec-7] DEBUG org.hibernate.SQL - 
+    select
+        t1_0.id,
+        t1_0.active,
+        t1_0.created_at,
+        t1_0.created_by,
+        t1_0.description,
+        t1_0.effective_date,
+        t1_0.expiry_date,
+        t1_0.flat_rate,
+        t1_0.name,
+        t1_0.tariff_type,
+        t1_0.updated_at,
+        t1_0.updated_by,
+        t1_0.utility_type 
+    from
+        public.tariffs t1_0 
+    offset
+        ? rows 
+    fetch
+        first ? rows only
+2026-06-07 09:23:55 [http-nio-8080-exec-7] DEBUG org.hibernate.SQL - 
+    select
+        tv1_0.id,
+        tv1_0.created_at,
+        tv1_0.created_by,
+        tv1_0.description,
+        tv1_0.effective_date,
+        tv1_0.expiry_date,
+        tv1_0.max_units,
+        tv1_0.min_units,
+        tv1_0.rate_per_unit,
+        tv1_0.tariff_id,
+        tv1_0.tier_order,
+        tv1_0.updated_at,
+        tv1_0.updated_by 
+    from
+        public.tariff_versions tv1_0 
+    where
+        tv1_0.tariff_id=? 
+    order by
+        tv1_0.tier_order
+2026-06-07 09:23:55 [http-nio-8080-exec-7] DEBUG org.hibernate.SQL - 
+    select
+        tv1_0.id,
+        tv1_0.created_at,
+        tv1_0.created_by,
+        tv1_0.description,
+        tv1_0.effective_date,
+        tv1_0.expiry_date,
+        tv1_0.max_units,
+        tv1_0.min_units,
+        tv1_0.rate_per_unit,
+        tv1_0.tariff_id,
+        tv1_0.tier_order,
+        tv1_0.updated_at,
+        tv1_0.updated_by 
+    from
+        public.tariff_versions tv1_0 
+    where
+        tv1_0.tariff_id=? 
+    order by
+        tv1_0.tier_order
+2026-06-07 09:28:12 [File Watcher] INFO  o.s.b.d.a.LocalDevToolsAutoConfiguration$RestartingClassPathChangeChangedEventListener - Restarting due to 1 class path change (0 additions, 0 deletions, 1 modification)
+2026-06-07 09:28:14 [Thread-7] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+2026-06-07 09:28:14 [Thread-7] INFO  com.zaxxer.hikari.HikariDataSource - UtilityBillingHikariPool - Shutdown initiated...
+2026-06-07 09:28:14 [Thread-7] INFO  com.zaxxer.hikari.HikariDataSource - UtilityBillingHikariPool - Shutdown completed.
+2026-06-07 09:28:16 [restartedMain] INFO  com.exam.utility.UtilityApplication - Starting UtilityApplication using Java 21.0.4 with PID 25168 (C:\Users\user\Downloads\Java-NE-main\Java-NE-main\target\classes started by user in C:\Users\user\Downloads\Java-NE-main)
+2026-06-07 09:28:16 [restartedMain] DEBUG com.exam.utility.UtilityApplication - Running with Spring Boot v3.3.5, Spring v6.1.14
+2026-06-07 09:28:16 [restartedMain] INFO  com.exam.utility.UtilityApplication - The following 1 profile is active: "dev"
+2026-06-07 09:28:27 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-06-07 09:28:28 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 805 ms. Found 24 JPA repository interfaces.
+2026-06-07 09:28:30 [restartedMain] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port 8080 (http)
+2026-06-07 09:28:30 [restartedMain] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+2026-06-07 09:28:30 [restartedMain] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.31]
+2026-06-07 09:28:30 [restartedMain] INFO  o.a.c.c.C.[.[localhost].[/api/v1] - Initializing Spring embedded WebApplicationContext
+2026-06-07 09:28:30 [restartedMain] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 14560 ms
+2026-06-07 09:28:32 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - UtilityBillingHikariPool - Starting...
+2026-06-07 09:28:32 [restartedMain] INFO  com.zaxxer.hikari.pool.HikariPool - UtilityBillingHikariPool - Added connection org.postgresql.jdbc.PgConnection@1d087268
+2026-06-07 09:28:32 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - UtilityBillingHikariPool - Start completed.
+2026-06-07 09:28:32 [restartedMain] INFO  org.flywaydb.core.FlywayExecutor - Database: jdbc:postgresql://localhost:5432/utility_billing (PostgreSQL 17.1)
+2026-06-07 09:28:32 [restartedMain] WARN  o.f.c.i.database.base.Database - Flyway upgrade recommended: PostgreSQL 17.1 is newer than this version of Flyway and support has not been tested. The latest supported version of PostgreSQL is 16.
+2026-06-07 09:28:33 [restartedMain] INFO  o.f.core.internal.command.DbValidate - Successfully validated 9 migrations (execution time 00:00.163s)
+2026-06-07 09:28:33 [restartedMain] INFO  o.f.core.internal.command.DbMigrate - Current version of schema "public": 9
+2026-06-07 09:28:33 [restartedMain] INFO  o.f.core.internal.command.DbMigrate - Schema "public" is up to date. No migration necessary.
+2026-06-07 09:28:33 [restartedMain] INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+2026-06-07 09:28:33 [restartedMain] INFO  o.h.c.i.RegionFactoryInitiator - HHH000026: Second-level cache disabled
+2026-06-07 09:28:33 [restartedMain] INFO  o.s.o.j.p.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-06-07 09:28:33 [restartedMain] WARN  org.hibernate.orm.deprecation - HHH90000025: PostgreSQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2026-06-07 09:28:37 [restartedMain] INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-06-07 09:28:37 [restartedMain] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-06-07 09:28:38 [restartedMain] DEBUG c.e.u.s.JwtAuthenticationFilter - Filter 'jwtAuthenticationFilter' configured for use
+2026-06-07 09:28:38 [restartedMain] DEBUG c.e.u.s.ForcePasswordChangeFilter - Filter 'forcePasswordChangeFilter' configured for use
+2026-06-07 09:28:40 [restartedMain] INFO  o.s.s.c.a.a.c.InitializeAuthenticationProviderBeanManagerConfigurer$InitializeAuthenticationProviderManagerConfigurer - Global AuthenticationManager configured with AuthenticationProvider bean with name authenticationProvider
+2026-06-07 09:28:40 [restartedMain] WARN  o.s.s.c.a.a.c.InitializeUserDetailsBeanManagerConfigurer$InitializeUserDetailsManagerConfigurer - Global AuthenticationManager configured with an AuthenticationProvider bean. UserDetailsService beans will not be used for username/password login. Consider removing the AuthenticationProvider bean. Alternatively, consider using the UserDetailsService in a manually instantiated DaoAuthenticationProvider.
+2026-06-07 09:28:43 [restartedMain] INFO  o.s.b.a.e.web.EndpointLinksResolver - Exposing 4 endpoints beneath base path '/actuator'
+2026-06-07 09:28:47 [restartedMain] INFO  o.s.b.d.a.OptionalLiveReloadServer - LiveReload server is running on port 35729
+2026-06-07 09:28:47 [restartedMain] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port 8080 (http) with context path '/api/v1'
+2026-06-07 09:28:48 [restartedMain] INFO  com.exam.utility.UtilityApplication - Started UtilityApplication in 32.146 seconds (process running for 1103.685)
+2026-06-07 09:28:48 [restartedMain] DEBUG org.hibernate.SQL - 
+    select
+        u1_0.id,
+        u1_0.account_non_expired,
+        u1_0.account_non_locked,
+        u1_0.created_at,
+        u1_0.created_by,
+        u1_0.credentials_non_expired,
+        u1_0.email,
+        u1_0.enabled,
+        u1_0.failed_login_attempts,
+        u1_0.force_password_change,
+        u1_0.full_name,
+        u1_0.last_login,
+        u1_0.lock_time,
+        u1_0.password,
+        u1_0.phone_number,
+        u1_0.updated_at,
+        u1_0.updated_by 
+    from
+        public.users u1_0 
+    where
+        u1_0.email=?
+2026-06-07 09:28:48 [restartedMain] DEBUG org.hibernate.SQL - 
+    select
+        r1_0.user_id,
+        r1_1.id,
+        r1_1.created_at,
+        r1_1.created_by,
+        r1_1.description,
+        r1_1.name,
+        p1_0.role_id,
+        p1_1.id,
+        p1_1.created_at,
+        p1_1.created_by,
+        p1_1.description,
+        p1_1.name,
+        p1_1.updated_at,
+        p1_1.updated_by,
+        r1_1.updated_at,
+        r1_1.updated_by 
+    from
+        public.user_roles r1_0 
+    join
+        public.roles r1_1 
+            on r1_1.id=r1_0.role_id 
+    left join
+        public.role_permissions p1_0 
+            on r1_1.id=p1_0.role_id 
+    left join
+        public.permissions p1_1 
+            on p1_1.id=p1_0.permission_id 
+    where
+        r1_0.user_id=?
+2026-06-07 09:28:48 [restartedMain] INFO  o.s.b.d.a.ConditionEvaluationDeltaLoggingListener - Condition evaluation unchanged
+2026-06-07 09:48:42 [File Watcher] INFO  o.s.b.d.a.LocalDevToolsAutoConfiguration$RestartingClassPathChangeChangedEventListener - Restarting due to 211 class path changes (0 additions, 211 deletions, 0 modifications)
+2026-06-07 09:48:49 [Thread-17] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+2026-06-07 09:48:50 [Thread-17] INFO  com.zaxxer.hikari.HikariDataSource - UtilityBillingHikariPool - Shutdown initiated...
+2026-06-07 09:48:50 [Thread-17] INFO  com.zaxxer.hikari.HikariDataSource - UtilityBillingHikariPool - Shutdown completed.
+2026-06-07 09:49:08 [restartedMain] INFO  com.exam.utility.UtilityApplication - Starting UtilityApplication using Java 21.0.4 with PID 25168 (C:\Users\user\Downloads\Java-NE-main\Java-NE-main\target\classes started by user in C:\Users\user\Downloads\Java-NE-main)
+2026-06-07 09:49:08 [restartedMain] DEBUG com.exam.utility.UtilityApplication - Running with Spring Boot v3.3.5, Spring v6.1.14
+2026-06-07 09:49:08 [restartedMain] INFO  com.exam.utility.UtilityApplication - The following 1 profile is active: "dev"
+2026-06-07 09:49:11 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-06-07 09:49:11 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 342 ms. Found 24 JPA repository interfaces.
+2026-06-07 09:49:12 [restartedMain] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port 8080 (http)
+2026-06-07 09:49:12 [restartedMain] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+2026-06-07 09:49:12 [restartedMain] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.31]
+2026-06-07 09:49:12 [restartedMain] INFO  o.a.c.c.C.[.[localhost].[/api/v1] - Initializing Spring embedded WebApplicationContext
+2026-06-07 09:49:12 [restartedMain] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 3750 ms
+2026-06-07 09:49:13 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - UtilityBillingHikariPool - Starting...
+2026-06-07 09:49:13 [restartedMain] INFO  com.zaxxer.hikari.pool.HikariPool - UtilityBillingHikariPool - Added connection org.postgresql.jdbc.PgConnection@7659973b
+2026-06-07 09:49:13 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - UtilityBillingHikariPool - Start completed.
+2026-06-07 09:49:13 [restartedMain] INFO  org.flywaydb.core.FlywayExecutor - Database: jdbc:postgresql://localhost:5432/utility_billing (PostgreSQL 17.1)
+2026-06-07 09:49:13 [restartedMain] WARN  o.f.c.i.database.base.Database - Flyway upgrade recommended: PostgreSQL 17.1 is newer than this version of Flyway and support has not been tested. The latest supported version of PostgreSQL is 16.
+2026-06-07 09:49:13 [restartedMain] INFO  o.f.core.internal.command.DbValidate - Successfully validated 9 migrations (execution time 00:00.102s)
+2026-06-07 09:49:14 [restartedMain] INFO  o.f.core.internal.command.DbMigrate - Current version of schema "public": 9
+2026-06-07 09:49:14 [restartedMain] INFO  o.f.core.internal.command.DbMigrate - Schema "public" is up to date. No migration necessary.
+2026-06-07 09:49:14 [restartedMain] INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+2026-06-07 09:49:14 [restartedMain] INFO  o.h.c.i.RegionFactoryInitiator - HHH000026: Second-level cache disabled
+2026-06-07 09:49:14 [restartedMain] INFO  o.s.o.j.p.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-06-07 09:49:14 [restartedMain] WARN  org.hibernate.orm.deprecation - HHH90000025: PostgreSQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2026-06-07 09:49:16 [restartedMain] INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-06-07 09:49:17 [restartedMain] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-06-07 09:49:17 [restartedMain] DEBUG c.e.u.s.JwtAuthenticationFilter - Filter 'jwtAuthenticationFilter' configured for use
+2026-06-07 09:49:17 [restartedMain] DEBUG c.e.u.s.ForcePasswordChangeFilter - Filter 'forcePasswordChangeFilter' configured for use
+2026-06-07 09:49:19 [restartedMain] INFO  o.s.s.c.a.a.c.InitializeAuthenticationProviderBeanManagerConfigurer$InitializeAuthenticationProviderManagerConfigurer - Global AuthenticationManager configured with AuthenticationProvider bean with name authenticationProvider
+2026-06-07 09:49:19 [restartedMain] WARN  o.s.s.c.a.a.c.InitializeUserDetailsBeanManagerConfigurer$InitializeUserDetailsManagerConfigurer - Global AuthenticationManager configured with an AuthenticationProvider bean. UserDetailsService beans will not be used for username/password login. Consider removing the AuthenticationProvider bean. Alternatively, consider using the UserDetailsService in a manually instantiated DaoAuthenticationProvider.
+2026-06-07 09:49:22 [restartedMain] INFO  o.s.b.a.e.web.EndpointLinksResolver - Exposing 4 endpoints beneath base path '/actuator'
+2026-06-07 09:49:25 [restartedMain] INFO  o.s.b.d.a.OptionalLiveReloadServer - LiveReload server is running on port 35729
+2026-06-07 09:49:25 [restartedMain] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port 8080 (http) with context path '/api/v1'
+2026-06-07 09:49:25 [restartedMain] INFO  com.exam.utility.UtilityApplication - Started UtilityApplication in 17.346 seconds (process running for 2341.467)
+2026-06-07 09:49:25 [restartedMain] DEBUG org.hibernate.SQL - 
+    select
+        u1_0.id,
+        u1_0.account_non_expired,
+        u1_0.account_non_locked,
+        u1_0.created_at,
+        u1_0.created_by,
+        u1_0.credentials_non_expired,
+        u1_0.email,
+        u1_0.enabled,
+        u1_0.failed_login_attempts,
+        u1_0.force_password_change,
+        u1_0.full_name,
+        u1_0.last_login,
+        u1_0.lock_time,
+        u1_0.password,
+        u1_0.phone_number,
+        u1_0.updated_at,
+        u1_0.updated_by 
+    from
+        public.users u1_0 
+    where
+        u1_0.email=?
+2026-06-07 09:49:25 [restartedMain] DEBUG org.hibernate.SQL - 
+    select
+        r1_0.user_id,
+        r1_1.id,
+        r1_1.created_at,
+        r1_1.created_by,
+        r1_1.description,
+        r1_1.name,
+        p1_0.role_id,
+        p1_1.id,
+        p1_1.created_at,
+        p1_1.created_by,
+        p1_1.description,
+        p1_1.name,
+        p1_1.updated_at,
+        p1_1.updated_by,
+        r1_1.updated_at,
+        r1_1.updated_by 
+    from
+        public.user_roles r1_0 
+    join
+        public.roles r1_1 
+            on r1_1.id=r1_0.role_id 
+    left join
+        public.role_permissions p1_0 
+            on r1_1.id=p1_0.role_id 
+    left join
+        public.permissions p1_1 
+            on p1_1.id=p1_0.permission_id 
+    where
+        r1_0.user_id=?
+2026-06-07 09:49:26 [restartedMain] INFO  o.s.b.d.a.ConditionEvaluationDeltaLoggingListener - Condition evaluation unchanged
+2026-06-07 09:51:19 [File Watcher] INFO  o.s.b.d.a.LocalDevToolsAutoConfiguration$RestartingClassPathChangeChangedEventListener - Restarting due to 1 class path change (0 additions, 0 deletions, 1 modification)
+2026-06-07 09:51:19 [Thread-21] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+2026-06-07 09:51:19 [Thread-21] INFO  com.zaxxer.hikari.HikariDataSource - UtilityBillingHikariPool - Shutdown initiated...
+2026-06-07 09:51:19 [Thread-21] INFO  com.zaxxer.hikari.HikariDataSource - UtilityBillingHikariPool - Shutdown completed.
+2026-06-07 09:51:20 [restartedMain] INFO  com.exam.utility.UtilityApplication - Starting UtilityApplication using Java 21.0.4 with PID 25168 (C:\Users\user\Downloads\Java-NE-main\Java-NE-main\target\classes started by user in C:\Users\user\Downloads\Java-NE-main)
+2026-06-07 09:51:20 [restartedMain] DEBUG com.exam.utility.UtilityApplication - Running with Spring Boot v3.3.5, Spring v6.1.14
+2026-06-07 09:51:20 [restartedMain] INFO  com.exam.utility.UtilityApplication - The following 1 profile is active: "dev"
+2026-06-07 09:51:22 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-06-07 09:51:23 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 411 ms. Found 24 JPA repository interfaces.
+2026-06-07 09:51:25 [restartedMain] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port 8080 (http)
+2026-06-07 09:51:25 [restartedMain] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+2026-06-07 09:51:25 [restartedMain] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.31]
+2026-06-07 09:51:25 [restartedMain] INFO  o.a.c.c.C.[.[localhost].[/api/v1] - Initializing Spring embedded WebApplicationContext
+2026-06-07 09:51:25 [restartedMain] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 4981 ms
+2026-06-07 09:51:28 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - UtilityBillingHikariPool - Starting...
+2026-06-07 09:51:28 [restartedMain] INFO  com.zaxxer.hikari.pool.HikariPool - UtilityBillingHikariPool - Added connection org.postgresql.jdbc.PgConnection@38f78f83
+2026-06-07 09:51:28 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - UtilityBillingHikariPool - Start completed.
+2026-06-07 09:51:28 [restartedMain] INFO  org.flywaydb.core.FlywayExecutor - Database: jdbc:postgresql://localhost:5432/utility_billing (PostgreSQL 17.1)
+2026-06-07 09:51:28 [restartedMain] WARN  o.f.c.i.database.base.Database - Flyway upgrade recommended: PostgreSQL 17.1 is newer than this version of Flyway and support has not been tested. The latest supported version of PostgreSQL is 16.
+2026-06-07 09:51:28 [restartedMain] INFO  o.f.core.internal.command.DbValidate - Successfully validated 9 migrations (execution time 00:00.108s)
+2026-06-07 09:51:28 [restartedMain] INFO  o.f.core.internal.command.DbMigrate - Current version of schema "public": 9
+2026-06-07 09:51:28 [restartedMain] INFO  o.f.core.internal.command.DbMigrate - Schema "public" is up to date. No migration necessary.
+2026-06-07 09:51:28 [restartedMain] INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+2026-06-07 09:51:28 [restartedMain] INFO  o.h.c.i.RegionFactoryInitiator - HHH000026: Second-level cache disabled
+2026-06-07 09:51:29 [restartedMain] INFO  o.s.o.j.p.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-06-07 09:51:29 [restartedMain] WARN  org.hibernate.orm.deprecation - HHH90000025: PostgreSQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2026-06-07 09:51:32 [restartedMain] INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-06-07 09:51:32 [restartedMain] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-06-07 09:51:33 [restartedMain] DEBUG c.e.u.s.JwtAuthenticationFilter - Filter 'jwtAuthenticationFilter' configured for use
+2026-06-07 09:51:33 [restartedMain] DEBUG c.e.u.s.ForcePasswordChangeFilter - Filter 'forcePasswordChangeFilter' configured for use
+2026-06-07 09:51:35 [restartedMain] INFO  o.s.s.c.a.a.c.InitializeAuthenticationProviderBeanManagerConfigurer$InitializeAuthenticationProviderManagerConfigurer - Global AuthenticationManager configured with AuthenticationProvider bean with name authenticationProvider
+2026-06-07 09:51:35 [restartedMain] WARN  o.s.s.c.a.a.c.InitializeUserDetailsBeanManagerConfigurer$InitializeUserDetailsManagerConfigurer - Global AuthenticationManager configured with an AuthenticationProvider bean. UserDetailsService beans will not be used for username/password login. Consider removing the AuthenticationProvider bean. Alternatively, consider using the UserDetailsService in a manually instantiated DaoAuthenticationProvider.
+2026-06-07 09:51:39 [restartedMain] INFO  o.s.b.a.e.web.EndpointLinksResolver - Exposing 4 endpoints beneath base path '/actuator'
+2026-06-07 09:51:43 [restartedMain] INFO  o.s.b.d.a.OptionalLiveReloadServer - LiveReload server is running on port 35729
+2026-06-07 09:51:43 [restartedMain] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port 8080 (http) with context path '/api/v1'
+2026-06-07 09:51:43 [restartedMain] INFO  com.exam.utility.UtilityApplication - Started UtilityApplication in 23.397 seconds (process running for 2479.38)
+2026-06-07 09:51:43 [restartedMain] DEBUG org.hibernate.SQL - 
+    select
+        u1_0.id,
+        u1_0.account_non_expired,
+        u1_0.account_non_locked,
+        u1_0.created_at,
+        u1_0.created_by,
+        u1_0.credentials_non_expired,
+        u1_0.email,
+        u1_0.enabled,
+        u1_0.failed_login_attempts,
+        u1_0.force_password_change,
+        u1_0.full_name,
+        u1_0.last_login,
+        u1_0.lock_time,
+        u1_0.password,
+        u1_0.phone_number,
+        u1_0.updated_at,
+        u1_0.updated_by 
+    from
+        public.users u1_0 
+    where
+        u1_0.email=?
+2026-06-07 09:51:43 [restartedMain] DEBUG org.hibernate.SQL - 
+    select
+        r1_0.user_id,
+        r1_1.id,
+        r1_1.created_at,
+        r1_1.created_by,
+        r1_1.description,
+        r1_1.name,
+        p1_0.role_id,
+        p1_1.id,
+        p1_1.created_at,
+        p1_1.created_by,
+        p1_1.description,
+        p1_1.name,
+        p1_1.updated_at,
+        p1_1.updated_by,
+        r1_1.updated_at,
+        r1_1.updated_by 
+    from
+        public.user_roles r1_0 
+    join
+        public.roles r1_1 
+            on r1_1.id=r1_0.role_id 
+    left join
+        public.role_permissions p1_0 
+            on r1_1.id=p1_0.role_id 
+    left join
+        public.permissions p1_1 
+            on p1_1.id=p1_0.permission_id 
+    where
+        r1_0.user_id=?
+2026-06-07 09:51:44 [restartedMain] INFO  o.s.b.d.a.ConditionEvaluationDeltaLoggingListener - Condition evaluation unchanged
+2026-06-07 09:52:13 [File Watcher] INFO  o.s.b.d.a.LocalDevToolsAutoConfiguration$RestartingClassPathChangeChangedEventListener - Restarting due to 3 class path changes (0 additions, 0 deletions, 3 modifications)
+2026-06-07 09:52:14 [Thread-28] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+2026-06-07 09:52:14 [Thread-28] INFO  com.zaxxer.hikari.HikariDataSource - UtilityBillingHikariPool - Shutdown initiated...
+2026-06-07 09:52:14 [Thread-28] INFO  com.zaxxer.hikari.HikariDataSource - UtilityBillingHikariPool - Shutdown completed.
+2026-06-07 09:52:17 [restartedMain] INFO  com.exam.utility.UtilityApplication - Starting UtilityApplication using Java 21.0.4 with PID 25168 (C:\Users\user\Downloads\Java-NE-main\Java-NE-main\target\classes started by user in C:\Users\user\Downloads\Java-NE-main)
+2026-06-07 09:52:17 [restartedMain] DEBUG com.exam.utility.UtilityApplication - Running with Spring Boot v3.3.5, Spring v6.1.14
+2026-06-07 09:52:17 [restartedMain] INFO  com.exam.utility.UtilityApplication - The following 1 profile is active: "dev"
+2026-06-07 09:52:35 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-06-07 09:52:37 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 2286 ms. Found 24 JPA repository interfaces.
+2026-06-07 09:52:42 [restartedMain] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port 8080 (http)
+2026-06-07 09:52:42 [restartedMain] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+2026-06-07 09:52:42 [restartedMain] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.31]
+2026-06-07 09:52:42 [restartedMain] INFO  o.a.c.c.C.[.[localhost].[/api/v1] - Initializing Spring embedded WebApplicationContext
+2026-06-07 09:52:42 [restartedMain] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 24851 ms
+2026-06-07 09:52:46 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - UtilityBillingHikariPool - Starting...
+2026-06-07 09:52:47 [restartedMain] INFO  com.zaxxer.hikari.pool.HikariPool - UtilityBillingHikariPool - Added connection org.postgresql.jdbc.PgConnection@259f6e3d
+2026-06-07 09:52:47 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - UtilityBillingHikariPool - Start completed.
+2026-06-07 09:52:47 [restartedMain] INFO  org.flywaydb.core.FlywayExecutor - Database: jdbc:postgresql://localhost:5432/utility_billing (PostgreSQL 17.1)
+2026-06-07 09:52:47 [restartedMain] WARN  o.f.c.i.database.base.Database - Flyway upgrade recommended: PostgreSQL 17.1 is newer than this version of Flyway and support has not been tested. The latest supported version of PostgreSQL is 16.
+2026-06-07 09:52:47 [restartedMain] INFO  o.f.core.internal.command.DbValidate - Successfully validated 9 migrations (execution time 00:00.191s)
+2026-06-07 09:52:47 [restartedMain] INFO  o.f.core.internal.command.DbMigrate - Current version of schema "public": 9
+2026-06-07 09:52:47 [restartedMain] INFO  o.f.core.internal.command.DbMigrate - Schema "public" is up to date. No migration necessary.
+2026-06-07 09:52:48 [restartedMain] INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+2026-06-07 09:52:48 [restartedMain] INFO  o.h.c.i.RegionFactoryInitiator - HHH000026: Second-level cache disabled
+2026-06-07 09:52:48 [restartedMain] INFO  o.s.o.j.p.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-06-07 09:52:48 [restartedMain] WARN  org.hibernate.orm.deprecation - HHH90000025: PostgreSQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2026-06-07 09:52:52 [restartedMain] INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-06-07 09:52:52 [restartedMain] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-06-07 09:52:54 [restartedMain] DEBUG c.e.u.s.JwtAuthenticationFilter - Filter 'jwtAuthenticationFilter' configured for use
+2026-06-07 09:52:54 [restartedMain] DEBUG c.e.u.s.ForcePasswordChangeFilter - Filter 'forcePasswordChangeFilter' configured for use
+2026-06-07 09:52:59 [restartedMain] INFO  o.s.s.c.a.a.c.InitializeAuthenticationProviderBeanManagerConfigurer$InitializeAuthenticationProviderManagerConfigurer - Global AuthenticationManager configured with AuthenticationProvider bean with name authenticationProvider
+2026-06-07 09:52:59 [restartedMain] WARN  o.s.s.c.a.a.c.InitializeUserDetailsBeanManagerConfigurer$InitializeUserDetailsManagerConfigurer - Global AuthenticationManager configured with an AuthenticationProvider bean. UserDetailsService beans will not be used for username/password login. Consider removing the AuthenticationProvider bean. Alternatively, consider using the UserDetailsService in a manually instantiated DaoAuthenticationProvider.
+2026-06-07 09:53:05 [restartedMain] INFO  o.s.b.a.e.web.EndpointLinksResolver - Exposing 4 endpoints beneath base path '/actuator'
+2026-06-07 09:53:08 [restartedMain] INFO  o.s.b.d.a.OptionalLiveReloadServer - LiveReload server is running on port 35729
+2026-06-07 09:53:09 [restartedMain] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port 8080 (http) with context path '/api/v1'
+2026-06-07 09:53:09 [restartedMain] INFO  com.exam.utility.UtilityApplication - Started UtilityApplication in 52.766 seconds (process running for 2564.962)
+2026-06-07 09:53:09 [restartedMain] DEBUG org.hibernate.SQL - 
+    select
+        u1_0.id,
+        u1_0.account_non_expired,
+        u1_0.account_non_locked,
+        u1_0.created_at,
+        u1_0.created_by,
+        u1_0.credentials_non_expired,
+        u1_0.email,
+        u1_0.enabled,
+        u1_0.failed_login_attempts,
+        u1_0.force_password_change,
+        u1_0.full_name,
+        u1_0.last_login,
+        u1_0.lock_time,
+        u1_0.password,
+        u1_0.phone_number,
+        u1_0.updated_at,
+        u1_0.updated_by 
+    from
+        public.users u1_0 
+    where
+        u1_0.email=?
+2026-06-07 09:53:09 [restartedMain] DEBUG org.hibernate.SQL - 
+    select
+        r1_0.user_id,
+        r1_1.id,
+        r1_1.created_at,
+        r1_1.created_by,
+        r1_1.description,
+        r1_1.name,
+        p1_0.role_id,
+        p1_1.id,
+        p1_1.created_at,
+        p1_1.created_by,
+        p1_1.description,
+        p1_1.name,
+        p1_1.updated_at,
+        p1_1.updated_by,
+        r1_1.updated_at,
+        r1_1.updated_by 
+    from
+        public.user_roles r1_0 
+    join
+        public.roles r1_1 
+            on r1_1.id=r1_0.role_id 
+    left join
+        public.role_permissions p1_0 
+            on r1_1.id=p1_0.role_id 
+    left join
+        public.permissions p1_1 
+            on p1_1.id=p1_0.permission_id 
+    where
+        r1_0.user_id=?
+2026-06-07 09:53:10 [restartedMain] INFO  o.s.b.d.a.ConditionEvaluationDeltaLoggingListener - Condition evaluation unchanged
+2026-06-07 09:53:26 [File Watcher] INFO  o.s.b.d.a.LocalDevToolsAutoConfiguration$RestartingClassPathChangeChangedEventListener - Restarting due to 1 class path change (1 addition, 0 deletions, 0 modifications)
+2026-06-07 09:53:26 [Thread-32] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+2026-06-07 09:53:26 [Thread-32] INFO  com.zaxxer.hikari.HikariDataSource - UtilityBillingHikariPool - Shutdown initiated...
+2026-06-07 09:53:26 [Thread-32] INFO  com.zaxxer.hikari.HikariDataSource - UtilityBillingHikariPool - Shutdown completed.
+2026-06-07 09:53:26 [restartedMain] INFO  com.exam.utility.UtilityApplication - Starting UtilityApplication using Java 21.0.4 with PID 25168 (C:\Users\user\Downloads\Java-NE-main\Java-NE-main\target\classes started by user in C:\Users\user\Downloads\Java-NE-main)
+2026-06-07 09:53:26 [restartedMain] DEBUG com.exam.utility.UtilityApplication - Running with Spring Boot v3.3.5, Spring v6.1.14
+2026-06-07 09:53:26 [restartedMain] INFO  com.exam.utility.UtilityApplication - The following 1 profile is active: "dev"

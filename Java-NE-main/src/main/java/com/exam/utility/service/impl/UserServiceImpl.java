@@ -215,6 +215,12 @@ public class UserServiceImpl implements UserService {
         return new String(chars);
     }
 
+    @Override
+    @Transactional(readOnly = true)
+    public PagedResponse<UserResponse> searchUsers(String keyword, Pageable pageable) {
+        return PagedResponse.of(userRepository.searchUsers(keyword, pageable).map(this::toResponse));
+    }
+
     private UserResponse toResponse(User user) {
         Set<String> roles = user.getRoles().stream()
             .map(Role::getName)
