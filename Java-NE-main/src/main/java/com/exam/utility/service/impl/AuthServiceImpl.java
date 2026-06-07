@@ -8,6 +8,7 @@ import com.exam.utility.dto.response.auth.UserResponse;
 import com.exam.utility.entity.*;
 import com.exam.utility.enums.AuditAction;
 import com.exam.utility.exception.*;
+import com.exam.utility.entity.Customer;
 import com.exam.utility.repository.*;
 import com.exam.utility.security.JwtService;
 import com.exam.utility.service.AuditService;
@@ -53,6 +54,7 @@ public class AuthServiceImpl implements AuthService {
     private final VerificationTokenRepository verificationTokenRepository;
     private final OtpCodeRepository otpCodeRepository;
     private final PasswordResetTokenRepository passwordResetTokenRepository;
+    private final CustomerRepository customerRepository;
     private final PasswordEncoder passwordEncoder;
     private final JwtService jwtService;
     private final AuthenticationManager authenticationManager;
@@ -208,6 +210,15 @@ public class AuthServiceImpl implements AuthService {
 
         verificationToken.setUsed(true);
         verificationTokenRepository.save(verificationToken);
+
+        // Link to an existing Customer record with the same email if one exists
+        customerRepository.findByEmail(user.getEmail()).ifPresent(customer -> {
+            if (customer.getUser() == null) {
+                customer.setUser(user);
+                customerRepository.save(customer);
+                log.info("Linked verified user {} to existing customer record {}", user.getEmail(), customer.getId());
+            }
+        });
 
         // Send welcome email only after successful verification, per security policy
         emailService.sendWelcomeEmail(user.getEmail(), user.getFullName());

@@ -82,6 +82,8 @@ public class BillingServiceImpl implements BillingService {
         if (request.getNotes() != null) bill.setNotes(request.getNotes());
 
         bill = billRepository.save(bill);
+        // Reload with all associations joined to avoid Hibernate 6 lazy-loading state conflict after save
+        bill = billRepository.findByBillNumberFetched(bill.getBillNumber()).orElseThrow();
         notificationService.notifyBillApproved(bill);
         auditService.log(AuditAction.BILL_APPROVED, "Bill", bill.getId().toString(),
             "Bill approved: " + bill.getBillNumber());
@@ -102,6 +104,7 @@ public class BillingServiceImpl implements BillingService {
         bill.setStatus(BillStatus.CANCELLED);
         bill.setNotes("REJECTED: " + request.getReason());
         bill = billRepository.save(bill);
+        bill = billRepository.findByBillNumberFetched(bill.getBillNumber()).orElseThrow();
 
         auditService.log(AuditAction.UPDATE, "Bill", bill.getId().toString(),
             "Bill rejected: " + bill.getBillNumber() + " — " + request.getReason());
@@ -118,14 +121,14 @@ public class BillingServiceImpl implements BillingService {
     @Override
     @Transactional(readOnly = true)
     public BillResponse getBillByNumber(String billNumber) {
-        return toResponse(billRepository.findByBillNumber(billNumber)
+        return toResponse(billRepository.findByBillNumberFetched(billNumber)
             .orElseThrow(() -> new ResourceNotFoundException("Bill", "billNumber", billNumber)));
     }
 
     @Override
     @Transactional(readOnly = true)
     public BillResponse getBillById(Long id) {
-        return toResponse(billRepository.findById(id)
+        return toResponse(billRepository.findByIdFetched(id)
             .orElseThrow(() -> new ResourceNotFoundException("Bill", "id", id)));
     }
 

@@ -11,6 +11,7 @@ import com.exam.utility.exception.BusinessException;
 import com.exam.utility.exception.DuplicateResourceException;
 import com.exam.utility.exception.ResourceNotFoundException;
 import com.exam.utility.repository.CustomerRepository;
+import com.exam.utility.repository.UserRepository;
 import com.exam.utility.service.AuditService;
 import com.exam.utility.service.CustomerService;
 import lombok.RequiredArgsConstructor;
@@ -38,6 +39,7 @@ import org.springframework.transaction.annotation.Transactional;
 public class CustomerServiceImpl implements CustomerService {
 
     private final CustomerRepository customerRepository;
+    private final UserRepository userRepository;
     private final AuditService auditService;
 
     @Override
@@ -62,6 +64,15 @@ public class CustomerServiceImpl implements CustomerService {
             .build();
 
         customer = customerRepository.save(customer);
+
+        // Link to an existing User account with the same email if one exists
+        Customer finalCustomer = customer;
+        userRepository.findByEmail(request.getEmail().toLowerCase()).ifPresent(user -> {
+            finalCustomer.setUser(user);
+            customerRepository.save(finalCustomer);
+            log.info("Linked customer {} to existing user account {}", finalCustomer.getId(), user.getEmail());
+        });
+
         auditService.log(AuditAction.CREATE, "Customer", customer.getId().toString(),
             "Customer created: " + customer.getFullName());
         log.info("Customer created: {} (ID: {})", customer.getFullName(), customer.getId());

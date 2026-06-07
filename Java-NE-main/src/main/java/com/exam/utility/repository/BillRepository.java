@@ -44,6 +44,24 @@ public interface BillRepository extends JpaRepository<Bill, Long> {
     @Query("SELECT b FROM Bill b WHERE b.billingCycle.id = :cycleId")
     List<Bill> findByBillingCycleId(Long cycleId);
 
+    @Query("SELECT DISTINCT b FROM Bill b " +
+           "LEFT JOIN FETCH b.customer " +
+           "LEFT JOIN FETCH b.meter " +
+           "LEFT JOIN FETCH b.billingCycle " +
+           "LEFT JOIN FETCH b.meterReading " +
+           "LEFT JOIN FETCH b.items " +
+           "WHERE b.billNumber = :billNumber")
+    Optional<Bill> findByBillNumberFetched(@Param("billNumber") String billNumber);
+
+    @Query("SELECT DISTINCT b FROM Bill b " +
+           "LEFT JOIN FETCH b.customer " +
+           "LEFT JOIN FETCH b.meter " +
+           "LEFT JOIN FETCH b.billingCycle " +
+           "LEFT JOIN FETCH b.meterReading " +
+           "LEFT JOIN FETCH b.items " +
+           "WHERE b.id = :id")
+    Optional<Bill> findByIdFetched(@Param("id") Long id);
+
     @Query("SELECT b FROM Bill b WHERE " +
            "LOWER(b.billNumber) LIKE LOWER(CONCAT('%',:keyword,'%')) OR " +
            "LOWER(b.customer.fullName) LIKE LOWER(CONCAT('%',:keyword,'%')) OR " +
