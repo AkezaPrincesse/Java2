@@ -9140,3 +9140,374 @@ Caused by: java.net.SocketTimeoutException: Read timed out
     values
         (?, ?, ?, ?, ?, ?, ?) 
     returning id
+2026-06-07 14:05:32 [http-nio-8080-exec-3] DEBUG org.hibernate.SQL - 
+    select
+        u1_0.id,
+        u1_0.account_non_expired,
+        u1_0.account_non_locked,
+        u1_0.created_at,
+        u1_0.created_by,
+        u1_0.credentials_non_expired,
+        u1_0.email,
+        u1_0.enabled,
+        u1_0.failed_login_attempts,
+        u1_0.force_password_change,
+        u1_0.full_name,
+        u1_0.last_login,
+        u1_0.lock_time,
+        u1_0.password,
+        u1_0.phone_number,
+        u1_0.updated_at,
+        u1_0.updated_by 
+    from
+        public.users u1_0 
+    where
+        u1_0.email=?
+2026-06-07 14:05:32 [http-nio-8080-exec-3] DEBUG org.hibernate.SQL - 
+    select
+        r1_0.user_id,
+        r1_1.id,
+        r1_1.created_at,
+        r1_1.created_by,
+        r1_1.description,
+        r1_1.name,
+        p1_0.role_id,
+        p1_1.id,
+        p1_1.created_at,
+        p1_1.created_by,
+        p1_1.description,
+        p1_1.name,
+        p1_1.updated_at,
+        p1_1.updated_by,
+        r1_1.updated_at,
+        r1_1.updated_by 
+    from
+        public.user_roles r1_0 
+    join
+        public.roles r1_1 
+            on r1_1.id=r1_0.role_id 
+    left join
+        public.role_permissions p1_0 
+            on r1_1.id=p1_0.role_id 
+    left join
+        public.permissions p1_1 
+            on p1_1.id=p1_0.permission_id 
+    where
+        r1_0.user_id=?
+2026-06-07 14:05:32 [http-nio-8080-exec-3] DEBUG c.e.u.s.JwtAuthenticationFilter - Authenticated user: admin@wasac-reg.rw
+2026-06-07 14:05:32 [http-nio-8080-exec-3] DEBUG org.hibernate.SQL - 
+    select
+        m1_0.id,
+        m1_0.created_at,
+        m1_0.created_by,
+        m1_0.customer_id,
+        m1_0.initial_reading,
+        m1_0.installation_date,
+        m1_0.location,
+        m1_0.meter_number,
+        m1_0.meter_type,
+        m1_0.status,
+        m1_0.tariff_id,
+        m1_0.updated_at,
+        m1_0.updated_by 
+    from
+        public.meters m1_0 
+    where
+        m1_0.id=?
+2026-06-07 14:05:32 [http-nio-8080-exec-3] DEBUG org.hibernate.SQL - 
+    select
+        mr1_0.id 
+    from
+        public.meter_readings mr1_0 
+    where
+        mr1_0.meter_id=? 
+        and mr1_0.reading_year=? 
+        and mr1_0.reading_month=? 
+    fetch
+        first ? rows only
+2026-06-07 14:05:32 [http-nio-8080-exec-3] WARN  c.e.u.e.GlobalExceptionHandler - Duplicate resource: A reading already exists for meter WATER-MTR-001 for 2026/6
+2026-06-07 14:05:32 [http-nio-8080-exec-3] WARN  o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - Resolved [com.exam.utility.exception.DuplicateResourceException: A reading already exists for meter WATER-MTR-001 for 2026/6]
+2026-06-07 14:05:45 [http-nio-8080-exec-4] DEBUG org.hibernate.SQL - 
+    select
+        u1_0.id,
+        u1_0.account_non_expired,
+        u1_0.account_non_locked,
+        u1_0.created_at,
+        u1_0.created_by,
+        u1_0.credentials_non_expired,
+        u1_0.email,
+        u1_0.enabled,
+        u1_0.failed_login_attempts,
+        u1_0.force_password_change,
+        u1_0.full_name,
+        u1_0.last_login,
+        u1_0.lock_time,
+        u1_0.password,
+        u1_0.phone_number,
+        u1_0.updated_at,
+        u1_0.updated_by 
+    from
+        public.users u1_0 
+    where
+        u1_0.email=?
+2026-06-07 14:05:45 [http-nio-8080-exec-4] DEBUG org.hibernate.SQL - 
+    select
+        r1_0.user_id,
+        r1_1.id,
+        r1_1.created_at,
+        r1_1.created_by,
+        r1_1.description,
+        r1_1.name,
+        p1_0.role_id,
+        p1_1.id,
+        p1_1.created_at,
+        p1_1.created_by,
+        p1_1.description,
+        p1_1.name,
+        p1_1.updated_at,
+        p1_1.updated_by,
+        r1_1.updated_at,
+        r1_1.updated_by 
+    from
+        public.user_roles r1_0 
+    join
+        public.roles r1_1 
+            on r1_1.id=r1_0.role_id 
+    left join
+        public.role_permissions p1_0 
+            on r1_1.id=p1_0.role_id 
+    left join
+        public.permissions p1_1 
+            on p1_1.id=p1_0.permission_id 
+    where
+        r1_0.user_id=?
+2026-06-07 14:05:45 [http-nio-8080-exec-4] DEBUG c.e.u.s.JwtAuthenticationFilter - Authenticated user: admin@wasac-reg.rw
+2026-06-07 14:05:45 [http-nio-8080-exec-4] DEBUG org.hibernate.SQL - 
+    select
+        m1_0.id,
+        m1_0.created_at,
+        m1_0.created_by,
+        m1_0.customer_id,
+        m1_0.initial_reading,
+        m1_0.installation_date,
+        m1_0.location,
+        m1_0.meter_number,
+        m1_0.meter_type,
+        m1_0.status,
+        m1_0.tariff_id,
+        m1_0.updated_at,
+        m1_0.updated_by 
+    from
+        public.meters m1_0 
+    where
+        m1_0.id=?
+2026-06-07 14:05:45 [http-nio-8080-exec-4] DEBUG org.hibernate.SQL - 
+    select
+        mr1_0.id 
+    from
+        public.meter_readings mr1_0 
+    where
+        mr1_0.meter_id=? 
+        and mr1_0.reading_year=? 
+        and mr1_0.reading_month=? 
+    fetch
+        first ? rows only
+2026-06-07 14:05:45 [http-nio-8080-exec-4] DEBUG org.hibernate.SQL - 
+    insert 
+    into
+        public.meter_readings
+        (consumption, created_at, created_by, current_reading, meter_id, notes, previous_reading, reading_date, reading_image_path, reading_month, reading_year, updated_at, updated_by) 
+    values
+        (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) 
+    returning id
+2026-06-07 14:05:45 [http-nio-8080-exec-4] DEBUG org.hibernate.SQL - 
+    select
+        c1_0.id,
+        c1_0.address,
+        c1_0.created_at,
+        c1_0.created_by,
+        c1_0.district,
+        c1_0.email,
+        c1_0.full_name,
+        c1_0.national_id,
+        c1_0.phone_number,
+        c1_0.sector,
+        c1_0.status,
+        c1_0.updated_at,
+        c1_0.updated_by,
+        c1_0.user_id 
+    from
+        public.customers c1_0 
+    where
+        c1_0.id=?
+2026-06-07 14:05:45 [SimpleAsyncTaskExecutor-4] DEBUG org.hibernate.SQL - 
+    insert 
+    into
+        public.audit_logs
+        (action, description, entity_id, entity_name, ip_address, new_values, old_values, performed_at, performed_by, user_agent) 
+    values
+        (?, ?, ?, ?, ?, ?, ?, ?, ?, ?) 
+    returning id
+2026-06-07 14:06:33 [http-nio-8080-exec-1] DEBUG org.hibernate.SQL - 
+    select
+        u1_0.id,
+        u1_0.account_non_expired,
+        u1_0.account_non_locked,
+        u1_0.created_at,
+        u1_0.created_by,
+        u1_0.credentials_non_expired,
+        u1_0.email,
+        u1_0.enabled,
+        u1_0.failed_login_attempts,
+        u1_0.force_password_change,
+        u1_0.full_name,
+        u1_0.last_login,
+        u1_0.lock_time,
+        u1_0.password,
+        u1_0.phone_number,
+        u1_0.updated_at,
+        u1_0.updated_by 
+    from
+        public.users u1_0 
+    where
+        u1_0.email=?
+2026-06-07 14:06:33 [http-nio-8080-exec-1] DEBUG org.hibernate.SQL - 
+    select
+        r1_0.user_id,
+        r1_1.id,
+        r1_1.created_at,
+        r1_1.created_by,
+        r1_1.description,
+        r1_1.name,
+        p1_0.role_id,
+        p1_1.id,
+        p1_1.created_at,
+        p1_1.created_by,
+        p1_1.description,
+        p1_1.name,
+        p1_1.updated_at,
+        p1_1.updated_by,
+        r1_1.updated_at,
+        r1_1.updated_by 
+    from
+        public.user_roles r1_0 
+    join
+        public.roles r1_1 
+            on r1_1.id=r1_0.role_id 
+    left join
+        public.role_permissions p1_0 
+            on r1_1.id=p1_0.role_id 
+    left join
+        public.permissions p1_1 
+            on p1_1.id=p1_0.permission_id 
+    where
+        r1_0.user_id=?
+2026-06-07 14:06:33 [http-nio-8080-exec-1] DEBUG c.e.u.s.JwtAuthenticationFilter - Authenticated user: admin@wasac-reg.rw
+2026-06-07 14:06:33 [http-nio-8080-exec-1] DEBUG org.hibernate.SQL - 
+    select
+        distinct b1_0.id,
+        b1_0.approved_at,
+        b1_0.approved_by,
+        b1_0.balance_amount,
+        b1_0.bill_date,
+        b1_0.bill_number,
+        b1_0.billing_cycle_id,
+        bc1_0.id,
+        bc1_0.billing_month,
+        bc1_0.billing_year,
+        bc1_0.closed,
+        bc1_0.created_at,
+        bc1_0.created_by,
+        bc1_0.due_date,
+        bc1_0.end_date,
+        bc1_0.start_date,
+        bc1_0.updated_at,
+        bc1_0.updated_by,
+        b1_0.consumption_amount,
+        b1_0.created_at,
+        b1_0.created_by,
+        b1_0.customer_id,
+        c1_0.id,
+        c1_0.address,
+        c1_0.created_at,
+        c1_0.created_by,
+        c1_0.district,
+        c1_0.email,
+        c1_0.full_name,
+        c1_0.national_id,
+        c1_0.phone_number,
+        c1_0.sector,
+        c1_0.status,
+        c1_0.updated_at,
+        c1_0.updated_by,
+        c1_0.user_id,
+        b1_0.due_date,
+        i1_0.bill_id,
+        i1_0.id,
+        i1_0.amount,
+        i1_0.created_at,
+        i1_0.created_by,
+        i1_0.description,
+        i1_0.item_type,
+        i1_0.quantity,
+        i1_0.unit_price,
+        i1_0.updated_at,
+        i1_0.updated_by,
+        b1_0.meter_id,
+        m1_0.id,
+        m1_0.created_at,
+        m1_0.created_by,
+        m1_0.customer_id,
+        m1_0.initial_reading,
+        m1_0.installation_date,
+        m1_0.location,
+        m1_0.meter_number,
+        m1_0.meter_type,
+        m1_0.status,
+        m1_0.tariff_id,
+        m1_0.updated_at,
+        m1_0.updated_by,
+        mr1_0.id,
+        mr1_0.consumption,
+        mr1_0.created_at,
+        mr1_0.created_by,
+        mr1_0.current_reading,
+        mr1_0.meter_id,
+        mr1_0.notes,
+        mr1_0.previous_reading,
+        mr1_0.reading_date,
+        mr1_0.reading_image_path,
+        mr1_0.reading_month,
+        mr1_0.reading_year,
+        mr1_0.updated_at,
+        mr1_0.updated_by,
+        b1_0.notes,
+        b1_0.paid_amount,
+        b1_0.paid_at,
+        b1_0.penalty_amount,
+        b1_0.service_charge_amount,
+        b1_0.status,
+        b1_0.tax_amount,
+        b1_0.total_amount,
+        b1_0.updated_at,
+        b1_0.updated_by,
+        b1_0.utility_type 
+    from
+        public.bills b1_0 
+    left join
+        public.customers c1_0 
+            on c1_0.id=b1_0.customer_id 
+    left join
+        public.meters m1_0 
+            on m1_0.id=b1_0.meter_id 
+    left join
+        public.billing_cycles bc1_0 
+            on bc1_0.id=b1_0.billing_cycle_id 
+    left join
+        public.meter_readings mr1_0 
+            on mr1_0.id=b1_0.meter_reading_id 
+    left join
+        public.bill_items i1_0 
+            on b1_0.id=i1_0.bill_id 
+    where
+        b1_0.bill_number=?

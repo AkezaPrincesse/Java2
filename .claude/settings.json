@@ -1,7 +1,11 @@
 {
   "permissions": {
     "allow": [
-      "PowerShell(netstat -ano)"
+      "PowerShell(netstat -ano)",
+      "Bash(PGPASSWORD=12345 psql -U postgres -h localhost -d utility_billing -c \"SELECT id, full_name, email, enabled FROM users WHERE email = 'sengagloire2007@gmail.com';\")",
+      "Bash(PGPASSWORD=12345 psql -U postgres -h localhost -d utility_billing -c \"SELECT id, full_name, email, user_id FROM customers WHERE email = 'sengagloire2007@gmail.com';\")",
+      "Bash(PGPASSWORD=12345 psql -U postgres -h localhost -d utility_billing -c \"SELECT id, full_name, email FROM customers ORDER BY id;\")",
+      "Bash(PGPASSWORD=12345 psql -U postgres -h localhost -d utility_billing -c \"SELECT id, meter_number, meter_type, customer_id, status FROM meters ORDER BY id;\")"
     ]
   }
 }
